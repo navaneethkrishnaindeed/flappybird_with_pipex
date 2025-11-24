@@ -1,0 +1,21 @@
+name: flappy_bird_pipex
+description: A Flappy Bird game built with Flutter and PipeX state management using MVC architecture
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  pipe_x: ^1.0.0
+  shared_preferences: ^2.0.15 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
