@@ -1,4 +1,4 @@
-name: Simple Test - Download PipeX Package 200 Times
+name: Simple Test - Download PipeX 200 Times
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   download-pipex-test:
-    name: Download PipeX Package from pub.dev 200 Times
+    name: Download PipeX Dependency 200 Times
     runs-on: ubuntu-latest
     
     steps:
@@ -35,78 +35,21 @@ jobs:
           echo "=== Dart Version ==="
           dart --version
       
-      - name: Download PipeX Package 200 Times
+      - name: Download PipeX 200 Times
         run: |
-          echo "Starting to download pipe_x package 200 times..."
-          echo "Package URL: https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz"
-          echo ""
-          
-          # Create file to track unique IPs
-          touch unique_ips.txt
-          
-          # Show GitHub Runner's IP and location
-          echo "🌐 GitHub Runner Information:"
-          MY_IP=$(curl -s https://api.ipify.org)
-          echo "Public IP: $MY_IP"
-          echo "Location Info:"
-          curl -s https://ipapi.co/$MY_IP/json/ | grep -E "(city|region|country_name|org)" || echo "Location lookup unavailable"
-          echo ""
-          
-          # DNS lookup for pub.dev
-          echo "🔍 DNS Lookup for pub.dev:"
-          dig pub.dev +short
-          echo ""
-          echo "All pub.dev IPs:"
-          dig pub.dev +short | tee -a unique_ips.txt
-          echo ""
-          
+          echo "Starting to download pipe_x dependency 200 times..."
           for i in {1..200}
           do
             echo "========================================="
             echo "Download Attempt #$i of 200"
             echo "========================================="
             
-            # Show routing information
-            echo "📍 Network Route Info:"
-            echo "Resolving pub.dev IP address..."
-            PUB_DEV_IP=$(dig +short pub.dev | head -n 1)
-            echo "✅ pub.dev resolves to: $PUB_DEV_IP"
-            
-            # Show my current IP
-            MY_IP=$(curl -s https://api.ipify.org)
-            echo "✅ My IP (GitHub Runner): $MY_IP"
-            
-            # Show route hops (first few hops only)
-            echo "🛣️ Network hops to pub.dev (first 10):"
-            traceroute -m 10 -w 1 pub.dev 2>/dev/null || echo "Traceroute not available"
-            echo ""
-            
-            # Download pipe_x package with verbose output showing IPs
-            echo "📦 Downloading pipe_x-1.4.4.tar.gz..."
-            echo "Connection details:"
-            DOWNLOAD_OUTPUT=$(curl -L -v -o pipe_x-1.4.4.tar.gz https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz 2>&1)
-            echo "$DOWNLOAD_OUTPUT" | grep -E "(Trying|Connected to|Host:|Server:|Location:|GET|HTTP/)"
-            
-            # Extract and save connected IP
-            CONNECTED_IP=$(echo "$DOWNLOAD_OUTPUT" | grep -oP "Trying \K[\d\.]+" | head -1)
-            if [ ! -z "$CONNECTED_IP" ]; then
-              echo "🔗 Connected to IP: $CONNECTED_IP"
-              echo "$CONNECTED_IP" >> unique_ips.txt
-            fi
-            
-            echo "📊 Download size:"
-            ls -lh pipe_x-1.4.4.tar.gz
-            
-            # Clean up downloaded file
-            rm -f pipe_x-1.4.4.tar.gz
-            
-            # Clean Flutter cache and everything
-            echo "🧹 Cleaning Flutter cache..."
-            flutter pub cache clean --force
-            flutter clean
+            # Remove existing dependencies
             rm -rf .dart_tool
             rm -f pubspec.lock
-            rm -rf build
+            
+            # Download dependencies (including pipe_x)
+            flutter pub get
             
             echo "✅ Download #$i completed successfully!"
             echo ""
@@ -118,20 +61,6 @@ jobs:
       
       - name: Final Summary
         run: |
-          echo "========================================="
-          echo "=== Final Summary ==="
-          echo "========================================="
-          echo "✅ Successfully downloaded pipe_x-1.4.4.tar.gz 200 times"
-          echo "✅ Cleaned Flutter cache 200 times"
-          echo "📦 Package URL: https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz"
-          echo ""
-          echo "🌐 Network Summary:"
-          echo "GitHub Runner IP: $(curl -s https://api.ipify.org)"
-          echo ""
-          echo "📍 Unique IPs encountered during downloads:"
-          if [ -f unique_ips.txt ]; then
-            sort unique_ips.txt | uniq
-          fi
-          echo ""
-          echo "🏁 CI/CD Test Complete!"
+          echo "=== Final Dependency List ==="
+          flutter pub deps
 
