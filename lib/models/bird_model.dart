@@ -6,7 +6,7 @@ class BirdModel {
   bool isAlive;
 
   static const double gravity = 0.2;
-  static const double jumpStrength = -4.5;
+  static const double jumpStrength = -3.5;
   static const double radius = 20.0;
 
   BirdModel({
