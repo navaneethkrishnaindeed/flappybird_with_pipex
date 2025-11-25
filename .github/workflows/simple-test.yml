@@ -1,4 +1,4 @@
-name: Simple Test - Download PipeX 200 Times
+name: Simple Test - Download PipeX Package 200 Times
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   download-pipex-test:
-    name: Download PipeX Dependency 200 Times
+    name: Download PipeX Package from pub.dev 200 Times
     runs-on: ubuntu-latest
     
     steps:
@@ -35,25 +35,39 @@ jobs:
           echo "=== Dart Version ==="
           dart --version
       
-      - name: Download PipeX 200 Times
+      - name: Download PipeX Package 200 Times
         run: |
-          echo "Starting to download pipe_x dependency 200 times..."
+          echo "Starting to download pipe_x package 200 times..."
+          echo "Package URL: https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz"
+          echo ""
+          
           for i in {1..200}
           do
             echo "========================================="
             echo "Download Attempt #$i of 200"
             echo "========================================="
             
-            # Remove existing dependencies
+            # Download pipe_x package directly from pub.dev
+            echo "📦 Downloading pipe_x-1.4.4.tar.gz..."
+            curl -L -o pipe_x-1.4.4.tar.gz https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz
+            
+            echo "📊 Download size:"
+            ls -lh pipe_x-1.4.4.tar.gz
+            
+            # Clean up downloaded file
+            rm -f pipe_x-1.4.4.tar.gz
+            
+            # Clean Flutter cache and everything
+            echo "🧹 Cleaning Flutter cache..."
+            flutter pub cache clean --force
+            flutter clean
             rm -rf .dart_tool
             rm -f pubspec.lock
-            
-            # Download dependencies (including pipe_x)
-            flutter pub get
+            rm -rf build
             
             echo "✅ Download #$i completed successfully!"
-            echo "⏳ Waiting 10 seconds before next download..."
-            sleep 10
+            echo "⏳ Waiting 5 seconds before next download..."
+            sleep 5
             echo ""
           done
           
@@ -63,6 +77,9 @@ jobs:
       
       - name: Final Summary
         run: |
-          echo "=== Final Dependency List ==="
-          flutter pub deps
+          echo "=== Final Summary ==="
+          echo "✅ Successfully downloaded pipe_x-1.4.4.tar.gz 200 times"
+          echo "✅ Cleaned Flutter cache 200 times"
+          echo "⏱️ Total time with 5 second delays: ~200 downloads"
+          echo "📦 Package URL: https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz"
 
