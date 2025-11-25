@@ -41,15 +41,58 @@ jobs:
           echo "Package URL: https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz"
           echo ""
           
+          # Create file to track unique IPs
+          touch unique_ips.txt
+          
+          # Show GitHub Runner's IP and location
+          echo "🌐 GitHub Runner Information:"
+          MY_IP=$(curl -s https://api.ipify.org)
+          echo "Public IP: $MY_IP"
+          echo "Location Info:"
+          curl -s https://ipapi.co/$MY_IP/json/ | grep -E "(city|region|country_name|org)" || echo "Location lookup unavailable"
+          echo ""
+          
+          # DNS lookup for pub.dev
+          echo "🔍 DNS Lookup for pub.dev:"
+          dig pub.dev +short
+          echo ""
+          echo "All pub.dev IPs:"
+          dig pub.dev +short | tee -a unique_ips.txt
+          echo ""
+          
           for i in {1..200}
           do
             echo "========================================="
             echo "Download Attempt #$i of 200"
             echo "========================================="
             
-            # Download pipe_x package directly from pub.dev
+            # Show routing information
+            echo "📍 Network Route Info:"
+            echo "Resolving pub.dev IP address..."
+            PUB_DEV_IP=$(dig +short pub.dev | head -n 1)
+            echo "✅ pub.dev resolves to: $PUB_DEV_IP"
+            
+            # Show my current IP
+            MY_IP=$(curl -s https://api.ipify.org)
+            echo "✅ My IP (GitHub Runner): $MY_IP"
+            
+            # Show route hops (first few hops only)
+            echo "🛣️ Network hops to pub.dev (first 10):"
+            traceroute -m 10 -w 1 pub.dev 2>/dev/null || echo "Traceroute not available"
+            echo ""
+            
+            # Download pipe_x package with verbose output showing IPs
             echo "📦 Downloading pipe_x-1.4.4.tar.gz..."
-            curl -L -o pipe_x-1.4.4.tar.gz https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz
+            echo "Connection details:"
+            DOWNLOAD_OUTPUT=$(curl -L -v -o pipe_x-1.4.4.tar.gz https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz 2>&1)
+            echo "$DOWNLOAD_OUTPUT" | grep -E "(Trying|Connected to|Host:|Server:|Location:|GET|HTTP/)"
+            
+            # Extract and save connected IP
+            CONNECTED_IP=$(echo "$DOWNLOAD_OUTPUT" | grep -oP "Trying \K[\d\.]+" | head -1)
+            if [ ! -z "$CONNECTED_IP" ]; then
+              echo "🔗 Connected to IP: $CONNECTED_IP"
+              echo "$CONNECTED_IP" >> unique_ips.txt
+            fi
             
             echo "📊 Download size:"
             ls -lh pipe_x-1.4.4.tar.gz
@@ -66,8 +109,6 @@ jobs:
             rm -rf build
             
             echo "✅ Download #$i completed successfully!"
-            echo "⏳ Waiting 5 seconds before next download..."
-            sleep 5
             echo ""
           done
           
@@ -77,9 +118,20 @@ jobs:
       
       - name: Final Summary
         run: |
+          echo "========================================="
           echo "=== Final Summary ==="
+          echo "========================================="
           echo "✅ Successfully downloaded pipe_x-1.4.4.tar.gz 200 times"
           echo "✅ Cleaned Flutter cache 200 times"
-          echo "⏱️ Total time with 5 second delays: ~200 downloads"
           echo "📦 Package URL: https://pub.dev/api/archives/pipe_x-1.4.4.tar.gz"
+          echo ""
+          echo "🌐 Network Summary:"
+          echo "GitHub Runner IP: $(curl -s https://api.ipify.org)"
+          echo ""
+          echo "📍 Unique IPs encountered during downloads:"
+          if [ -f unique_ips.txt ]; then
+            sort unique_ips.txt | uniq
+          fi
+          echo ""
+          echo "🏁 CI/CD Test Complete!"
 
