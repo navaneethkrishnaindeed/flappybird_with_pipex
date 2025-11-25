@@ -1,0 +1,68 @@
+name: Simple Test - Download PipeX 200 Times
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  download-pipex-test:
+    name: Download PipeX Dependency 200 Times
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.1'
+          channel: 'stable'
+          cache: true
+      
+      - name: Check Flutter Version
+        run: |
+          echo "=== Flutter Version ==="
+          flutter --version
+          echo ""
+          echo "=== Dart Version ==="
+          dart --version
+      
+      - name: Download PipeX 200 Times
+        run: |
+          echo "Starting to download pipe_x dependency 200 times..."
+          for i in {1..200}
+          do
+            echo "========================================="
+            echo "Download Attempt #$i of 200"
+            echo "========================================="
+            
+            # Remove existing dependencies
+            rm -rf .dart_tool
+            rm -f pubspec.lock
+            
+            # Download dependencies (including pipe_x)
+            flutter pub get
+            
+            echo "✅ Download #$i completed successfully!"
+            echo "⏳ Waiting 10 seconds before next download..."
+            sleep 10
+            echo ""
+          done
+          
+          echo "========================================="
+          echo "🎉 All 200 downloads completed!"
+          echo "========================================="
+      
+      - name: Final Summary
+        run: |
+          echo "=== Final Dependency List ==="
+          flutter pub deps
+
