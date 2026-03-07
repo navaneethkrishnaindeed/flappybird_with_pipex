@@ -2,15 +2,13 @@
 
 A modern implementation of Flappy Bird built with Flutter and PipeX state management, following the MVC architecture pattern.
 
-![CI - Build and Test](https://github.com/YOUR_USERNAME/flappybird_with_pipex/workflows/CI%20-%20Build%20and%20Test/badge.svg)
-![Deploy to GitHub Pages](https://github.com/YOUR_USERNAME/flappybird_with_pipex/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)
-![Code Quality](https://github.com/YOUR_USERNAME/flappybird_with_pipex/workflows/Code%20Quality/badge.svg)
-
-> ⚠️ **Note**: Replace `YOUR_USERNAME` in the badges above with your GitHub username
+[![Deploy to GitHub Pages](https://github.com/navaneethkrishnaindeed/flappybird_with_pipex/actions/workflows/deploy.yml/badge.svg)](https://github.com/navaneethkrishnaindeed/flappybird_with_pipex/actions/workflows/deploy.yml)
 
 ## 🎮 Play Online
 
-Play the game online: [https://YOUR_USERNAME.github.io/flappybird_with_pipex/](https://YOUR_USERNAME.github.io/flappybird_with_pipex/)
+**🕹️ Live Demo:** [https://pipex.navaneethk.dev/projects/flappy/](https://pipex.navaneethk.dev/projects/flappy/)
+
+> Part of the [PipeX Projects](https://pipex.navaneethk.dev/projects/) collection
 
 ## ✨ Features
 
@@ -26,16 +24,16 @@ Play the game online: [https://YOUR_USERNAME.github.io/flappybird_with_pipex/](h
 
 ### Prerequisites
 
-- Flutter SDK (3.0.0 or higher)
+- Flutter SDK (3.6.0 or higher)
 - Dart SDK (comes with Flutter)
 - Android Studio / Xcode (for mobile builds)
-- Any code editor (VS Code, Android Studio, IntelliJ IDEA)
+- Any code editor (VS Code, Cursor, Android Studio, IntelliJ IDEA)
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/flappybird_with_pipex.git
+   git clone https://github.com/navaneethkrishnaindeed/flappybird_with_pipex.git
    cd flappybird_with_pipex
    ```
 
@@ -126,14 +124,11 @@ open coverage/html/index.html
 
 ## 🔄 CI/CD
 
-This project includes comprehensive GitHub Actions workflows:
+This project uses GitHub Actions for automated deployment:
 
-- **CI Pipeline**: Runs tests, linting, and builds on every push
-- **Release Pipeline**: Creates releases with APK, AAB, and Web builds
-- **GitHub Pages**: Automatically deploys web version
-- **Code Quality**: Checks code formatting and analysis on PRs
+- **GitHub Pages**: Automatically deploys the web version to [pipex.navaneethk.dev/projects/flappy/](https://pipex.navaneethk.dev/projects/flappy/) on every push to `main`
 
-See [`.github/README.md`](.github/README.md) for detailed CI/CD documentation.
+The workflow builds the Flutter web app and deploys it using GitHub Pages with a custom domain.
 
 ## 📦 Dependencies
 
@@ -204,6 +199,12 @@ This project is open source and available under the MIT License.
 - PipeX team for the state management solution
 
 ## 📧 Contact
+
+**Navaneeth K**
+- 🌐 Portfolio: [navaneethk.dev](https://navaneethk.dev)
+- 📄 Resume: [resume.navaneethk.dev](https://resume.navaneethk.dev)
+- 🎮 Projects: [pipex.navaneethk.dev](https://pipex.navaneethk.dev)
+- 💻 GitHub: [@navaneethkrishnaindeed](https://github.com/navaneethkrishnaindeed)
 
 For questions or feedback, please open an issue on GitHub.
 
