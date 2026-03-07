@@ -24,14 +24,14 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
           channel: 'stable'
-          cache: true
+          cache: false
+
+      - name: Flutter version
+        run: flutter --version
 
       - name: Get dependencies
-        run: |
-          flutter pub get
-          flutter pub upgrade
+        run: flutter pub get
 
       - name: Build web
         run: flutter build web --release --base-href "/projects/flappy/"
