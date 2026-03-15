@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Analysis Report - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .correlation-matrix td {
+            width: 80px;
+            text-align: center;
+        }
+        .corr-strong-pos { background: #4472C4; color: white; }
+        .corr-mod-pos { background: #8FAADC; }
+        .corr-weak { background: #F2F2F2; }
+        .corr-mod-neg { background: #F4B183; }
+        .corr-strong-neg { background: #C00000; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>CORRELATION ANALYSIS OUTPUT</h1>
+    <p><strong>Variables:</strong> CSAT, UI/UX Revisions, Hosting Incidents, On-Time %, PMS Issues, Lag %<br>
+    <strong>Method:</strong> Pearson Correlation (2-tailed)<br>
+    <strong>Date:</strong> March 2025<br>
+    <strong>Data Source:</strong> Wafeka Digital Agency Customer Survey (n=310)</p>
+
+    <!-- Correlation Matrix -->
+    <h2>Correlations</h2>
+    <table class="spss-table correlation-matrix">
+        <thead>
+            <tr>
+                <th></th>
+                <th>CSAT</th>
+                <th>UI/UX Rev</th>
+                <th>Hosting</th>
+                <th>On-Time %</th>
+                <th>PMS</th>
+                <th>Lag %</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>CSAT</strong></td>
+                <td class="corr-strong-pos">1.000</td>
+                <td class="corr-mod-neg">-.584**</td>
+                <td class="corr-mod-neg">-.412**</td>
+                <td class="corr-strong-pos">.721**</td>
+                <td class="corr-mod-neg">-.389**</td>
+                <td class="corr-mod-neg">-.523**</td>
+            </tr>
+            <tr>
+                <td><strong>UI/UX Revisions</strong></td>
+                <td class="corr-mod-neg">-.584**</td>
+                <td class="corr-strong-pos">1.000</td>
+                <td class="corr-weak">.186*</td>
+                <td class="corr-mod-neg">-.412**</td>
+                <td class="corr-weak">.234*</td>
+                <td class="corr-mod-pos">.367**</td>
+            </tr>
+            <tr>
+                <td><strong>Hosting Incidents</strong></td>
+                <td class="corr-mod-neg">-.412**</td>
+                <td class="corr-weak">.186*</td>
+                <td class="corr-strong-pos">1.000</td>
+                <td class="corr-weak">-.156</td>
+                <td class="corr-weak">.089</td>
+                <td class="corr-weak">.201*</td>
+            </tr>
+            <tr>
+                <td><strong>On-Time %</strong></td>
+                <td class="corr-strong-pos">.721**</td>
+                <td class="corr-mod-neg">-.412**</td>
+                <td class="corr-weak">-.156</td>
+                <td class="corr-strong-pos">1.000</td>
+                <td class="corr-mod-neg">-.298**</td>
+                <td class="corr-mod-neg">-.445**</td>
+            </tr>
+            <tr>
+                <td><strong>PMS Issues</strong></td>
+                <td class="corr-mod-neg">-.389**</td>
+                <td class="corr-weak">.234*</td>
+                <td class="corr-weak">.089</td>
+                <td class="corr-mod-neg">-.298**</td>
+                <td class="corr-strong-pos">1.000</td>
+                <td class="corr-mod-pos">.512**</td>
+            </tr>
+            <tr>
+                <td><strong>Lag %</strong></td>
+                <td class="corr-mod-neg">-.523**</td>
+                <td class="corr-mod-pos">.367**</td>
+                <td class="corr-weak">.201*</td>
+                <td class="corr-mod-neg">-.445**</td>
+                <td class="corr-mod-pos">.512**</td>
+                <td class="corr-strong-pos">1.000</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="notes">** Correlation is significant at the 0.01 level (2-tailed)<br>
+    * Correlation is significant at the 0.05 level (2-tailed)</p>
+
+    <!-- Legend -->
+    <h3>Correlation Strength Legend</h3>
+    <table class="spss-table" style="width: auto;">
+        <tbody>
+            <tr>
+                <td class="corr-strong-pos" style="width: 100px;">Strong +</td>
+                <td>r ≥ 0.70</td>
+            </tr>
+            <tr>
+                <td class="corr-mod-pos">Moderate +</td>
+                <td>0.40 ≤ r < 0.70</td>
+            </tr>
+            <tr>
+                <td class="corr-weak">Weak</td>
+                <td>|r| < 0.40</td>
+            </tr>
+            <tr>
+                <td class="corr-mod-neg">Moderate -</td>
+                <td>-0.70 < r ≤ -0.40</td>
+            </tr>
+            <tr>
+                <td class="corr-strong-neg">Strong -</td>
+                <td>r ≤ -0.70</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- Descriptive Statistics -->
+    <h2>Descriptive Statistics</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Variable</th>
+                <th>N</th>
+                <th>Minimum</th>
+                <th>Maximum</th>
+                <th>Mean</th>
+                <th>Std. Deviation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CSAT Score</td>
+                <td class="number">310</td>
+                <td class="number">2.50</td>
+                <td class="number">4.20</td>
+                <td class="number">3.48</td>
+                <td class="number">.42</td>
+            </tr>
+            <tr>
+                <td>UI/UX Revisions</td>
+                <td class="number">310</td>
+                <td class="number">1.00</td>
+                <td class="number">5.00</td>
+                <td class="number">2.20</td>
+                <td class="number">.85</td>
+            </tr>
+            <tr>
+                <td>Hosting Incidents</td>
+                <td class="number">310</td>
+                <td class="number">0.00</td>
+                <td class="number">8.00</td>
+                <td class="number">2.10</td>
+                <td class="number">1.45</td>
+            </tr>
+            <tr>
+                <td>On-Time Delivery %</td>
+                <td class="number">310</td>
+                <td class="number">35.00</td>
+                <td class="number">85.00</td>
+                <td class="number">54.00</td>
+                <td class="number">12.30</td>
+            </tr>
+            <tr>
+                <td>PMS Issues</td>
+                <td class="number">310</td>
+                <td class="number">5.00</td>
+                <td class="number">120.00</td>
+                <td class="number">45.00</td>
+                <td class="number">28.50</td>
+            </tr>
+            <tr>
+                <td>Average Lag %</td>
+                <td class="number">310</td>
+                <td class="number">2.00</td>
+                <td class="number">25.00</td>
+                <td class="number">11.50</td>
+                <td class="number">5.20</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Key Correlations with CSAT -->
+    <h2>Key Correlations with Customer Satisfaction</h2>
+    <div class="chart-container">
+        <div class="chart-title">Figure 1: Correlation Coefficients with CSAT</div>
+        <div class="bar-chart">
+            <div class="bar-row">
+                <span class="bar-label">On-Time Delivery</span>
+                <div class="bar-container">
+                    <div class="bar-center-line"></div>
+                    <div class="bar-fill positive" style="width: 36%;"></div>
+                </div>
+                <span class="bar-value">+0.721</span>
+            </div>
+            <div class="bar-row">
+                <span class="bar-label">UI/UX Revisions</span>
+                <div class="bar-container">
+                    <div class="bar-center-line"></div>
+                    <div class="bar-fill negative" style="width: 29%;"></div>
+                </div>
+                <span class="bar-value">-0.584</span>
+            </div>
+            <div class="bar-row">
+                <span class="bar-label">Average Lag %</span>
+                <div class="bar-container">
+                    <div class="bar-center-line"></div>
+                    <div class="bar-fill negative" style="width: 26%;"></div>
+                </div>
+                <span class="bar-value">-0.523</span>
+            </div>
+            <div class="bar-row">
+                <span class="bar-label">Hosting Incidents</span>
+                <div class="bar-container">
+                    <div class="bar-center-line"></div>
+                    <div class="bar-fill negative" style="width: 21%;"></div>
+                </div>
+                <span class="bar-value">-0.412</span>
+            </div>
+            <div class="bar-row">
+                <span class="bar-label">PMS Issues</span>
+                <div class="bar-container">
+                    <div class="bar-center-line"></div>
+                    <div class="bar-fill negative" style="width: 19%;"></div>
+                </div>
+                <span class="bar-value">-0.389</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interpretation -->
+    <h2>Interpretation</h2>
+    
+    <h3>Strong Correlations (|r| ≥ 0.50)</h3>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Relationship</th>
+                <th>r</th>
+                <th>Interpretation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CSAT ↔ On-Time Delivery</td>
+                <td class="number">+.721</td>
+                <td>Strong positive: Better delivery timing strongly improves satisfaction</td>
+            </tr>
+            <tr>
+                <td>CSAT ↔ UI/UX Revisions</td>
+                <td class="number">-.584</td>
+                <td>Moderate negative: More revisions substantially reduce satisfaction</td>
+            </tr>
+            <tr>
+                <td>CSAT ↔ Lag %</td>
+                <td class="number">-.523</td>
+                <td>Moderate negative: Project delays reduce customer satisfaction</td>
+            </tr>
+            <tr>
+                <td>PMS ↔ Lag %</td>
+                <td class="number">+.512</td>
+                <td>Moderate positive: PMS issues are associated with project delays</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Key Findings</h3>
+    <ol>
+        <li><strong>On-Time Delivery</strong> has the strongest positive correlation with CSAT (r = .721)</li>
+        <li><strong>UI/UX Revisions</strong> show a notable negative correlation (r = -.584)</li>
+        <li><strong>PMS Issues</strong> correlate with <strong>Lag %</strong> (r = .512), suggesting systemic issues</li>
+        <li>All predictor variables show expected directional relationships with CSAT</li>
+    </ol>
+
+    <!-- Footer -->
+    <div class="report-footer">
+        <p>Wafeka Digital Agency | Correlation Analysis Report</p>
+        <p>Method: Pearson Product-Moment Correlation | Two-tailed significance</p>
+        <p>Generated: March 2025</p>
+    </div>
+
+</body>
+</html>

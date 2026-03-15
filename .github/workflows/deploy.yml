@@ -41,12 +41,16 @@ jobs:
           # Create directories
           mkdir -p _site/projects/flappy
           mkdir -p _site/wafeka
+          mkdir -p _site/reports
           
           # Copy Flappy Bird game
           cp -r build/web/* _site/projects/flappy/
           
-          # Copy Wafeka Analysis Dashboard
+          # Copy Wafeka Analysis Dashboard (fancy version)
           cp -r analysys/* _site/wafeka/
+          
+          # Copy SPSS/Excel Style Reports (professional version)
+          cp -r analysis_reports/* _site/reports/
           
           # Create root landing page
           cat > _site/index.html << 'EOF'
@@ -142,6 +146,16 @@ jobs:
                     <span class="tag">Analytics</span>
                     <span class="tag">Dashboard</span>
                     <span class="tag">Data Science</span>
+                  </div>
+                </a>
+                
+                <a href="/reports/" class="card card-reports" style="--accent: #10b981; --accent2: #4472C4;">
+                  <h2>📋 SPSS Reports</h2>
+                  <p>Professional statistical analysis reports in SPSS/Excel format. Clean white backgrounds, standard tables, print-ready.</p>
+                  <div class="tags">
+                    <span class="tag">SPSS Style</span>
+                    <span class="tag">Statistics</span>
+                    <span class="tag">MBA Research</span>
                   </div>
                 </a>
               </div>

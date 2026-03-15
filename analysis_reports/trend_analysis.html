@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend Analysis Report - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>TREND ANALYSIS OUTPUT</h1>
+    <p><strong>Analysis Period:</strong> 2023-2025 (3 Years)<br>
+    <strong>Method:</strong> Year-over-Year Comparison<br>
+    <strong>Date:</strong> March 2025<br>
+    <strong>Data Source:</strong> Wafeka Digital Agency (n=310 projects)</p>
+
+    <!-- Summary Statistics -->
+    <h2>Descriptive Statistics - Yearly Summary</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>2023</th>
+                <th>2024</th>
+                <th>2025</th>
+                <th>3-Year Total/Avg</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Number of Projects</td>
+                <td class="number">95</td>
+                <td class="number">105</td>
+                <td class="number">110</td>
+                <td class="number"><strong>310</strong></td>
+            </tr>
+            <tr>
+                <td>Revenue (₹ Lakhs)</td>
+                <td class="number">47.15</td>
+                <td class="number">52.38</td>
+                <td class="number">58.72</td>
+                <td class="number"><strong>158.25</strong></td>
+            </tr>
+            <tr>
+                <td>CSAT Score (1-5)</td>
+                <td class="number" style="color:#C00000;">2.8</td>
+                <td class="number" style="color:#008000;">3.6</td>
+                <td class="number" style="color:#D4A017;">3.4</td>
+                <td class="number"><strong>3.27</strong></td>
+            </tr>
+            <tr>
+                <td>On-Time Delivery %</td>
+                <td class="number" style="color:#C00000;">24%</td>
+                <td class="number" style="color:#008000;">58%</td>
+                <td class="number" style="color:#D4A017;">54%</td>
+                <td class="number"><strong>45%</strong></td>
+            </tr>
+            <tr>
+                <td>Team Size</td>
+                <td class="number">42-48</td>
+                <td class="number">48-52</td>
+                <td class="number">52-58</td>
+                <td class="number"><strong>55 (avg)</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Year-over-Year Change -->
+    <h2>Year-over-Year Percent Change</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>2023→2024</th>
+                <th>Direction</th>
+                <th>2024→2025</th>
+                <th>Direction</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Projects</td>
+                <td class="number" style="color:#008000;">+10.5%</td>
+                <td>↑</td>
+                <td class="number" style="color:#008000;">+4.8%</td>
+                <td>↑</td>
+                <td>Growing</td>
+            </tr>
+            <tr>
+                <td>Revenue</td>
+                <td class="number" style="color:#008000;">+11.1%</td>
+                <td>↑</td>
+                <td class="number" style="color:#008000;">+12.1%</td>
+                <td>↑</td>
+                <td>Growing</td>
+            </tr>
+            <tr>
+                <td>CSAT Score</td>
+                <td class="number" style="color:#008000;">+28.6%</td>
+                <td>↑</td>
+                <td class="number" style="color:#C00000;">-5.6%</td>
+                <td>↓</td>
+                <td>⚠️ Mixed</td>
+            </tr>
+            <tr>
+                <td>On-Time %</td>
+                <td class="number" style="color:#008000;">+141.7%</td>
+                <td>↑</td>
+                <td class="number" style="color:#C00000;">-6.9%</td>
+                <td>↓</td>
+                <td>⚠️ Slipping</td>
+            </tr>
+            <tr>
+                <td>UI/UX Revisions</td>
+                <td class="number" style="color:#008000;">-42.9%</td>
+                <td>↓</td>
+                <td class="number" style="color:#008000;">-21.4%</td>
+                <td>↓</td>
+                <td>✅ Resolved</td>
+            </tr>
+            <tr>
+                <td>Hosting Incidents</td>
+                <td class="number" style="color:#008000;">-65.2%</td>
+                <td>↓</td>
+                <td class="number" style="color:#008000;">-62.5%</td>
+                <td>↓</td>
+                <td>✅ Resolved</td>
+            </tr>
+            <tr>
+                <td>PMS Issues</td>
+                <td class="number">New</td>
+                <td>—</td>
+                <td class="number" style="color:#C00000;">+591.7%</td>
+                <td>↑</td>
+                <td>🔴 Crisis</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- CSAT Trend -->
+    <h2>CSAT Score Trend Analysis</h2>
+    <div class="chart-container">
+        <div class="chart-title">Figure 1: Customer Satisfaction Score (2023-2025)</div>
+        <svg viewBox="0 0 400 250" style="width: 100%; max-width: 500px; display: block; margin: 0 auto;">
+            <!-- Axes -->
+            <line x1="60" y1="200" x2="360" y2="200" stroke="#000" stroke-width="1"/>
+            <line x1="60" y1="200" x2="60" y2="40" stroke="#000" stroke-width="1"/>
+            
+            <!-- Grid lines -->
+            <line x1="60" y1="160" x2="360" y2="160" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="60" y1="120" x2="360" y2="120" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="60" y1="80" x2="360" y2="80" stroke="#ccc" stroke-width="0.5"/>
+            
+            <!-- Y-axis labels -->
+            <text x="50" y="205" fill="#000" font-size="10" text-anchor="end">2.0</text>
+            <text x="50" y="165" fill="#000" font-size="10" text-anchor="end">3.0</text>
+            <text x="50" y="125" fill="#000" font-size="10" text-anchor="end">4.0</text>
+            <text x="50" y="85" fill="#000" font-size="10" text-anchor="end">5.0</text>
+            
+            <!-- X-axis labels -->
+            <text x="120" y="220" fill="#000" font-size="10" text-anchor="middle">2023</text>
+            <text x="210" y="220" fill="#000" font-size="10" text-anchor="middle">2024</text>
+            <text x="300" y="220" fill="#000" font-size="10" text-anchor="middle">2025</text>
+            
+            <!-- Bars -->
+            <rect x="90" y="168" width="60" height="32" fill="#C00000"/>
+            <rect x="180" y="112" width="60" height="88" fill="#008000"/>
+            <rect x="270" y="120" width="60" height="80" fill="#D4A017"/>
+            
+            <!-- Values -->
+            <text x="120" y="160" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">2.8</text>
+            <text x="210" y="105" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">3.6</text>
+            <text x="300" y="112" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">3.4</text>
+            
+            <!-- Axis titles -->
+            <text x="210" y="240" fill="#000" font-size="11" text-anchor="middle">Year</text>
+            <text x="20" y="120" fill="#000" font-size="11" text-anchor="middle" transform="rotate(-90 20 120)">CSAT Score</text>
+        </svg>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Issue Distribution Trends -->
+    <h2>Issue Distribution by Year</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Issue Category</th>
+                <th>2023</th>
+                <th>2024</th>
+                <th>2025</th>
+                <th>Trend</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>UI/UX Issues</td>
+                <td class="number" style="color:#C00000;">76%</td>
+                <td class="number">15%</td>
+                <td class="number" style="color:#008000;">8%</td>
+                <td style="color:#008000;">↓ Resolved</td>
+            </tr>
+            <tr>
+                <td>Hosting Issues</td>
+                <td class="number" style="color:#C00000;">44%</td>
+                <td class="number">10%</td>
+                <td class="number" style="color:#008000;">3%</td>
+                <td style="color:#008000;">↓ Resolved</td>
+            </tr>
+            <tr>
+                <td>SEO Issues</td>
+                <td class="number">30%</td>
+                <td class="number">35%</td>
+                <td class="number">28%</td>
+                <td>→ Stable</td>
+            </tr>
+            <tr>
+                <td>PMS/CRM Issues</td>
+                <td class="number">0%</td>
+                <td class="number">18%</td>
+                <td class="number" style="color:#C00000;">47%</td>
+                <td style="color:#C00000;">↑ Crisis</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="notes">Note: Issue migration observed - technical issues resolved, operational issues emerged</p>
+
+    <!-- Growth Metrics -->
+    <h2>Compound Annual Growth Rate (CAGR)</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>2023 Base</th>
+                <th>2025 Current</th>
+                <th>CAGR</th>
+                <th>Assessment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Revenue</td>
+                <td class="number">₹47.15L</td>
+                <td class="number">₹58.72L</td>
+                <td class="number" style="color:#008000;"><strong>+11.5%</strong></td>
+                <td>Healthy growth</td>
+            </tr>
+            <tr>
+                <td>Project Volume</td>
+                <td class="number">95</td>
+                <td class="number">110</td>
+                <td class="number" style="color:#008000;"><strong>+7.6%</strong></td>
+                <td>Healthy growth</td>
+            </tr>
+            <tr>
+                <td>Team Size</td>
+                <td class="number">45</td>
+                <td class="number">55</td>
+                <td class="number" style="color:#008000;"><strong>+10.6%</strong></td>
+                <td>Scaling appropriately</td>
+            </tr>
+            <tr>
+                <td>CSAT Score</td>
+                <td class="number">2.8</td>
+                <td class="number">3.4</td>
+                <td class="number" style="color:#008000;"><strong>+10.3%</strong></td>
+                <td>Recovered but volatile</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Revenue Trend -->
+    <h2>Revenue Trend Analysis</h2>
+    <div class="chart-container">
+        <div class="chart-title">Figure 2: Revenue Growth (₹ Lakhs)</div>
+        <svg viewBox="0 0 400 220" style="width: 100%; max-width: 500px; display: block; margin: 0 auto;">
+            <!-- Axes -->
+            <line x1="60" y1="180" x2="360" y2="180" stroke="#000" stroke-width="1"/>
+            <line x1="60" y1="180" x2="60" y2="30" stroke="#000" stroke-width="1"/>
+            
+            <!-- Y-axis labels -->
+            <text x="50" y="185" fill="#000" font-size="10" text-anchor="end">₹40L</text>
+            <text x="50" y="130" fill="#000" font-size="10" text-anchor="end">₹50L</text>
+            <text x="50" y="75" fill="#000" font-size="10" text-anchor="end">₹60L</text>
+            
+            <!-- X-axis labels -->
+            <text x="120" y="198" fill="#000" font-size="10" text-anchor="middle">2023</text>
+            <text x="210" y="198" fill="#000" font-size="10" text-anchor="middle">2024</text>
+            <text x="300" y="198" fill="#000" font-size="10" text-anchor="middle">2025</text>
+            
+            <!-- Bars -->
+            <rect x="90" y="107" width="60" height="73" fill="#4472C4"/>
+            <rect x="180" y="81" width="60" height="99" fill="#4472C4"/>
+            <rect x="270" y="49" width="60" height="131" fill="#4472C4"/>
+            
+            <!-- Values -->
+            <text x="120" y="100" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">₹47.15L</text>
+            <text x="210" y="74" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">₹52.38L</text>
+            <text x="300" y="42" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">₹58.72L</text>
+            
+            <!-- Growth arrows -->
+            <text x="165" y="65" fill="#008000" font-size="9">+11%</text>
+            <text x="255" y="40" fill="#008000" font-size="9">+12%</text>
+        </svg>
+    </div>
+
+    <!-- Forecast Scenarios -->
+    <h2>2026 Forecast Scenarios</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Scenario A: No PMS</th>
+                <th>Scenario B: With PMS</th>
+                <th>Difference</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Projected CSAT</td>
+                <td class="number" style="color:#C00000;">2.9 - 3.1</td>
+                <td class="number" style="color:#008000;">3.8 - 4.1</td>
+                <td class="number">+0.9 to +1.0</td>
+            </tr>
+            <tr>
+                <td>On-Time Delivery</td>
+                <td class="number" style="color:#C00000;">45% - 50%</td>
+                <td class="number" style="color:#008000;">68% - 72%</td>
+                <td class="number">+18% to +27%</td>
+            </tr>
+            <tr>
+                <td>Client Churn Risk</td>
+                <td class="number" style="color:#C00000;">15% - 20%</td>
+                <td class="number" style="color:#008000;">5% - 8%</td>
+                <td class="number">-10% to -12%</td>
+            </tr>
+            <tr>
+                <td>Revenue Impact</td>
+                <td class="number" style="color:#C00000;">-₹8L to -₹10L</td>
+                <td class="number" style="color:#008000;">+₹12L to +₹15L</td>
+                <td class="number">₹20L - ₹25L</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Key Findings -->
+    <h2>Key Trend Findings</h2>
+    <div class="model-summary">
+        <h3>Summary</h3>
+        <ol>
+            <li><strong>Revenue:</strong> Consistent 11.5% CAGR growth across all three years</li>
+            <li><strong>CSAT:</strong> V-shaped recovery (2.8 → 3.6 → 3.4) - recent decline due to operational issues</li>
+            <li><strong>Technical Issues:</strong> Successfully resolved - UI/UX down 83%, Hosting down 87%</li>
+            <li><strong>Operational Issues:</strong> PMS-related issues grew from 0% to 47% of all complaints</li>
+            <li><strong>Issue Migration:</strong> Problems shifted from technical to operational domain</li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+    <div class="report-footer">
+        <p>Wafeka Digital Agency | Trend Analysis Report</p>
+        <p>3-Year Longitudinal Study | 2023-2025</p>
+        <p>Generated: March 2025</p>
+    </div>
+
+</body>
+</html>

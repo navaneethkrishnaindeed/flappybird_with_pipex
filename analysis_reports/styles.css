@@ -1,0 +1,230 @@
+/* SPSS/Excel Style - Clean Professional Report Styling */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Headers */
+h1 {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #000;
+    border-bottom: 2px solid #000;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #000;
+    margin: 30px 0 15px 0;
+    border-bottom: 1px solid #666;
+    padding-bottom: 5px;
+}
+
+h3 {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0 10px 0;
+}
+
+/* SPSS-Style Tables */
+.spss-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0 25px 0;
+    font-size: 10pt;
+}
+
+.spss-table caption {
+    text-align: left;
+    font-weight: bold;
+    padding: 8px 0;
+    font-size: 11pt;
+}
+
+.spss-table th {
+    background: #e0e0e0;
+    border: 1px solid #999;
+    padding: 6px 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.spss-table td {
+    border: 1px solid #999;
+    padding: 6px 10px;
+}
+
+.spss-table tr:nth-child(even) {
+    background: #f5f5f5;
+}
+
+.spss-table .number {
+    text-align: right;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.spss-table .sig {
+    font-weight: bold;
+}
+
+.spss-table .sig-high {
+    color: #000;
+}
+
+/* Model Summary Box */
+.model-summary {
+    border: 2px solid #000;
+    padding: 15px;
+    margin: 20px 0;
+    background: #fafafa;
+}
+
+.model-summary h3 {
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+}
+
+/* Equation Box */
+.equation-box {
+    background: #f0f0f0;
+    border: 1px solid #666;
+    padding: 15px 20px;
+    margin: 20px 0;
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    text-align: center;
+}
+
+/* Notes */
+.notes {
+    font-size: 9pt;
+    color: #666;
+    margin-top: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #ccc;
+}
+
+/* Chart Container */
+.chart-container {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.chart-title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 11pt;
+}
+
+/* Simple Bar Chart */
+.bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar-label {
+    width: 140px;
+    font-size: 10pt;
+    text-align: right;
+}
+
+.bar-container {
+    flex: 1;
+    height: 20px;
+    background: #e0e0e0;
+    position: relative;
+}
+
+.bar-fill {
+    height: 100%;
+    position: absolute;
+}
+
+.bar-fill.positive {
+    background: #4472C4;
+    left: 50%;
+}
+
+.bar-fill.negative {
+    background: #C00000;
+    right: 50%;
+}
+
+.bar-value {
+    width: 60px;
+    font-size: 10pt;
+    font-family: 'Consolas', monospace;
+}
+
+.bar-center-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #000;
+}
+
+/* Grid for side-by-side content */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+/* Page break for printing */
+.page-break {
+    page-break-before: always;
+    margin-top: 40px;
+    border-top: 1px dashed #ccc;
+    padding-top: 20px;
+}
+
+/* Print styles */
+@media print {
+    body {
+        padding: 20px;
+    }
+    .page-break {
+        page-break-before: always;
+    }
+}
+
+/* Footer */
+.report-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #666;
+    font-size: 9pt;
+    color: #666;
+    text-align: center;
+}

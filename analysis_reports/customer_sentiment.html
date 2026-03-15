@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Sentiment Report - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>CUSTOMER SENTIMENT ANALYSIS</h1>
+    <p><strong>Reviews Analyzed:</strong> 850+ Customer Feedback Entries<br>
+    <strong>Method:</strong> Sentiment Classification & NPS Analysis<br>
+    <strong>Date:</strong> March 2025<br>
+    <strong>Data Source:</strong> Wafeka Digital Agency (n=310 projects)</p>
+
+    <!-- NPS Summary -->
+    <h2>Net Promoter Score (NPS) Summary</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Promoters (9-10)</th>
+                <th>Passives (7-8)</th>
+                <th>Detractors (0-6)</th>
+                <th>NPS Score</th>
+                <th>Classification</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2023</td>
+                <td class="number">8%</td>
+                <td class="number">32%</td>
+                <td class="number" style="color:#C00000;">60%</td>
+                <td class="number" style="color:#C00000;"><strong>-52</strong></td>
+                <td style="color:#C00000;">Detractor Zone</td>
+            </tr>
+            <tr>
+                <td>2024</td>
+                <td class="number">30%</td>
+                <td class="number">50%</td>
+                <td class="number">20%</td>
+                <td class="number" style="color:#008000;"><strong>+10</strong></td>
+                <td style="color:#008000;">Passive Zone</td>
+            </tr>
+            <tr>
+                <td>2025</td>
+                <td class="number">23%</td>
+                <td class="number">52%</td>
+                <td class="number">25%</td>
+                <td class="number" style="color:#D4A017;"><strong>-2</strong></td>
+                <td style="color:#D4A017;">Borderline</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="notes">NPS Scale: -100 to +100 | Calculated as: % Promoters - % Detractors</p>
+
+    <!-- Rating Distribution -->
+    <h2>Star Rating Distribution</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Rating</th>
+                <th>2023 (n=95)</th>
+                <th>2024 (n=105)</th>
+                <th>2025 (n=110)</th>
+                <th>Total (n=310)</th>
+                <th>Trend</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5 Stars (Excellent)</td>
+                <td class="number">5 (5%)</td>
+                <td class="number" style="color:#008000;">18 (17%)</td>
+                <td class="number">15 (14%)</td>
+                <td class="number"><strong>38</strong></td>
+                <td style="color:#008000;">+180%</td>
+            </tr>
+            <tr>
+                <td>4 Stars (Good)</td>
+                <td class="number">17 (18%)</td>
+                <td class="number" style="color:#008000;">38 (36%)</td>
+                <td class="number">35 (32%)</td>
+                <td class="number"><strong>90</strong></td>
+                <td style="color:#008000;">+106%</td>
+            </tr>
+            <tr>
+                <td>3 Stars (Average)</td>
+                <td class="number">40 (42%)</td>
+                <td class="number">35 (33%)</td>
+                <td class="number">42 (38%)</td>
+                <td class="number"><strong>117</strong></td>
+                <td>+5%</td>
+            </tr>
+            <tr>
+                <td>2 Stars (Poor)</td>
+                <td class="number" style="color:#C00000;">27 (28%)</td>
+                <td class="number">12 (11%)</td>
+                <td class="number">15 (14%)</td>
+                <td class="number"><strong>54</strong></td>
+                <td style="color:#008000;">-44%</td>
+            </tr>
+            <tr>
+                <td>1 Star (Very Poor)</td>
+                <td class="number" style="color:#C00000;">6 (6%)</td>
+                <td class="number">2 (2%)</td>
+                <td class="number">3 (3%)</td>
+                <td class="number"><strong>11</strong></td>
+                <td style="color:#008000;">-50%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Emotion Analysis -->
+    <h2>Emotion Classification</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Sentiment</th>
+                <th>Emotion</th>
+                <th>Count</th>
+                <th>% of Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background:#c6efce;">
+                <td rowspan="5"><strong>Positive</strong></td>
+                <td>Satisfied</td>
+                <td class="number">142</td>
+                <td class="number">16.7%</td>
+            </tr>
+            <tr style="background:#c6efce;">
+                <td>Impressed</td>
+                <td class="number">68</td>
+                <td class="number">8.0%</td>
+            </tr>
+            <tr style="background:#c6efce;">
+                <td>Relieved</td>
+                <td class="number">52</td>
+                <td class="number">6.1%</td>
+            </tr>
+            <tr style="background:#c6efce;">
+                <td>Trusting</td>
+                <td class="number">45</td>
+                <td class="number">5.3%</td>
+            </tr>
+            <tr style="background:#c6efce;">
+                <td>Delighted</td>
+                <td class="number">38</td>
+                <td class="number">4.5%</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Total Positive</strong></td>
+                <td class="number"><strong>345</strong></td>
+                <td class="number"><strong>40.6%</strong></td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td rowspan="5"><strong>Negative</strong></td>
+                <td>Frustrated</td>
+                <td class="number">128</td>
+                <td class="number">15.1%</td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td>Disappointed</td>
+                <td class="number">85</td>
+                <td class="number">10.0%</td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td>Confused</td>
+                <td class="number">65</td>
+                <td class="number">7.6%</td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td>Angry</td>
+                <td class="number">42</td>
+                <td class="number">4.9%</td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td>Anxious</td>
+                <td class="number">38</td>
+                <td class="number">4.5%</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Total Negative</strong></td>
+                <td class="number"><strong>358</strong></td>
+                <td class="number"><strong>42.1%</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- Top Complaint Categories -->
+    <h2>Complaint Category Analysis (2025)</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Complaint Category</th>
+                <th>Frequency</th>
+                <th>% of Total</th>
+                <th>Trend vs 2024</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>PMS/CRM Absence</td>
+                <td class="number">52</td>
+                <td class="number" style="color:#C00000;">47%</td>
+                <td style="color:#C00000;">↑ NEW ISSUE</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Meeting Notes Lost</td>
+                <td class="number">45</td>
+                <td class="number" style="color:#C00000;">41%</td>
+                <td style="color:#C00000;">↑ +156%</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Context Dropped</td>
+                <td class="number">42</td>
+                <td class="number">38%</td>
+                <td style="color:#C00000;">↑ +89%</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Handoff Failures</td>
+                <td class="number">39</td>
+                <td class="number">35%</td>
+                <td style="color:#C00000;">↑ +125%</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>SEO Results Slow</td>
+                <td class="number">31</td>
+                <td class="number">28%</td>
+                <td>→ Stable</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>UI/UX Revisions</td>
+                <td class="number">9</td>
+                <td class="number" style="color:#008000;">8%</td>
+                <td style="color:#008000;">↓ -73%</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Hosting Issues</td>
+                <td class="number">3</td>
+                <td class="number" style="color:#008000;">3%</td>
+                <td style="color:#008000;">↓ -87%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Escalation Trends -->
+    <h2>Escalation Analysis</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Escalation Level</th>
+                <th>2023</th>
+                <th>2024</th>
+                <th>2025</th>
+                <th>2024→2025</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Project Manager Level</td>
+                <td class="number" style="color:#C00000;">85</td>
+                <td class="number" style="color:#008000;">32</td>
+                <td class="number" style="color:#D4A017;">45</td>
+                <td style="color:#C00000;">+41%</td>
+            </tr>
+            <tr>
+                <td>Department Head Level</td>
+                <td class="number" style="color:#C00000;">38</td>
+                <td class="number" style="color:#008000;">12</td>
+                <td class="number" style="color:#D4A017;">22</td>
+                <td style="color:#C00000;">+83%</td>
+            </tr>
+            <tr>
+                <td>CXO Level</td>
+                <td class="number">12</td>
+                <td class="number" style="color:#008000;">3</td>
+                <td class="number">8</td>
+                <td style="color:#C00000;">+167%</td>
+            </tr>
+            <tr>
+                <td>Legal Threats</td>
+                <td class="number">3</td>
+                <td class="number" style="color:#008000;">0</td>
+                <td class="number">1</td>
+                <td style="color:#D4A017;">New</td>
+            </tr>
+            <tr style="background:#f0f0f0;">
+                <td><strong>Total Escalations</strong></td>
+                <td class="number"><strong>138</strong></td>
+                <td class="number"><strong>47</strong></td>
+                <td class="number"><strong>76</strong></td>
+                <td style="color:#C00000;"><strong>+62%</strong></td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="notes">Warning: Escalations increasing again after 66% drop in 2024</p>
+
+    <!-- Representative Quotes -->
+    <h2>Voice of Customer - Representative Quotes</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Quote</th>
+                <th>Source</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background:#c6efce;">
+                <td>Positive</td>
+                <td>"Design system works perfectly. First drafts now match our vision."</td>
+                <td>Green Trends</td>
+                <td>2025</td>
+            </tr>
+            <tr style="background:#c6efce;">
+                <td>Positive</td>
+                <td>"Site is faster. No more crashes. VPS upgrade working well."</td>
+                <td>Good Luck</td>
+                <td>2024</td>
+            </tr>
+            <tr style="background:#c6efce;">
+                <td>Positive</td>
+                <td>"Same designer from 2023 - she now understands our industry."</td>
+                <td>Mani Salon</td>
+                <td>2024</td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td>Negative</td>
+                <td>"I had to explain requirements THREE TIMES. Meeting notes apparently lost."</td>
+                <td>Good Luck</td>
+                <td>2025</td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td>Negative</td>
+                <td>"PM LEFT AND NO ONE KNEW ANYTHING! Had to explain everything again."</td>
+                <td>Mani Salon</td>
+                <td>2025</td>
+            </tr>
+            <tr style="background:#ffeb9c;">
+                <td>Mixed</td>
+                <td>"The product is great but the process is terrible. You need a proper PMS!"</td>
+                <td>KL House Clinic</td>
+                <td>2025</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Key Insights -->
+    <h2>Key Sentiment Insights</h2>
+    <div class="model-summary">
+        <h3>Summary</h3>
+        <ol>
+            <li><strong>NPS Recovery then Decline:</strong> -52 (2023) → +10 (2024) → -2 (2025)</li>
+            <li><strong>Sentiment Split:</strong> 40.6% positive vs 42.1% negative (2025)</li>
+            <li><strong>Issue Migration:</strong> Technical complaints resolved, operational complaints surged</li>
+            <li><strong>Escalations Rising:</strong> +62% increase in 2025 after dropping 66% in 2024</li>
+            <li><strong>Root Cause:</strong> Absence of PMS/CRM system drives 47% of 2025 complaints</li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+    <div class="report-footer">
+        <p>Wafeka Digital Agency | Customer Sentiment Report</p>
+        <p>850+ Reviews Analyzed | Sentiment Classification Applied</p>
+        <p>Generated: March 2025</p>
+    </div>
+
+</body>
+</html>

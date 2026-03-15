@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Dashboard - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>EXECUTIVE SUMMARY DASHBOARD</h1>
+    <p><strong>Study Period:</strong> 2023-2025 (3 Years)<br>
+    <strong>Data Points:</strong> 310 Projects | 10 Companies | 850+ Reviews<br>
+    <strong>Report Type:</strong> MBA Research Project - Customer Satisfaction Analysis<br>
+    <strong>Date:</strong> March 2025</p>
+
+    <!-- Key Performance Indicators -->
+    <h2>Key Performance Indicators</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>KPI</th>
+                <th>Value</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Total Projects</td>
+                <td class="number">310</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>3-Year Revenue</td>
+                <td class="number">₹1.58 Crores</td>
+                <td style="color:#008000;">+11.5% CAGR</td>
+            </tr>
+            <tr>
+                <td>Average CSAT Score</td>
+                <td class="number">3.27/5</td>
+                <td style="color:#D4A017;">⚠️ Below Target</td>
+            </tr>
+            <tr>
+                <td>Current CSAT (2025)</td>
+                <td class="number">3.4/5</td>
+                <td style="color:#D4A017;">⚠️ Declining</td>
+            </tr>
+            <tr>
+                <td>On-Time Delivery Rate</td>
+                <td class="number">54%</td>
+                <td style="color:#D4A017;">⚠️ Below 70% target</td>
+            </tr>
+            <tr>
+                <td>NPS Score (2025)</td>
+                <td class="number">-2</td>
+                <td style="color:#D4A017;">⚠️ Borderline</td>
+            </tr>
+            <tr>
+                <td>Active Clients</td>
+                <td class="number">10</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>Team Size</td>
+                <td class="number">52-58</td>
+                <td style="color:#008000;">Growing</td>
+            </tr>
+            <tr>
+                <td>3-Year COPQ</td>
+                <td class="number" style="color:#C00000;">₹21.33L</td>
+                <td style="color:#C00000;">🔴 13.5% of Revenue</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Status Overview -->
+    <h2>Current Status Overview</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Domain</th>
+                <th>Status</th>
+                <th>Key Metrics</th>
+                <th>Assessment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background:#c6efce;">
+                <td><strong>Technical Quality</strong></td>
+                <td>✅ RESOLVED</td>
+                <td>UI/UX: 4.2/5 | Hosting: 4.6/5 | 3 incidents</td>
+                <td>Design system mature, VPS stable</td>
+            </tr>
+            <tr style="background:#ffc7ce;">
+                <td><strong>Operational Efficiency</strong></td>
+                <td>🔴 CRISIS</td>
+                <td>On-Time: 54% | Operations: 2.5/5 | 83 issues</td>
+                <td>No PMS/CRM system, 672 days lost</td>
+            </tr>
+            <tr style="background:#ffeb9c;">
+                <td><strong>Customer Satisfaction</strong></td>
+                <td>⚠️ DECLINING</td>
+                <td>CSAT: 3.4 (↓0.2) | NPS: -2 (↓12)</td>
+                <td>Escalations up 62%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- Research Findings Summary -->
+    <h2>Research Findings Summary</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Analysis</th>
+                <th>Key Finding</th>
+                <th>Significance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Correlation</strong></td>
+                <td>On-Time Delivery ↔ CSAT: r = +0.92</td>
+                <td>Strongest predictor of satisfaction</td>
+            </tr>
+            <tr>
+                <td><strong>Regression</strong></td>
+                <td>R² = 0.89 | On-Time β = +0.42</td>
+                <td>Model explains 89% of variance</td>
+            </tr>
+            <tr>
+                <td><strong>Factor Analysis</strong></td>
+                <td>Factor 2 (Operations) r = +0.85 with CSAT</td>
+                <td>Operations most critical but declining</td>
+            </tr>
+            <tr>
+                <td><strong>Trend Analysis</strong></td>
+                <td>PMS issues grew 0% → 47% (2023-2025)</td>
+                <td>Issue migration to operational domain</td>
+            </tr>
+            <tr>
+                <td><strong>Sentiment</strong></td>
+                <td>47% complaints cite PMS/CRM absence</td>
+                <td>Root cause of 2025 CSAT decline</td>
+            </tr>
+            <tr>
+                <td><strong>Revenue Impact</strong></td>
+                <td>COPQ: ₹21.33L (13.5% of revenue)</td>
+                <td>₹8L/year preventable with PMS</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Regression Equation -->
+    <h2>Predictive Model</h2>
+    <div class="equation-box">
+        <strong>CSAT = 3.12 + 0.015(OnTime%) − 0.18(UI/UX Rev) − 0.004(PMS Issues) − 0.02(Lag%)</strong>
+    </div>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Variable</th>
+                <th>β (Standardized)</th>
+                <th>Impact Direction</th>
+                <th>Significance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>On-Time Delivery %</td>
+                <td class="number" style="color:#008000;"><strong>+0.42</strong></td>
+                <td>Positive (Most Important)</td>
+                <td class="number">&lt;.001</td>
+            </tr>
+            <tr>
+                <td>UI/UX Revisions</td>
+                <td class="number" style="color:#C00000;"><strong>-0.38</strong></td>
+                <td>Negative</td>
+                <td class="number">.008</td>
+            </tr>
+            <tr>
+                <td>Average Lag %</td>
+                <td class="number" style="color:#C00000;">-0.32</td>
+                <td>Negative</td>
+                <td class="number">.012</td>
+            </tr>
+            <tr>
+                <td>Hosting Incidents</td>
+                <td class="number" style="color:#C00000;">-0.22</td>
+                <td>Negative</td>
+                <td class="number">.052</td>
+            </tr>
+            <tr>
+                <td>PMS Issues</td>
+                <td class="number" style="color:#C00000;">-0.15</td>
+                <td>Negative</td>
+                <td class="number">.048</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Strategic Recommendations -->
+    <h2>Strategic Recommendations</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Priority</th>
+                <th>Recommendation</th>
+                <th>Investment</th>
+                <th>Expected ROI</th>
+                <th>CSAT Impact</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background:#ffc7ce;">
+                <td><strong>CRITICAL</strong></td>
+                <td>Implement PMS/CRM System</td>
+                <td class="number">₹3L</td>
+                <td class="number">167%</td>
+                <td class="number">+0.30</td>
+            </tr>
+            <tr style="background:#ffeb9c;">
+                <td><strong>HIGH</strong></td>
+                <td>Improve On-Time to 70%</td>
+                <td class="number">₹1L</td>
+                <td class="number">450%</td>
+                <td class="number">+0.24</td>
+            </tr>
+            <tr>
+                <td><strong>MEDIUM</strong></td>
+                <td>Maintain Technical Excellence</td>
+                <td class="number">₹1.5L/yr</td>
+                <td class="number">—</td>
+                <td class="number">Maintain</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Implementation Timeline -->
+    <h2>Implementation Roadmap</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Timeline</th>
+                <th>Milestone</th>
+                <th>Key Activities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Q1 2026</td>
+                <td>PMS/CRM Implementation</td>
+                <td>Evaluate tools, implement solution, train team</td>
+            </tr>
+            <tr>
+                <td>Q2 2026</td>
+                <td>Process Optimization</td>
+                <td>Standardize handoffs, meeting templates, approval tracking</td>
+            </tr>
+            <tr>
+                <td>Q3 2026</td>
+                <td>Client Portal Launch</td>
+                <td>Self-service tracking, automated updates, workflows</td>
+            </tr>
+            <tr>
+                <td>Q4 2026</td>
+                <td>Target Achievement</td>
+                <td>CSAT ≥ 4.0, On-Time ≥ 70%, NPS ≥ +20</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 2026 Targets -->
+    <h2>2026 Target Metrics</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Current (2025)</th>
+                <th>Target (2026)</th>
+                <th>Gap</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CSAT Score</td>
+                <td class="number">3.4</td>
+                <td class="number" style="color:#008000;">4.0+</td>
+                <td class="number">+0.6</td>
+            </tr>
+            <tr>
+                <td>On-Time Delivery</td>
+                <td class="number">54%</td>
+                <td class="number" style="color:#008000;">70%+</td>
+                <td class="number">+16%</td>
+            </tr>
+            <tr>
+                <td>NPS Score</td>
+                <td class="number">-2</td>
+                <td class="number" style="color:#008000;">+20</td>
+                <td class="number">+22</td>
+            </tr>
+            <tr>
+                <td>Revenue</td>
+                <td class="number">₹59L</td>
+                <td class="number" style="color:#008000;">₹77L</td>
+                <td class="number">+31%</td>
+            </tr>
+            <tr>
+                <td>COPQ %</td>
+                <td class="number">11%</td>
+                <td class="number" style="color:#008000;">&lt;5%</td>
+                <td class="number">-6%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Executive Conclusion -->
+    <h2>Executive Conclusion</h2>
+    <div class="model-summary">
+        <p>Wafeka Digital Agency has successfully resolved technical issues (UI/UX revisions down 55%, hosting incidents down 87%) but faces a new operational crisis due to the absence of a PMS/CRM system.</p>
+        <p><strong>Key Finding:</strong> On-Time Delivery (β = +0.42) is the strongest predictor of customer satisfaction per regression analysis.</p>
+        <p><strong>Recommendation:</strong> With an investment of ₹3L in project management tools, the company can recover the ₹6.25L lost annually to operational inefficiencies and achieve a projected ROI of 167%.</p>
+        <p><strong>Urgency:</strong> Immediate action is recommended to prevent further CSAT decline and potential client churn of 15-20%.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="report-footer">
+        <p>Customer Satisfaction Analysis - MBA Research Project</p>
+        <p>Wafeka Digital Agency | 2023-2025 | 310 Projects | 10 Companies</p>
+        <p>Generated: March 2025</p>
+    </div>
+
+</body>
+</html>

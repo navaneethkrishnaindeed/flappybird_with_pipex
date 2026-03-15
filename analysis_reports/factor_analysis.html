@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factor Analysis Report - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>FACTOR ANALYSIS OUTPUT</h1>
+    <p><strong>Extraction Method:</strong> Principal Component Analysis (PCA)<br>
+    <strong>Rotation Method:</strong> Varimax with Kaiser Normalization<br>
+    <strong>Date:</strong> March 2025<br>
+    <strong>Data Source:</strong> Wafeka Digital Agency (n=310, 14 variables)</p>
+
+    <!-- KMO and Bartlett's Test -->
+    <h2>KMO and Bartlett's Test</h2>
+    <table class="spss-table">
+        <tbody>
+            <tr>
+                <td colspan="2">Kaiser-Meyer-Olkin Measure of Sampling Adequacy</td>
+                <td class="number"><strong>.82</strong></td>
+            </tr>
+            <tr>
+                <td rowspan="3">Bartlett's Test of Sphericity</td>
+                <td>Approx. Chi-Square</td>
+                <td class="number">1842.56</td>
+            </tr>
+            <tr>
+                <td>df</td>
+                <td class="number">91</td>
+            </tr>
+            <tr>
+                <td>Sig.</td>
+                <td class="number sig sig-high">&lt;.001</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="notes">KMO ≥ .80 indicates "meritorious" sampling adequacy for factor analysis</p>
+
+    <!-- Total Variance Explained -->
+    <h2>Total Variance Explained</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th rowspan="2">Component</th>
+                <th colspan="3">Initial Eigenvalues</th>
+                <th colspan="3">Rotation Sums of Squared Loadings</th>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <th>% of Variance</th>
+                <th>Cumulative %</th>
+                <th>Total</th>
+                <th>% of Variance</th>
+                <th>Cumulative %</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td class="number">4.85</td>
+                <td class="number">34.6%</td>
+                <td class="number">34.6%</td>
+                <td class="number">4.52</td>
+                <td class="number">32.3%</td>
+                <td class="number">32.3%</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td class="number">3.42</td>
+                <td class="number">24.4%</td>
+                <td class="number">59.0%</td>
+                <td class="number">3.28</td>
+                <td class="number">23.4%</td>
+                <td class="number">55.7%</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td class="number">2.18</td>
+                <td class="number">15.6%</td>
+                <td class="number"><strong>74.6%</strong></td>
+                <td class="number">2.65</td>
+                <td class="number">18.9%</td>
+                <td class="number"><strong>74.6%</strong></td>
+            </tr>
+            <tr style="color: #999;">
+                <td>4</td>
+                <td class="number">0.85</td>
+                <td class="number">6.1%</td>
+                <td class="number">80.7%</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr style="color: #999;">
+                <td>5</td>
+                <td class="number">0.72</td>
+                <td class="number">5.1%</td>
+                <td class="number">85.8%</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr style="color: #999;">
+                <td>6</td>
+                <td class="number">0.58</td>
+                <td class="number">4.1%</td>
+                <td class="number">89.9%</td>
+                <td colspan="3"></td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="notes">Extraction Method: Principal Component Analysis<br>
+    Components with Eigenvalue &gt; 1.0 retained (Kaiser criterion)</p>
+
+    <!-- Scree Plot -->
+    <h2>Scree Plot</h2>
+    <div class="chart-container">
+        <div class="chart-title">Figure 1: Eigenvalue by Component Number</div>
+        <svg viewBox="0 0 450 280" style="width: 100%; max-width: 550px; display: block; margin: 0 auto;">
+            <!-- Axes -->
+            <line x1="60" y1="220" x2="420" y2="220" stroke="#000" stroke-width="1"/>
+            <line x1="60" y1="220" x2="60" y2="30" stroke="#000" stroke-width="1"/>
+            
+            <!-- Grid lines -->
+            <line x1="60" y1="170" x2="420" y2="170" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="60" y1="120" x2="420" y2="120" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="60" y1="70" x2="420" y2="70" stroke="#ccc" stroke-width="0.5"/>
+            
+            <!-- Eigenvalue = 1 reference line -->
+            <line x1="60" y1="187" x2="420" y2="187" stroke="#C00000" stroke-width="1" stroke-dasharray="5,5"/>
+            <text x="425" y="191" fill="#C00000" font-size="9">Eigenvalue = 1</text>
+            
+            <!-- Y-axis labels -->
+            <text x="50" y="225" fill="#000" font-size="10" text-anchor="end">0</text>
+            <text x="50" y="175" fill="#000" font-size="10" text-anchor="end">1</text>
+            <text x="50" y="125" fill="#000" font-size="10" text-anchor="end">3</text>
+            <text x="50" y="75" fill="#000" font-size="10" text-anchor="end">5</text>
+            <text x="50" y="40" fill="#000" font-size="10" text-anchor="end">6</text>
+            
+            <!-- X-axis labels -->
+            <text x="100" y="240" fill="#000" font-size="10" text-anchor="middle">1</text>
+            <text x="160" y="240" fill="#000" font-size="10" text-anchor="middle">2</text>
+            <text x="220" y="240" fill="#000" font-size="10" text-anchor="middle">3</text>
+            <text x="280" y="240" fill="#000" font-size="10" text-anchor="middle">4</text>
+            <text x="340" y="240" fill="#000" font-size="10" text-anchor="middle">5</text>
+            <text x="400" y="240" fill="#000" font-size="10" text-anchor="middle">6</text>
+            
+            <!-- Axis titles -->
+            <text x="240" y="265" fill="#000" font-size="11" text-anchor="middle">Component Number</text>
+            <text x="20" y="130" fill="#000" font-size="11" text-anchor="middle" transform="rotate(-90 20 130)">Eigenvalue</text>
+            
+            <!-- Line connecting points -->
+            <polyline points="100,55 160,112 220,157 280,195 340,200 400,206" fill="none" stroke="#4472C4" stroke-width="2"/>
+            
+            <!-- Data points -->
+            <circle cx="100" cy="55" r="5" fill="#4472C4"/>
+            <circle cx="160" cy="112" r="5" fill="#4472C4"/>
+            <circle cx="220" cy="157" r="5" fill="#4472C4"/>
+            <circle cx="280" cy="195" r="5" fill="#999"/>
+            <circle cx="340" cy="200" r="5" fill="#999"/>
+            <circle cx="400" cy="206" r="5" fill="#999"/>
+            
+            <!-- Point labels -->
+            <text x="100" y="45" fill="#4472C4" font-size="9" text-anchor="middle">4.85</text>
+            <text x="160" y="102" fill="#4472C4" font-size="9" text-anchor="middle">3.42</text>
+            <text x="220" y="147" fill="#4472C4" font-size="9" text-anchor="middle">2.18</text>
+        </svg>
+        <p class="notes" style="text-align: center; margin-top: 10px;">Three components retained based on Kaiser criterion (Eigenvalue &gt; 1)</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Rotated Component Matrix -->
+    <h2>Rotated Component Matrix<sup>a</sup></h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Variable</th>
+                <th>Factor 1<br>Technical Quality</th>
+                <th>Factor 2<br>Operations</th>
+                <th>Factor 3<br>Communication</th>
+                <th>Communality</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>UI/UX Design</td>
+                <td class="number" style="background:#c6efce;"><strong>.89</strong></td>
+                <td class="number">.12</td>
+                <td class="number">.18</td>
+                <td class="number">.84</td>
+            </tr>
+            <tr>
+                <td>Website Development</td>
+                <td class="number" style="background:#c6efce;"><strong>.85</strong></td>
+                <td class="number">.22</td>
+                <td class="number">.15</td>
+                <td class="number">.80</td>
+            </tr>
+            <tr>
+                <td>Hosting Reliability</td>
+                <td class="number" style="background:#c6efce;"><strong>.82</strong></td>
+                <td class="number">.28</td>
+                <td class="number">.08</td>
+                <td class="number">.76</td>
+            </tr>
+            <tr>
+                <td>Mobile Responsiveness</td>
+                <td class="number" style="background:#c6efce;"><strong>.78</strong></td>
+                <td class="number">.15</td>
+                <td class="number">.12</td>
+                <td class="number">.65</td>
+            </tr>
+            <tr>
+                <td>E-commerce Functionality</td>
+                <td class="number" style="background:#c6efce;"><strong>.72</strong></td>
+                <td class="number">.35</td>
+                <td class="number">.21</td>
+                <td class="number">.68</td>
+            </tr>
+            <tr>
+                <td>On-Time Delivery</td>
+                <td class="number">.25</td>
+                <td class="number" style="background:#c6efce;"><strong>.88</strong></td>
+                <td class="number">.15</td>
+                <td class="number">.86</td>
+            </tr>
+            <tr>
+                <td>Project Management</td>
+                <td class="number">.18</td>
+                <td class="number" style="background:#c6efce;"><strong>.85</strong></td>
+                <td class="number">.32</td>
+                <td class="number">.85</td>
+            </tr>
+            <tr>
+                <td>Resource Allocation</td>
+                <td class="number">.22</td>
+                <td class="number" style="background:#c6efce;"><strong>.82</strong></td>
+                <td class="number">.28</td>
+                <td class="number">.79</td>
+            </tr>
+            <tr>
+                <td>Meeting Coordination</td>
+                <td class="number">.15</td>
+                <td class="number" style="background:#c6efce;"><strong>.78</strong></td>
+                <td class="number">.35</td>
+                <td class="number">.76</td>
+            </tr>
+            <tr>
+                <td>WBS/Planning</td>
+                <td class="number">.20</td>
+                <td class="number" style="background:#c6efce;"><strong>.75</strong></td>
+                <td class="number">.30</td>
+                <td class="number">.70</td>
+            </tr>
+            <tr>
+                <td>Client Updates</td>
+                <td class="number">.12</td>
+                <td class="number">.28</td>
+                <td class="number" style="background:#c6efce;"><strong>.85</strong></td>
+                <td class="number">.82</td>
+            </tr>
+            <tr>
+                <td>Requirement Clarity</td>
+                <td class="number">.18</td>
+                <td class="number">.32</td>
+                <td class="number" style="background:#c6efce;"><strong>.82</strong></td>
+                <td class="number">.80</td>
+            </tr>
+            <tr>
+                <td>Single Point of Contact</td>
+                <td class="number">.08</td>
+                <td class="number">.25</td>
+                <td class="number" style="background:#c6efce;"><strong>.78</strong></td>
+                <td class="number">.68</td>
+            </tr>
+            <tr>
+                <td>Knowledge Transfer</td>
+                <td class="number">.22</td>
+                <td class="number">.35</td>
+                <td class="number" style="background:#c6efce;"><strong>.72</strong></td>
+                <td class="number">.68</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="notes">Extraction Method: Principal Component Analysis<br>
+    Rotation Method: Varimax with Kaiser Normalization<br>
+    a. Rotation converged in 5 iterations<br>
+    Loadings &gt; .50 highlighted</p>
+
+    <!-- Factor Score Coefficients -->
+    <h2>Component Score Coefficient Matrix</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>F1: Technical</th>
+                <th>F2: Operations</th>
+                <th>F3: Communication</th>
+                <th>Interpretation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2023</td>
+                <td class="number" style="color:#C00000;">-1.45</td>
+                <td class="number" style="color:#C00000;">-0.85</td>
+                <td class="number" style="color:#C00000;">-0.62</td>
+                <td>Crisis Year - All factors negative</td>
+            </tr>
+            <tr>
+                <td>2024</td>
+                <td class="number" style="color:#008000;">+0.72</td>
+                <td class="number" style="color:#008000;">+0.58</td>
+                <td class="number" style="color:#008000;">+0.45</td>
+                <td>Recovery Year - All factors positive</td>
+            </tr>
+            <tr>
+                <td>2025</td>
+                <td class="number" style="color:#008000;">+1.15</td>
+                <td class="number" style="color:#C00000;">-0.32</td>
+                <td class="number" style="color:#C00000;">-0.28</td>
+                <td>Mixed - Technical strong, Ops weak</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Factor-CSAT Correlation -->
+    <h2>Factor Correlation with CSAT</h2>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Factor</th>
+                <th>Correlation (r)</th>
+                <th>Significance</th>
+                <th>Rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Factor 2: Operational Efficiency</td>
+                <td class="number"><strong>+.85</strong></td>
+                <td class="number sig sig-high">&lt;.001</td>
+                <td>1 (Highest)</td>
+            </tr>
+            <tr>
+                <td>Factor 1: Technical Quality</td>
+                <td class="number">+.78</td>
+                <td class="number sig sig-high">&lt;.001</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Factor 3: Communication</td>
+                <td class="number">+.68</td>
+                <td class="number sig sig-high">&lt;.001</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Interpretation -->
+    <h2>Interpretation</h2>
+    <div class="model-summary">
+        <h3>Key Findings</h3>
+        <ol>
+            <li><strong>Three-factor structure</strong> explains 74.6% of total variance</li>
+            <li><strong>Factor 2 (Operations)</strong> has the highest CSAT correlation (r = .85) but shows declining performance in 2025</li>
+            <li><strong>Factor 1 (Technical)</strong> recovered from -1.45 (2023) to +1.15 (2025)</li>
+            <li><strong>2025 paradox:</strong> Technical excellence achieved but overall CSAT dropped due to operational decline</li>
+        </ol>
+    </div>
+
+    <h3>Factor Definitions</h3>
+    <table class="spss-table">
+        <thead>
+            <tr>
+                <th>Factor</th>
+                <th>Variance</th>
+                <th>Key Variables</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>F1: Technical Quality</strong></td>
+                <td class="number">34.6%</td>
+                <td>UI/UX Design, Web Development, Hosting, Mobile, E-commerce</td>
+            </tr>
+            <tr>
+                <td><strong>F2: Operational Efficiency</strong></td>
+                <td class="number">24.4%</td>
+                <td>On-Time Delivery, Project Management, Resource Allocation, Planning</td>
+            </tr>
+            <tr>
+                <td><strong>F3: Communication</strong></td>
+                <td class="number">15.6%</td>
+                <td>Client Updates, Requirement Clarity, SPOC, Knowledge Transfer</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Footer -->
+    <div class="report-footer">
+        <p>Wafeka Digital Agency | Factor Analysis Report</p>
+        <p>Method: Principal Component Analysis with Varimax Rotation</p>
+        <p>Generated: March 2025</p>
+    </div>
+
+</body>
+</html>
