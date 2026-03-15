@@ -46,7 +46,7 @@ jobs:
           # Copy Flappy Bird game
           cp -r build/web/* _site/projects/flappy/
           
-          # Copy Wafeka Analysis Dashboard (fancy version)
+          # Copy Zoro Technologies Analysis Dashboard (fancy version)
           cp -r analysys/* _site/wafeka/
           
           # Copy SPSS/Excel Style Reports (professional version)
@@ -140,7 +140,7 @@ jobs:
                 </a>
                 
                 <a href="/wafeka/" class="card card-data">
-                  <h2>📊 Wafeka Analytics</h2>
+                  <h2>📊 Zoro Analytics</h2>
                   <p>Comprehensive data analysis dashboard with correlation, regression, factor analysis, and executive insights.</p>
                   <div class="tags">
                     <span class="tag">Analytics</span>
