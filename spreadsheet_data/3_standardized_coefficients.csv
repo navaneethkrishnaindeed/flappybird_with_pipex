@@ -1,0 +1,6 @@
+Variable,Standardized Beta,Impact Direction,Rank
+On-Time Delivery,0.42,Positive,1
+UI/UX Revisions,-0.38,Negative,2
+Average Lag %,-0.32,Negative,3
+Hosting Incidents,-0.22,Negative,4
+PMS Issues,-0.15,Negative,5

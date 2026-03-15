@@ -1,0 +1,5 @@
+Scenario,Name,Predicted CSAT,UI/UX,Lag %,PMS,On-Time %,Notes
+1,Current State (2025),3.4,2.2,14,83,,Baseline
+2,If PMS Implemented,3.7,,8,10,,+0.3 CSAT improvement
+3,If UI/UX = 2.0,3.5,2.0,,,,"Marginal improvement +0.1"
+4,Optimal State,4.1,,,5,70,Best case scenario

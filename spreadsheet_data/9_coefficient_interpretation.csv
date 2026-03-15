@@ -1,0 +1,6 @@
+Variable,Coefficient,Interpretation,Example Change,CSAT Impact
+On-Time Delivery,+0.015,"Every 1% increase in on-time delivery improves CSAT by 0.015 points",50% → 60% (+10%),+0.15 CSAT
+UI/UX Revisions,-0.18,"Each additional revision round reduces CSAT by 0.18 points",2 → 5 revisions (+3),-0.54 CSAT
+Hosting Incidents,-0.02,"Each hosting incident reduces CSAT by 0.02 points",0 → 5 incidents,-0.10 CSAT
+PMS Issues,-0.004,"Each PMS issue reduces CSAT by 0.004 points",12 → 83 issues,-0.28 CSAT
+Average Lag %,-0.02,"Every 1% increase in lag reduces CSAT by 0.02 points",8% → 14% (+6%),-0.12 CSAT

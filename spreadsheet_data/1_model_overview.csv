@@ -1,0 +1,8 @@
+Metric,Value,Description
+R² (Explained Variance),0.89,89% variance explained
+Adjusted R²,0.85,Strong model fit
+F-Statistic,24.6,p < 0.001
+RMSE,0.18,Low prediction error
+Observations (n),310,Sample size
+Predictor Variables,5,Number of predictors
+Intercept (Baseline CSAT),3.12,Baseline satisfaction score

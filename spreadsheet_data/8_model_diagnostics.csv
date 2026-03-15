@@ -1,0 +1,7 @@
+Test,Statistic,Value,Threshold,Status
+Normality (Shapiro-Wilk),p-value,0.12,> 0.05,Passed
+Multicollinearity,VIF (max),< 5,< 10,Passed
+Autocorrelation,Durbin-Watson,1.92,1.5-2.5,Passed
+RMSE,Error,0.18,-,Low
+MAE,Error,0.15,-,Low
+95% Confidence Interval,Range,±0.3,-,Acceptable

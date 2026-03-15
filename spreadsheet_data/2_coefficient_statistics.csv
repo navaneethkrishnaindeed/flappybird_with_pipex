@@ -1,0 +1,7 @@
+Variable,Beta (β),Std Error,t-value,p-value,Significance
+Intercept,3.12,0.45,6.93,<0.001,***
+UI/UX Revisions,-0.18,0.05,-3.60,0.008,**
+Hosting Incidents,-0.02,0.01,-2.00,0.052,*
+On-Time Delivery,0.015,0.003,5.00,<0.001,***
+PMS Issues,-0.004,0.002,-2.00,0.048,*
+Average Lag %,-0.02,0.006,-3.33,0.012,**
