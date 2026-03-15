@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regression Analysis - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .coefficient-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .coefficient-bar:last-child { border-bottom: none; }
+        .coef-name { width: 150px; font-weight: 500; }
+        .coef-bar-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 30px;
+        }
+        .coef-bar-center {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--text-muted);
+        }
+        .coef-bar-fill {
+            position: absolute;
+            height: 24px;
+            border-radius: 4px;
+            transition: all 0.5s ease;
+        }
+        .coef-bar-fill.positive {
+            left: 50%;
+            background: var(--gradient-success);
+        }
+        .coef-bar-fill.negative {
+            right: 50%;
+            background: var(--gradient-danger);
+        }
+        .coef-value { width: 80px; text-align: right; font-weight: 600; }
+        .prediction-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        .prediction-card:hover { border-color: var(--primary); }
+        .prediction-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .residual-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            position: absolute;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%);">
+            <h1>📈 Regression Analysis</h1>
+            <p>Identifying factors that most strongly influence customer satisfaction</p>
+            <span class="badge">Multiple Linear Regression | OLS Method</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="8_Executive_Dashboard.html">📊 Dashboard</a>
+            <a href="1_Correlation_Analysis.html">Correlation</a>
+            <a href="2_Regression_Analysis.html" class="active">Regression</a>
+            <a href="3_Factor_Analysis.html">Factor Analysis</a>
+            <a href="4_Trend_Analysis.html">Trends</a>
+            <a href="5_Service_Performance.html">Services</a>
+            <a href="6_Customer_Sentiment.html">Sentiment</a>
+            <a href="7_Revenue_Impact.html">Revenue</a>
+        </nav>
+
+        <!-- Model Overview -->
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="kpi-card success">
+                <div class="kpi-label">R² (Explained Variance)</div>
+                <div class="kpi-value">0.89</div>
+                <div class="kpi-change positive">89% variance explained</div>
+            </div>
+            <div class="kpi-card info">
+                <div class="kpi-label">Adjusted R²</div>
+                <div class="kpi-value">0.85</div>
+                <div class="kpi-change positive">Strong model fit</div>
+            </div>
+            <div class="kpi-card success">
+                <div class="kpi-label">F-Statistic</div>
+                <div class="kpi-value">24.6</div>
+                <div class="kpi-change positive">p < 0.001</div>
+            </div>
+            <div class="kpi-card info">
+                <div class="kpi-label">RMSE</div>
+                <div class="kpi-value">0.18</div>
+                <div class="kpi-change positive">Low prediction error</div>
+            </div>
+        </div>
+
+        <!-- Regression Equation -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📐 Multiple Regression Equation</h3>
+                <span class="badge success">Statistically Significant</span>
+            </div>
+            <div class="card-body">
+                <div class="formula" style="text-align: center; padding: 2rem;">
+                    <div class="formula-title">Predictive Model for Customer Satisfaction (CSAT)</div>
+                    <div class="formula-content" style="font-size: 1.3rem;">
+                        CSAT = <span style="color: var(--success);">3.12</span> 
+                        - <span style="color: var(--danger);">0.18</span>(UI/UX) 
+                        - <span style="color: var(--danger);">0.02</span>(Hosting) 
+                        + <span style="color: var(--success);">0.015</span>(OnTime%) 
+                        - <span style="color: var(--warning);">0.004</span>(PMS) 
+                        - <span style="color: var(--danger);">0.02</span>(Lag%)
+                    </div>
+                </div>
+                <div class="grid grid-3" style="margin-top: 1.5rem;">
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">3.12</div>
+                        <div class="stat-label">Intercept (Baseline CSAT)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--primary);">5</div>
+                        <div class="stat-label">Predictor Variables</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">310</div>
+                        <div class="stat-label">Observations (n)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coefficient Analysis -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Regression Coefficients</h2>
+                <p class="section-subtitle">Impact of each variable on Customer Satisfaction</p>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom: 2rem;">
+            <!-- Coefficient Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Coefficient Statistics</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>β</th>
+                                    <th>Std Err</th>
+                                    <th>t-value</th>
+                                    <th>p-value</th>
+                                    <th>Sig</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Intercept</strong></td>
+                                    <td class="cell-positive">3.12</td>
+                                    <td>0.45</td>
+                                    <td>6.93</td>
+                                    <td>&lt;0.001</td>
+                                    <td>***</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>UI/UX Revisions</strong></td>
+                                    <td class="cell-negative">-0.18</td>
+                                    <td>0.05</td>
+                                    <td>-3.60</td>
+                                    <td>0.008</td>
+                                    <td>**</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Hosting Incidents</strong></td>
+                                    <td class="cell-negative">-0.02</td>
+                                    <td>0.01</td>
+                                    <td>-2.00</td>
+                                    <td>0.052</td>
+                                    <td>*</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>On-Time Delivery</strong></td>
+                                    <td class="cell-positive">+0.015</td>
+                                    <td>0.003</td>
+                                    <td>5.00</td>
+                                    <td>&lt;0.001</td>
+                                    <td>***</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PMS Issues</strong></td>
+                                    <td class="cell-warning">-0.004</td>
+                                    <td>0.002</td>
+                                    <td>-2.00</td>
+                                    <td>0.048</td>
+                                    <td>*</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Average Lag %</strong></td>
+                                    <td class="cell-negative">-0.02</td>
+                                    <td>0.006</td>
+                                    <td>-3.33</td>
+                                    <td>0.012</td>
+                                    <td>**</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem;">
+                        *** p&lt;0.001, ** p&lt;0.01, * p&lt;0.05
+                    </p>
+                </div>
+            </div>
+
+            <!-- Standardized Coefficients Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Standardized Coefficients (Beta Weights)</h3>
+                </div>
+                <div class="card-body">
+                    <div class="coefficient-bar">
+                        <span class="coef-name">On-Time Delivery</span>
+                        <div class="coef-bar-container">
+                            <div class="coef-bar-center"></div>
+                            <div class="coef-bar-fill positive" style="width: 42%;"></div>
+                        </div>
+                        <span class="coef-value" style="color: var(--success);">+0.42</span>
+                    </div>
+                    <div class="coefficient-bar">
+                        <span class="coef-name">UI/UX Revisions</span>
+                        <div class="coef-bar-container">
+                            <div class="coef-bar-center"></div>
+                            <div class="coef-bar-fill negative" style="width: 38%;"></div>
+                        </div>
+                        <span class="coef-value" style="color: var(--danger);">-0.38</span>
+                    </div>
+                    <div class="coefficient-bar">
+                        <span class="coef-name">Average Lag %</span>
+                        <div class="coef-bar-container">
+                            <div class="coef-bar-center"></div>
+                            <div class="coef-bar-fill negative" style="width: 32%;"></div>
+                        </div>
+                        <span class="coef-value" style="color: var(--danger);">-0.32</span>
+                    </div>
+                    <div class="coefficient-bar">
+                        <span class="coef-name">Hosting Incidents</span>
+                        <div class="coef-bar-container">
+                            <div class="coef-bar-center"></div>
+                            <div class="coef-bar-fill negative" style="width: 22%;"></div>
+                        </div>
+                        <span class="coef-value" style="color: var(--warning);">-0.22</span>
+                    </div>
+                    <div class="coefficient-bar">
+                        <span class="coef-name">PMS Issues</span>
+                        <div class="coef-bar-container">
+                            <div class="coef-bar-center"></div>
+                            <div class="coef-bar-fill negative" style="width: 15%;"></div>
+                        </div>
+                        <span class="coef-value" style="color: var(--warning);">-0.15</span>
+                    </div>
+                    
+                    <div class="insight" style="margin-top: 1.5rem;">
+                        <div class="insight-title">💡 Impact Ranking</div>
+                        <div class="insight-text">On-Time Delivery has the strongest standardized effect (+0.42), followed by UI/UX Revisions (-0.38). PMS Issues, while currently smaller (-0.15), is rapidly growing.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interpretation Section -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🔍 Coefficient Interpretation</h2>
+                <p class="section-subtitle">What does each coefficient mean in practical terms?</p>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-header" style="background: var(--gradient-success);">
+                    <h3 style="color: white;">✅ On-Time Delivery (+0.015)</h3>
+                </div>
+                <div class="card-body">
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <div class="comparison-value" style="color: var(--text-secondary);">50%</div>
+                            <div class="comparison-label">On-Time</div>
+                        </div>
+                        <div class="comparison-vs">→</div>
+                        <div class="comparison-item">
+                            <div class="comparison-value" style="color: var(--success);">60%</div>
+                            <div class="comparison-label">On-Time</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 1rem;">
+                        <strong style="font-size: 1.5rem; color: var(--success);">+0.15 CSAT</strong>
+                    </p>
+                    <p style="text-align: center; color: var(--text-secondary);">
+                        Every 10% increase in on-time delivery improves CSAT by 0.15 points
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="background: var(--gradient-danger);">
+                    <h3 style="color: white;">❌ UI/UX Revisions (-0.18)</h3>
+                </div>
+                <div class="card-body">
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <div class="comparison-value" style="color: var(--success);">2 Rev</div>
+                            <div class="comparison-label">Current</div>
+                        </div>
+                        <div class="comparison-vs">→</div>
+                        <div class="comparison-item">
+                            <div class="comparison-value" style="color: var(--danger);">5 Rev</div>
+                            <div class="comparison-label">Crisis</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 1rem;">
+                        <strong style="font-size: 1.5rem; color: var(--danger);">-0.54 CSAT</strong>
+                    </p>
+                    <p style="text-align: center; color: var(--text-secondary);">
+                        Each additional revision round reduces CSAT by 0.18 points
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model Diagnostics -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🔬 Model Diagnostics</h2>
+                <p class="section-subtitle">Validating regression assumptions</p>
+            </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Normality Test</h3>
+                    <span class="badge success">Passed</span>
+                </div>
+                <div class="card-body">
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">0.12</div>
+                        <div class="stat-label">Shapiro-Wilk p-value</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.875rem;">
+                        p > 0.05 indicates residuals are approximately normally distributed
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Multicollinearity</h3>
+                    <span class="badge success">Passed</span>
+                </div>
+                <div class="card-body">
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">&lt; 5</div>
+                        <div class="stat-label">All VIF Values</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.875rem;">
+                        VIF &lt; 5 indicates no problematic multicollinearity
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Autocorrelation</h3>
+                    <span class="badge success">Passed</span>
+                </div>
+                <div class="card-body">
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">1.92</div>
+                        <div class="stat-label">Durbin-Watson Statistic</div>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.875rem;">
+                        Value near 2 indicates no autocorrelation
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prediction Scenarios -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🎯 Prediction Scenarios</h2>
+                <p class="section-subtitle">What-if analysis using the regression model</p>
+            </div>
+        </div>
+
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="prediction-card">
+                <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem;">SCENARIO 1</div>
+                <div style="font-weight: 600; margin-bottom: 1rem;">Current State (2025)</div>
+                <div class="prediction-value">3.4</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
+                    UI/UX: 2.2 | Lag: 14% | PMS: 83
+                </div>
+            </div>
+
+            <div class="prediction-card" style="border-color: var(--success);">
+                <div style="font-size: 0.875rem; color: var(--success); margin-bottom: 0.5rem;">SCENARIO 2</div>
+                <div style="font-weight: 600; margin-bottom: 1rem;">If PMS Implemented</div>
+                <div class="prediction-value" style="background: var(--gradient-success); -webkit-background-clip: text;">3.7</div>
+                <div style="font-size: 0.75rem; color: var(--success); margin-top: 0.5rem;">
+                    Lag: 8% | PMS: 10 | +0.3 CSAT
+                </div>
+            </div>
+
+            <div class="prediction-card" style="border-color: var(--info);">
+                <div style="font-size: 0.875rem; color: var(--info); margin-bottom: 0.5rem;">SCENARIO 3</div>
+                <div style="font-weight: 600; margin-bottom: 1rem;">If UI/UX = 2.0</div>
+                <div class="prediction-value" style="background: var(--gradient-info); -webkit-background-clip: text;">3.5</div>
+                <div style="font-size: 0.75rem; color: var(--info); margin-top: 0.5rem;">
+                    Marginal improvement +0.1
+                </div>
+            </div>
+
+            <div class="prediction-card" style="border-color: var(--primary); background: var(--primary); color: white;">
+                <div style="font-size: 0.875rem; opacity: 0.8; margin-bottom: 0.5rem;">SCENARIO 4</div>
+                <div style="font-weight: 600; margin-bottom: 1rem;">Optimal State</div>
+                <div style="font-size: 3rem; font-weight: 800;">4.1</div>
+                <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 0.5rem;">
+                    On-Time: 70% | Lag: 5%
+                </div>
+            </div>
+        </div>
+
+        <!-- ROI Analysis -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>💰 Business Impact (ROI of Improvements)</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Improvement</th>
+                                <th>Investment</th>
+                                <th>CSAT Impact</th>
+                                <th>Revenue Impact</th>
+                                <th>ROI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Implement PMS/CRM</strong></td>
+                                <td>₹3,00,000</td>
+                                <td class="cell-positive">+0.3</td>
+                                <td class="cell-positive">+₹8,00,000</td>
+                                <td><span class="badge success">167%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Improve On-Time to 70%</strong></td>
+                                <td>₹1,00,000</td>
+                                <td class="cell-positive">+0.24</td>
+                                <td class="cell-positive">+₹5,50,000</td>
+                                <td><span class="badge success">450%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reduce UI/UX to 1.5 avg</strong></td>
+                                <td>₹50,000</td>
+                                <td class="cell-positive">+0.13</td>
+                                <td class="cell-positive">+₹2,50,000</td>
+                                <td><span class="badge success">400%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Combined Optimization</strong></td>
+                                <td>₹4,50,000</td>
+                                <td class="cell-positive">+0.7</td>
+                                <td class="cell-positive">+₹15,00,000</td>
+                                <td><span class="badge success">233%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Findings -->
+        <div class="grid grid-2" style="margin-bottom: 2rem;">
+            <div class="insight">
+                <div class="insight-title">🎯 Primary Finding</div>
+                <div class="insight-text">On-Time Delivery is the single most important factor (β = +0.42). Improving from 54% to 70% could increase CSAT by 0.24 points - equivalent to recovering from 2025 levels to 2024 peak.</div>
+            </div>
+            <div class="insight" style="background: var(--gradient-danger);">
+                <div class="insight-title">⚠️ Warning: PMS Growing Impact</div>
+                <div class="insight-text">While PMS coefficient is currently low (-0.15), the variable increased 7x (12→83) in one year. If this trend continues, PMS will become the dominant negative factor by 2026.</div>
+            </div>
+        </div>
+
+        <!-- Actual vs Predicted Chart -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📈 Actual vs Predicted CSAT</h3>
+            </div>
+            <div class="card-body">
+                <div style="padding: 2rem;">
+                    <svg viewBox="0 0 400 300" style="width: 100%; height: 300px;">
+                        <!-- Grid -->
+                        <line x1="60" y1="30" x2="360" y2="30" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="80" x2="360" y2="80" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="130" x2="360" y2="130" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="180" x2="360" y2="180" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="230" x2="360" y2="230" stroke="var(--border)"/>
+                        
+                        <!-- Axes -->
+                        <text x="50" y="35" fill="var(--text-muted)" font-size="10" text-anchor="end">4.0</text>
+                        <text x="50" y="85" fill="var(--text-muted)" font-size="10" text-anchor="end">3.5</text>
+                        <text x="50" y="135" fill="var(--text-muted)" font-size="10" text-anchor="end">3.0</text>
+                        <text x="50" y="185" fill="var(--text-muted)" font-size="10" text-anchor="end">2.5</text>
+                        <text x="50" y="235" fill="var(--text-muted)" font-size="10" text-anchor="end">2.0</text>
+                        
+                        <!-- Perfect Prediction Line -->
+                        <line x1="60" y1="230" x2="360" y2="30" stroke="var(--success)" stroke-width="2" stroke-dasharray="8,4" opacity="0.5"/>
+                        <text x="280" y="60" fill="var(--success)" font-size="9">Perfect Fit</text>
+                        
+                        <!-- Data Points -->
+                        <circle cx="100" cy="190" r="8" fill="var(--danger)" opacity="0.8" title="2023"/>
+                        <circle cx="110" cy="185" r="6" fill="var(--danger)" opacity="0.6"/>
+                        <circle cx="90" cy="200" r="5" fill="var(--danger)" opacity="0.5"/>
+                        
+                        <circle cx="220" cy="65" r="8" fill="var(--success)" opacity="0.8" title="2024"/>
+                        <circle cx="210" cy="75" r="6" fill="var(--success)" opacity="0.6"/>
+                        <circle cx="235" cy="55" r="5" fill="var(--success)" opacity="0.5"/>
+                        
+                        <circle cx="290" cy="90" r="8" fill="var(--warning)" opacity="0.8" title="2025"/>
+                        <circle cx="300" cy="80" r="6" fill="var(--warning)" opacity="0.6"/>
+                        <circle cx="280" cy="100" r="5" fill="var(--warning)" opacity="0.5"/>
+                        
+                        <!-- X Labels -->
+                        <text x="100" y="255" fill="var(--text-secondary)" font-size="11" text-anchor="middle">2023</text>
+                        <text x="220" y="255" fill="var(--text-secondary)" font-size="11" text-anchor="middle">2024</text>
+                        <text x="290" y="255" fill="var(--text-secondary)" font-size="11" text-anchor="middle">2025</text>
+                        
+                        <!-- Legend -->
+                        <text x="200" y="280" fill="var(--text-muted)" font-size="10" text-anchor="middle">Predicted (X) vs Actual (Y) CSAT Scores</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Residual Analysis -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📊 Model Residuals (Prediction Errors)</h3>
+            </div>
+            <div class="card-body">
+                <div style="padding: 2rem;">
+                    <svg viewBox="0 0 400 200" style="width: 100%; height: 200px;">
+                        <!-- Zero line -->
+                        <line x1="50" y1="100" x2="380" y2="100" stroke="var(--primary)" stroke-width="2"/>
+                        <text x="40" y="105" fill="var(--text-muted)" font-size="10" text-anchor="end">0</text>
+                        <text x="40" y="50" fill="var(--text-muted)" font-size="10" text-anchor="end">+0.5</text>
+                        <text x="40" y="160" fill="var(--text-muted)" font-size="10" text-anchor="end">-0.5</text>
+                        
+                        <!-- Residual bars -->
+                        <rect x="70" y="100" width="25" height="40" fill="var(--danger)" rx="2"/>
+                        <rect x="100" y="75" width="25" height="25" fill="var(--danger)" rx="2"/>
+                        <rect x="130" y="85" width="25" height="15" fill="var(--warning)" rx="2"/>
+                        <rect x="160" y="90" width="25" height="10" fill="var(--warning)" rx="2"/>
+                        <rect x="190" y="95" width="25" height="5" fill="var(--success)" rx="2"/>
+                        <rect x="220" y="92" width="25" height="8" fill="var(--success)" rx="2"/>
+                        <rect x="250" y="100" width="25" height="12" fill="var(--success)" rx="2"/>
+                        <rect x="280" y="100" width="25" height="18" fill="var(--warning)" rx="2"/>
+                        <rect x="310" y="100" width="25" height="25" fill="var(--warning)" rx="2"/>
+                        <rect x="340" y="100" width="25" height="35" fill="var(--danger)" rx="2"/>
+                        
+                        <!-- X axis -->
+                        <line x1="50" y1="170" x2="380" y2="170" stroke="var(--border)"/>
+                        <text x="100" y="185" fill="var(--text-muted)" font-size="9" text-anchor="middle">2023</text>
+                        <text x="220" y="185" fill="var(--text-muted)" font-size="9" text-anchor="middle">2024</text>
+                        <text x="340" y="185" fill="var(--text-muted)" font-size="9" text-anchor="middle">2025</text>
+                    </svg>
+                </div>
+                <div class="grid grid-3" style="margin-top: 1rem;">
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">0.18</div>
+                        <div class="stat-label">RMSE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">0.15</div>
+                        <div class="stat-label">MAE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">±0.3</div>
+                        <div class="stat-label">95% CI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <p>Wafeka Digital Agency | Regression Analysis</p>
+            <p>Method: Ordinary Least Squares (OLS) | R² = 0.89</p>
+        </footer>
+    </div>
+</body>
+</html>

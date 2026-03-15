@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend Analysis - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .chart-container {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+        .svg-chart {
+            width: 100%;
+            height: 300px;
+        }
+        .chart-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .sparkline-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 50px;
+            padding: 0.5rem;
+        }
+        .spark {
+            flex: 1;
+            border-radius: 2px 2px 0 0;
+            transition: all 0.3s ease;
+            min-width: 20px;
+        }
+        .spark:hover {
+            filter: brightness(1.2);
+        }
+        .radar-container {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .yoy-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .yoy-arrow.up { background: var(--success-light); color: #065f46; }
+        .yoy-arrow.down { background: var(--danger-light); color: #991b1b; }
+        .yoy-arrow.neutral { background: var(--warning-light); color: #92400e; }
+        .area-chart {
+            position: relative;
+            height: 250px;
+            background: linear-gradient(to top, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+            border-left: 2px solid var(--border);
+            border-bottom: 2px solid var(--border);
+        }
+        .chart-y-axis {
+            position: absolute;
+            left: -40px;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .chart-x-axis {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        .mini-chart-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .mini-chart {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+        .mini-chart-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .mini-chart-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .horizontal-bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .h-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .h-bar-label {
+            width: 80px;
+            font-size: 0.875rem;
+            text-align: right;
+            color: var(--text-secondary);
+        }
+        .h-bar-track {
+            flex: 1;
+            height: 35px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .h-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding-left: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            transition: width 1s ease-out;
+        }
+        .h-bar-value {
+            width: 60px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .grouped-bar {
+            display: flex;
+            gap: 2px;
+            height: 100%;
+        }
+        .grouped-bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .grouped-bar-fill {
+            border-radius: 3px 3px 0 0;
+            transition: height 0.5s ease;
+        }
+        .stacked-area {
+            position: relative;
+            height: 200px;
+            margin: 2rem 0;
+        }
+        .area-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);">
+            <h1>📈 Trend Analysis</h1>
+            <p>Year-over-Year performance trends and growth patterns</p>
+            <span class="badge">3-Year Longitudinal Study | 2023-2025</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="8_Executive_Dashboard.html">📊 Dashboard</a>
+            <a href="1_Correlation_Analysis.html">Correlation</a>
+            <a href="2_Regression_Analysis.html">Regression</a>
+            <a href="3_Factor_Analysis.html">Factor Analysis</a>
+            <a href="4_Trend_Analysis.html" class="active">Trends</a>
+            <a href="5_Service_Performance.html">Services</a>
+            <a href="6_Customer_Sentiment.html">Sentiment</a>
+            <a href="7_Revenue_Impact.html">Revenue</a>
+        </nav>
+
+        <!-- YoY Summary Cards -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Year-over-Year Key Metrics</h2>
+                <p class="section-subtitle">Performance evolution across three years</p>
+            </div>
+        </div>
+
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="kpi-card info">
+                <div class="kpi-label">Total Projects</div>
+                <div class="kpi-value">310</div>
+                <div class="sparkline-container">
+                    <div class="spark" style="height: 70%; background: var(--chart-1);" title="2023: 95"></div>
+                    <div class="spark" style="height: 85%; background: var(--chart-1);" title="2024: 105"></div>
+                    <div class="spark" style="height: 100%; background: var(--chart-1);" title="2025: 110"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    <span>95</span>
+                    <span>105</span>
+                    <span>110</span>
+                </div>
+            </div>
+
+            <div class="kpi-card success">
+                <div class="kpi-label">3-Year Revenue</div>
+                <div class="kpi-value">₹1.58Cr</div>
+                <div class="sparkline-container">
+                    <div class="spark" style="height: 75%; background: var(--success);" title="2023: ₹47L"></div>
+                    <div class="spark" style="height: 88%; background: var(--success);" title="2024: ₹52L"></div>
+                    <div class="spark" style="height: 100%; background: var(--success);" title="2025: ₹59L"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    <span>₹47L</span>
+                    <span>₹52L</span>
+                    <span>₹59L</span>
+                </div>
+            </div>
+
+            <div class="kpi-card warning">
+                <div class="kpi-label">Avg CSAT Score</div>
+                <div class="kpi-value">3.27</div>
+                <div class="sparkline-container">
+                    <div class="spark" style="height: 56%; background: var(--danger);" title="2023: 2.8"></div>
+                    <div class="spark" style="height: 100%; background: var(--success);" title="2024: 3.6"></div>
+                    <div class="spark" style="height: 85%; background: var(--warning);" title="2025: 3.4"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    <span>2.8</span>
+                    <span>3.6</span>
+                    <span>3.4</span>
+                </div>
+            </div>
+
+            <div class="kpi-card info">
+                <div class="kpi-label">Team Size</div>
+                <div class="kpi-value">52-58</div>
+                <div class="sparkline-container">
+                    <div class="spark" style="height: 75%; background: var(--info);" title="2023: 42-48"></div>
+                    <div class="spark" style="height: 88%; background: var(--info);" title="2024: 48-52"></div>
+                    <div class="spark" style="height: 100%; background: var(--info);" title="2025: 52-58"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    <span>45</span>
+                    <span>50</span>
+                    <span>55</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSAT Trend Chart - FIXED -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📈 Customer Satisfaction Score Trend</h3>
+                <span class="badge warning">V-Shaped Recovery</span>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="padding: 3rem;">
+                    <svg viewBox="0 0 400 200" class="svg-chart" style="overflow: visible;">
+                        <!-- Grid Lines -->
+                        <defs>
+                            <linearGradient id="csatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.05"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Horizontal Grid -->
+                        <line x1="50" y1="20" x2="380" y2="20" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+                        <line x1="50" y1="60" x2="380" y2="60" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+                        <line x1="50" y1="100" x2="380" y2="100" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+                        <line x1="50" y1="140" x2="380" y2="140" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+                        <line x1="50" y1="180" x2="380" y2="180" stroke="var(--border)" stroke-width="1"/>
+                        
+                        <!-- Y-Axis Labels -->
+                        <text x="40" y="25" fill="var(--text-muted)" font-size="12" text-anchor="end">5.0</text>
+                        <text x="40" y="65" fill="var(--text-muted)" font-size="12" text-anchor="end">4.0</text>
+                        <text x="40" y="105" fill="var(--text-muted)" font-size="12" text-anchor="end">3.0</text>
+                        <text x="40" y="145" fill="var(--text-muted)" font-size="12" text-anchor="end">2.0</text>
+                        <text x="40" y="185" fill="var(--text-muted)" font-size="12" text-anchor="end">1.0</text>
+                        
+                        <!-- Area Fill -->
+                        <path d="M 100 136 L 215 52 L 330 68 L 330 180 L 100 180 Z" fill="url(#csatGradient)"/>
+                        
+                        <!-- Line -->
+                        <path d="M 100 136 L 215 52 L 330 68" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Data Points -->
+                        <circle cx="100" cy="136" r="10" fill="#ef4444" stroke="white" stroke-width="3"/>
+                        <circle cx="215" cy="52" r="10" fill="#10b981" stroke="white" stroke-width="3"/>
+                        <circle cx="330" cy="68" r="10" fill="#f59e0b" stroke="white" stroke-width="3"/>
+                        
+                        <!-- Data Labels -->
+                        <rect x="75" y="145" width="50" height="24" rx="4" fill="#ef4444"/>
+                        <text x="100" y="162" fill="white" font-size="12" font-weight="bold" text-anchor="middle">2.8</text>
+                        
+                        <rect x="190" y="22" width="50" height="24" rx="4" fill="#10b981"/>
+                        <text x="215" y="39" fill="white" font-size="12" font-weight="bold" text-anchor="middle">3.6</text>
+                        
+                        <rect x="305" y="78" width="50" height="24" rx="4" fill="#f59e0b"/>
+                        <text x="330" y="95" fill="white" font-size="12" font-weight="bold" text-anchor="middle">3.4</text>
+                        
+                        <!-- X-Axis Labels -->
+                        <text x="100" y="200" fill="var(--text-secondary)" font-size="14" font-weight="600" text-anchor="middle">2023</text>
+                        <text x="215" y="200" fill="var(--text-secondary)" font-size="14" font-weight="600" text-anchor="middle">2024</text>
+                        <text x="330" y="200" fill="var(--text-secondary)" font-size="14" font-weight="600" text-anchor="middle">2025</text>
+                        
+                        <!-- Annotations -->
+                        <text x="100" y="120" fill="var(--danger)" font-size="10" text-anchor="middle">Crisis</text>
+                        <text x="215" y="75" fill="var(--success)" font-size="10" text-anchor="middle">Peak</text>
+                        <text x="330" y="55" fill="var(--warning)" font-size="10" text-anchor="middle">Dip</text>
+                    </svg>
+                </div>
+                
+                <div class="grid grid-3" style="margin-top: 1.5rem;">
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--danger);">2.8</div>
+                        <div class="stat-label">2023 - Technical Crisis</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">3.6</div>
+                        <div class="stat-label">2024 - Recovery Peak</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--warning);">3.4</div>
+                        <div class="stat-label">2025 - PMS Crisis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Multi-Metric Comparison -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Multi-Metric Year-over-Year Comparison</h2>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>2023</th>
+                                <th>2024</th>
+                                <th>2025</th>
+                                <th>2023→2024</th>
+                                <th>2024→2025</th>
+                                <th>Overall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Projects</strong></td>
+                                <td>95</td>
+                                <td>105</td>
+                                <td>110</td>
+                                <td><span class="yoy-arrow up">↑ +10.5%</span></td>
+                                <td><span class="yoy-arrow up">↑ +4.8%</span></td>
+                                <td>📈 Growing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Revenue</strong></td>
+                                <td>₹47.15L</td>
+                                <td>₹52.38L</td>
+                                <td>₹58.72L</td>
+                                <td><span class="yoy-arrow up">↑ +11.1%</span></td>
+                                <td><span class="yoy-arrow up">↑ +12.1%</span></td>
+                                <td>📈 Growing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CSAT Score</strong></td>
+                                <td class="cell-negative">2.8</td>
+                                <td class="cell-positive">3.6</td>
+                                <td class="cell-warning">3.4</td>
+                                <td><span class="yoy-arrow up">↑ +28.6%</span></td>
+                                <td><span class="yoy-arrow down">↓ -5.6%</span></td>
+                                <td>⚠️ Mixed</td>
+                            </tr>
+                            <tr>
+                                <td><strong>On-Time %</strong></td>
+                                <td class="cell-negative">24%</td>
+                                <td class="cell-positive">58%</td>
+                                <td class="cell-warning">54%</td>
+                                <td><span class="yoy-arrow up">↑ +142%</span></td>
+                                <td><span class="yoy-arrow down">↓ -7%</span></td>
+                                <td>⚠️ Slipping</td>
+                            </tr>
+                            <tr>
+                                <td><strong>UI/UX Revisions</strong></td>
+                                <td class="cell-negative">4.9</td>
+                                <td class="cell-warning">2.8</td>
+                                <td class="cell-positive">2.2</td>
+                                <td><span class="yoy-arrow up">↓ -43%</span></td>
+                                <td><span class="yoy-arrow up">↓ -21%</span></td>
+                                <td>✅ Resolved</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hosting Issues</strong></td>
+                                <td class="cell-negative">23</td>
+                                <td class="cell-warning">8</td>
+                                <td class="cell-positive">3</td>
+                                <td><span class="yoy-arrow up">↓ -65%</span></td>
+                                <td><span class="yoy-arrow up">↓ -63%</span></td>
+                                <td>✅ Resolved</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PMS Issues</strong></td>
+                                <td>0</td>
+                                <td class="cell-warning">12</td>
+                                <td class="cell-negative">83</td>
+                                <td><span class="yoy-arrow neutral">New</span></td>
+                                <td><span class="yoy-arrow down">↑ +592%</span></td>
+                                <td>🔴 Crisis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Issue Distribution Grouped Bar Chart -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Issue Distribution Over Time</h2>
+                <p class="section-subtitle">How problem areas shifted across years</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="chart-container" style="padding: 2rem;">
+                    <svg viewBox="0 0 500 280" style="width: 100%; height: 280px;">
+                        <!-- Legend -->
+                        <rect x="120" y="10" width="12" height="12" fill="var(--chart-1)"/>
+                        <text x="137" y="20" fill="var(--text-secondary)" font-size="11">UI/UX</text>
+                        <rect x="190" y="10" width="12" height="12" fill="var(--chart-2)"/>
+                        <text x="207" y="20" fill="var(--text-secondary)" font-size="11">Hosting</text>
+                        <rect x="270" y="10" width="12" height="12" fill="var(--chart-3)"/>
+                        <text x="287" y="20" fill="var(--text-secondary)" font-size="11">SEO</text>
+                        <rect x="330" y="10" width="12" height="12" fill="var(--chart-4)"/>
+                        <text x="347" y="20" fill="var(--text-secondary)" font-size="11">PMS/CRM</text>
+                        
+                        <!-- Y-Axis -->
+                        <line x1="60" y1="40" x2="60" y2="240" stroke="var(--border)" stroke-width="1"/>
+                        <text x="50" y="45" fill="var(--text-muted)" font-size="10" text-anchor="end">80%</text>
+                        <text x="50" y="90" fill="var(--text-muted)" font-size="10" text-anchor="end">60%</text>
+                        <text x="50" y="135" fill="var(--text-muted)" font-size="10" text-anchor="end">40%</text>
+                        <text x="50" y="180" fill="var(--text-muted)" font-size="10" text-anchor="end">20%</text>
+                        <text x="50" y="225" fill="var(--text-muted)" font-size="10" text-anchor="end">0%</text>
+                        
+                        <!-- X-Axis -->
+                        <line x1="60" y1="240" x2="460" y2="240" stroke="var(--border)" stroke-width="1"/>
+                        
+                        <!-- 2023 Bars -->
+                        <rect x="80" y="50" width="30" height="190" fill="var(--chart-1)" rx="3"/>
+                        <rect x="115" y="130" width="30" height="110" fill="var(--chart-2)" rx="3"/>
+                        <rect x="150" y="165" width="30" height="75" fill="var(--chart-3)" rx="3"/>
+                        <rect x="185" y="238" width="30" height="2" fill="var(--chart-4)" rx="3"/>
+                        <text x="140" y="260" fill="var(--text-secondary)" font-size="14" font-weight="600" text-anchor="middle">2023</text>
+                        
+                        <!-- 2024 Bars -->
+                        <rect x="240" y="210" width="30" height="30" fill="var(--chart-1)" rx="3"/>
+                        <rect x="275" y="220" width="30" height="20" fill="var(--chart-2)" rx="3"/>
+                        <rect x="310" y="160" width="30" height="80" fill="var(--chart-3)" rx="3"/>
+                        <rect x="345" y="195" width="30" height="45" fill="var(--chart-4)" rx="3"/>
+                        <text x="295" y="260" fill="var(--text-secondary)" font-size="14" font-weight="600" text-anchor="middle">2024</text>
+                        
+                        <!-- 2025 Bars -->
+                        <rect x="395" y="220" width="30" height="20" fill="var(--chart-1)" rx="3"/>
+                        <rect x="430" y="232" width="30" height="8" fill="var(--chart-2)" rx="3"/>
+                        <rect x="395" y="170" width="30" height="70" fill="var(--chart-3)" rx="3"/>
+                        <rect x="430" y="122" width="30" height="118" fill="var(--chart-4)" rx="3"/>
+                        <text x="430" y="260" fill="var(--text-secondary)" font-size="14" font-weight="600" text-anchor="middle">2025</text>
+                        
+                        <!-- Bar Labels -->
+                        <text x="95" y="45" fill="white" font-size="9" font-weight="bold" text-anchor="middle">76%</text>
+                        <text x="130" y="125" fill="white" font-size="9" font-weight="bold" text-anchor="middle">44%</text>
+                        <text x="445" y="117" fill="white" font-size="9" font-weight="bold" text-anchor="middle">47%</text>
+                    </svg>
+                </div>
+                
+                <div class="insight">
+                    <div class="insight-title">💡 Key Insight: Issue Migration</div>
+                    <div class="insight-text">Technical issues (UI/UX: 76%→8%, Hosting: 44%→3%) were successfully resolved, but operational issues (PMS: 0%→47%) emerged as the new dominant problem.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Trend Chart -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>💰 Revenue Growth Trend</h3>
+                <span class="badge success">+11.5% CAGR</span>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="padding: 2rem;">
+                    <svg viewBox="0 0 400 220" style="width: 100%; height: 220px;">
+                        <!-- Gradient -->
+                        <defs>
+                            <linearGradient id="revenueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.5"/>
+                                <stop offset="100%" stop-color="#10b981" stop-opacity="0.05"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Grid -->
+                        <line x1="50" y1="30" x2="370" y2="30" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="50" y1="80" x2="370" y2="80" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="50" y1="130" x2="370" y2="130" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="50" y1="180" x2="370" y2="180" stroke="var(--border)"/>
+                        
+                        <!-- Y Labels -->
+                        <text x="45" y="35" fill="var(--text-muted)" font-size="10" text-anchor="end">₹60L</text>
+                        <text x="45" y="85" fill="var(--text-muted)" font-size="10" text-anchor="end">₹50L</text>
+                        <text x="45" y="135" fill="var(--text-muted)" font-size="10" text-anchor="end">₹40L</text>
+                        <text x="45" y="185" fill="var(--text-muted)" font-size="10" text-anchor="end">₹30L</text>
+                        
+                        <!-- Area -->
+                        <path d="M 100 110 L 210 75 L 320 35 L 320 180 L 100 180 Z" fill="url(#revenueGradient)"/>
+                        
+                        <!-- Bars -->
+                        <rect x="80" y="110" width="40" height="70" fill="#3b82f6" rx="4"/>
+                        <rect x="190" y="75" width="40" height="105" fill="#10b981" rx="4"/>
+                        <rect x="300" y="35" width="40" height="145" fill="#10b981" rx="4"/>
+                        
+                        <!-- Values -->
+                        <text x="100" y="100" fill="white" font-size="11" font-weight="bold" text-anchor="middle">₹47L</text>
+                        <text x="210" y="65" fill="white" font-size="11" font-weight="bold" text-anchor="middle">₹52L</text>
+                        <text x="320" y="25" fill="white" font-size="11" font-weight="bold" text-anchor="middle">₹59L</text>
+                        
+                        <!-- X Labels -->
+                        <text x="100" y="200" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2023</text>
+                        <text x="210" y="200" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2024</text>
+                        <text x="320" y="200" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2025</text>
+                        
+                        <!-- Growth Arrows -->
+                        <path d="M 135 90 L 175 80" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
+                        <text x="155" y="75" fill="#10b981" font-size="9">+11%</text>
+                        <path d="M 245 55 L 285 40" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
+                        <text x="265" y="35" fill="#10b981" font-size="9">+12%</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- On-Time Delivery Trend -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>⏰ On-Time Delivery Rate Trend</h3>
+            </div>
+            <div class="card-body">
+                <div class="horizontal-bar-chart">
+                    <div class="h-bar-item">
+                        <span class="h-bar-label">2023</span>
+                        <div class="h-bar-track">
+                            <div class="h-bar-fill" style="width: 24%; background: var(--danger);">24%</div>
+                        </div>
+                        <span class="h-bar-value" style="color: var(--danger);">24%</span>
+                    </div>
+                    <div class="h-bar-item">
+                        <span class="h-bar-label">2024</span>
+                        <div class="h-bar-track">
+                            <div class="h-bar-fill" style="width: 58%; background: var(--success);">58%</div>
+                        </div>
+                        <span class="h-bar-value" style="color: var(--success);">58%</span>
+                    </div>
+                    <div class="h-bar-item">
+                        <span class="h-bar-label">2025</span>
+                        <div class="h-bar-track">
+                            <div class="h-bar-fill" style="width: 54%; background: var(--warning);">54%</div>
+                        </div>
+                        <span class="h-bar-value" style="color: var(--warning);">54%</span>
+                    </div>
+                    <div class="h-bar-item">
+                        <span class="h-bar-label" style="color: var(--success);">Target</span>
+                        <div class="h-bar-track">
+                            <div class="h-bar-fill" style="width: 70%; background: linear-gradient(90deg, var(--success) 0%, var(--info) 100%);">70% Goal</div>
+                        </div>
+                        <span class="h-bar-value" style="color: var(--success);">70%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Growth Metrics -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📈 Compound Annual Growth Rate (CAGR)</h2>
+            </div>
+        </div>
+
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-body" style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--success);">+11.5%</div>
+                    <div style="color: var(--text-secondary);">Revenue CAGR</div>
+                    <div class="sparkline-container" style="justify-content: center;">
+                        <div class="spark" style="height: 60%; background: var(--success); width: 25px;"></div>
+                        <div class="spark" style="height: 80%; background: var(--success); width: 25px;"></div>
+                        <div class="spark" style="height: 100%; background: var(--success); width: 25px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body" style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--info);">+7.6%</div>
+                    <div style="color: var(--text-secondary);">Project Volume</div>
+                    <div class="sparkline-container" style="justify-content: center;">
+                        <div class="spark" style="height: 70%; background: var(--info); width: 25px;"></div>
+                        <div class="spark" style="height: 85%; background: var(--info); width: 25px;"></div>
+                        <div class="spark" style="height: 100%; background: var(--info); width: 25px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body" style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--success);">+11.5%</div>
+                    <div style="color: var(--text-secondary);">Team Growth</div>
+                    <div class="sparkline-container" style="justify-content: center;">
+                        <div class="spark" style="height: 75%; background: var(--primary); width: 25px;"></div>
+                        <div class="spark" style="height: 88%; background: var(--primary); width: 25px;"></div>
+                        <div class="spark" style="height: 100%; background: var(--primary); width: 25px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body" style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--warning);">+10.3%</div>
+                    <div style="color: var(--text-secondary);">CSAT Recovery</div>
+                    <div class="sparkline-container" style="justify-content: center;">
+                        <div class="spark" style="height: 50%; background: var(--danger); width: 25px;"></div>
+                        <div class="spark" style="height: 100%; background: var(--success); width: 25px;"></div>
+                        <div class="spark" style="height: 85%; background: var(--warning); width: 25px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quarterly Breakdown -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📅 Quarterly Project Distribution</h3>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <svg viewBox="0 0 500 200" style="width: 100%; height: 200px;">
+                        <!-- Y Axis -->
+                        <text x="25" y="25" fill="var(--text-muted)" font-size="10">35</text>
+                        <text x="25" y="75" fill="var(--text-muted)" font-size="10">25</text>
+                        <text x="25" y="125" fill="var(--text-muted)" font-size="10">15</text>
+                        <text x="25" y="175" fill="var(--text-muted)" font-size="10">0</text>
+                        
+                        <!-- Grid -->
+                        <line x1="40" y1="20" x2="480" y2="20" stroke="var(--border)" stroke-dasharray="2"/>
+                        <line x1="40" y1="70" x2="480" y2="70" stroke="var(--border)" stroke-dasharray="2"/>
+                        <line x1="40" y1="120" x2="480" y2="120" stroke="var(--border)" stroke-dasharray="2"/>
+                        <line x1="40" y1="170" x2="480" y2="170" stroke="var(--border)"/>
+                        
+                        <!-- 2023 Bars (Q1-Q4) -->
+                        <rect x="50" y="85" width="20" height="85" fill="#3b82f6" opacity="0.6" rx="2"/>
+                        <rect x="75" y="70" width="20" height="100" fill="#3b82f6" opacity="0.6" rx="2"/>
+                        <rect x="100" y="60" width="20" height="110" fill="#3b82f6" opacity="0.6" rx="2"/>
+                        <rect x="125" y="75" width="20" height="95" fill="#3b82f6" opacity="0.6" rx="2"/>
+                        
+                        <!-- 2024 Bars (Q1-Q4) -->
+                        <rect x="175" y="55" width="20" height="115" fill="#10b981" opacity="0.7" rx="2"/>
+                        <rect x="200" y="50" width="20" height="120" fill="#10b981" opacity="0.7" rx="2"/>
+                        <rect x="225" y="45" width="20" height="125" fill="#10b981" opacity="0.7" rx="2"/>
+                        <rect x="250" y="60" width="20" height="110" fill="#10b981" opacity="0.7" rx="2"/>
+                        
+                        <!-- 2025 Bars (Q1-Q4) -->
+                        <rect x="300" y="25" width="20" height="145" fill="#f59e0b" opacity="0.8" rx="2"/>
+                        <rect x="325" y="35" width="20" height="135" fill="#f59e0b" opacity="0.8" rx="2"/>
+                        <rect x="350" y="35" width="20" height="135" fill="#f59e0b" opacity="0.8" rx="2"/>
+                        <rect x="375" y="95" width="20" height="75" fill="#f59e0b" opacity="0.8" rx="2"/>
+                        
+                        <!-- X Labels -->
+                        <text x="95" y="190" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2023</text>
+                        <text x="220" y="190" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2024</text>
+                        <text x="345" y="190" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2025</text>
+                    </svg>
+                </div>
+                <div class="legend" style="margin-top: 1rem;">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3b82f6;"></div>
+                        <span>2023 (95 projects)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #10b981;"></div>
+                        <span>2024 (105 projects)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f59e0b;"></div>
+                        <span>2025 (110 projects)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecast -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🔮 2026 Forecast Scenarios</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-2">
+                    <div style="background: var(--danger-light); padding: 1.5rem; border-radius: 0.75rem;">
+                        <h4 style="color: #991b1b; margin-bottom: 1rem;">❌ Without PMS/CRM</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <tr><td>CSAT Score</td><td class="cell-negative" style="text-align: right;">2.9-3.1</td></tr>
+                                <tr><td>On-Time Delivery</td><td class="cell-negative" style="text-align: right;">45-50%</td></tr>
+                                <tr><td>Client Churn Risk</td><td class="cell-negative" style="text-align: right;">15-20%</td></tr>
+                                <tr><td>Revenue Impact</td><td class="cell-negative" style="text-align: right;">-₹8-10L</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="background: var(--success-light); padding: 1.5rem; border-radius: 0.75rem;">
+                        <h4 style="color: #065f46; margin-bottom: 1rem;">✅ With PMS/CRM</h4>
+                        <div class="table-wrapper">
+                            <table>
+                                <tr><td>CSAT Score</td><td class="cell-positive" style="text-align: right;">3.8-4.1</td></tr>
+                                <tr><td>On-Time Delivery</td><td class="cell-positive" style="text-align: right;">68-72%</td></tr>
+                                <tr><td>Client Retention</td><td class="cell-positive" style="text-align: right;">92-95%</td></tr>
+                                <tr><td>Revenue Impact</td><td class="cell-positive" style="text-align: right;">+₹12-15L</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <p>Wafeka Digital Agency | Trend Analysis</p>
+            <p>3-Year Longitudinal Study | 2023-2025</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Performance - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .service-card {
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .rating-stars {
+            display: flex;
+            gap: 2px;
+        }
+        .star {
+            width: 16px;
+            height: 16px;
+            background: var(--text-muted);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        .star.filled { background: #fbbf24; }
+        .star.half { background: linear-gradient(90deg, #fbbf24 50%, var(--text-muted) 50%); }
+        .performance-meter {
+            height: 8px;
+            background: var(--bg-card);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .performance-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+        .industry-row {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .industry-row:hover { background: var(--bg-hover); }
+        .industry-row:last-child { border-bottom: none; }
+        .industry-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.25rem;
+        }
+        .stacked-bar {
+            display: flex;
+            height: 24px;
+            border-radius: 4px;
+            overflow: hidden;
+            flex: 1;
+        }
+        .stack-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);">
+            <h1>🔧 Service Performance Analysis</h1>
+            <p>Detailed breakdown of service quality and client satisfaction by service type</p>
+            <span class="badge">14 Services | 943 Service Deliveries</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="8_Executive_Dashboard.html">📊 Dashboard</a>
+            <a href="1_Correlation_Analysis.html">Correlation</a>
+            <a href="2_Regression_Analysis.html">Regression</a>
+            <a href="3_Factor_Analysis.html">Factor Analysis</a>
+            <a href="4_Trend_Analysis.html">Trends</a>
+            <a href="5_Service_Performance.html" class="active">Services</a>
+            <a href="6_Customer_Sentiment.html">Sentiment</a>
+            <a href="7_Revenue_Impact.html">Revenue</a>
+        </nav>
+
+        <!-- Service Summary -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Service Satisfaction Rankings</h2>
+                <p class="section-subtitle">Average rating by service type (1-5 scale)</p>
+            </div>
+        </div>
+
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--success-light);">🖥️</div>
+                <h4>Hosting</h4>
+                <div class="rating-stars" style="margin: 0.5rem 0;">
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star half"></div>
+                </div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">4.6/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 92%; background: var(--success);"></div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">2023: 2.2 → 2025: 4.6 (+109%)</div>
+            </div>
+
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--success-light);">🔧</div>
+                <h4>Maintenance</h4>
+                <div class="rating-stars" style="margin: 0.5rem 0;">
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star half"></div>
+                </div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">4.4/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 88%; background: var(--success);"></div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">2023: 2.8 → 2025: 4.4 (+57%)</div>
+            </div>
+
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--info-light);">🎨</div>
+                <h4>UI/UX Design</h4>
+                <div class="rating-stars" style="margin: 0.5rem 0;">
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star"></div>
+                </div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--info);">4.2/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 84%; background: var(--info);"></div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">2023: 2.4 → 2025: 4.2 (+75%)</div>
+            </div>
+
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--info-light);">💻</div>
+                <h4>Web Dev</h4>
+                <div class="rating-stars" style="margin: 0.5rem 0;">
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star filled"></div>
+                    <div class="star"></div>
+                </div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--info);">3.8/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 76%; background: var(--info);"></div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">2023: 2.5 → 2025: 3.8 (+52%)</div>
+            </div>
+        </div>
+
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--warning-light);">✍️</div>
+                <h4>Content</h4>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">3.6/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 72%; background: var(--warning);"></div>
+                </div>
+            </div>
+
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--warning-light);">📱</div>
+                <h4>Digital Marketing</h4>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">3.5/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 70%; background: var(--warning);"></div>
+                </div>
+            </div>
+
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--warning-light);">🔍</div>
+                <h4>SEO</h4>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--warning);">3.4/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 68%; background: var(--warning);"></div>
+                </div>
+            </div>
+
+            <div class="service-card" style="padding: 1.5rem;">
+                <div class="service-icon" style="background: var(--danger-light);">⚙️</div>
+                <h4>Operations/PM</h4>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--danger);">2.5/5</div>
+                <div class="performance-meter">
+                    <div class="performance-fill" style="width: 50%; background: var(--danger);"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Comparison Table -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📋 Complete Service Performance Matrix</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>2023 Rating</th>
+                                <th>2024 Rating</th>
+                                <th>2025 Rating</th>
+                                <th>3-Year Avg</th>
+                                <th>Trend</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>🖥️ Hosting</strong></td>
+                                <td class="cell-negative">2.2</td>
+                                <td class="cell-positive">4.1</td>
+                                <td class="cell-positive">4.6</td>
+                                <td><strong>3.6</strong></td>
+                                <td><span class="badge success">↑ +109%</span></td>
+                                <td>✅ Resolved</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔧 Maintenance</strong></td>
+                                <td class="cell-warning">2.8</td>
+                                <td class="cell-positive">4.5</td>
+                                <td class="cell-positive">4.4</td>
+                                <td><strong>3.9</strong></td>
+                                <td><span class="badge success">↑ +57%</span></td>
+                                <td>✅ Excellent</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🎨 UI/UX Design</strong></td>
+                                <td class="cell-negative">2.4</td>
+                                <td class="cell-warning">3.5</td>
+                                <td class="cell-positive">4.2</td>
+                                <td><strong>3.4</strong></td>
+                                <td><span class="badge success">↑ +75%</span></td>
+                                <td>✅ Resolved</td>
+                            </tr>
+                            <tr>
+                                <td><strong>💻 Website Development</strong></td>
+                                <td class="cell-negative">2.5</td>
+                                <td class="cell-warning">3.5</td>
+                                <td class="cell-warning">3.8</td>
+                                <td><strong>3.3</strong></td>
+                                <td><span class="badge success">↑ +52%</span></td>
+                                <td>✅ Good</td>
+                            </tr>
+                            <tr>
+                                <td><strong>📧 Email Marketing</strong></td>
+                                <td class="cell-negative">2.6</td>
+                                <td class="cell-warning">3.4</td>
+                                <td class="cell-warning">3.2</td>
+                                <td><strong>3.1</strong></td>
+                                <td><span class="badge warning">↑ +23%</span></td>
+                                <td>⚠️ Needs Work</td>
+                            </tr>
+                            <tr>
+                                <td><strong>✍️ Content Creation</strong></td>
+                                <td class="cell-warning">3.0</td>
+                                <td class="cell-warning">3.7</td>
+                                <td class="cell-warning">3.6</td>
+                                <td><strong>3.4</strong></td>
+                                <td><span class="badge warning">↑ +20%</span></td>
+                                <td>⚠️ Stable</td>
+                            </tr>
+                            <tr>
+                                <td><strong>📱 Digital Marketing</strong></td>
+                                <td class="cell-warning">3.1</td>
+                                <td class="cell-warning">3.8</td>
+                                <td class="cell-warning">3.5</td>
+                                <td><strong>3.5</strong></td>
+                                <td><span class="badge warning">↑ +13%</span></td>
+                                <td>⚠️ Stable</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🔍 SEO</strong></td>
+                                <td class="cell-warning">2.8</td>
+                                <td class="cell-warning">3.2</td>
+                                <td class="cell-warning">3.4</td>
+                                <td><strong>3.1</strong></td>
+                                <td><span class="badge warning">↑ +21%</span></td>
+                                <td>⚠️ Needs Work</td>
+                            </tr>
+                            <tr>
+                                <td><strong>⚙️ Operations/PM</strong></td>
+                                <td class="cell-warning">3.0</td>
+                                <td class="cell-warning">3.2</td>
+                                <td class="cell-negative">2.5</td>
+                                <td><strong>2.9</strong></td>
+                                <td><span class="badge danger">↓ -17%</span></td>
+                                <td>🔴 Critical</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industry Performance -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🏭 Performance by Industry</h2>
+                <p class="section-subtitle">Client satisfaction across different business sectors</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="industry-row">
+                    <div class="industry-icon" style="background: var(--success-light);">🏥</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <strong>Healthcare (KL House Clinic)</strong>
+                            <span style="font-weight: 600; color: var(--success);">3.9/5</span>
+                        </div>
+                        <div class="stacked-bar">
+                            <div class="stack-segment" style="width: 12%; background: var(--danger);" title="2023">2.8</div>
+                            <div class="stack-segment" style="width: 44%; background: var(--success);" title="2024">4.2</div>
+                            <div class="stack-segment" style="width: 44%; background: var(--warning);" title="2025">3.6</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-row">
+                    <div class="industry-icon" style="background: var(--info-light);">🛒</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <strong>General Retail (Good Luck)</strong>
+                            <span style="font-weight: 600; color: var(--info);">3.7/5</span>
+                        </div>
+                        <div class="stacked-bar">
+                            <div class="stack-segment" style="width: 15%; background: var(--danger);" title="2023">3.0</div>
+                            <div class="stack-segment" style="width: 45%; background: var(--success);" title="2024">4.0</div>
+                            <div class="stack-segment" style="width: 40%; background: var(--warning);" title="2025">3.4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-row">
+                    <div class="industry-icon" style="background: var(--success-light);">💪</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <strong>Fitness (Akilan Fitness)</strong>
+                            <span style="font-weight: 600; color: var(--success);">3.7/5</span>
+                        </div>
+                        <div class="stacked-bar">
+                            <div class="stack-segment" style="width: 15%; background: var(--danger);" title="2023">3.0</div>
+                            <div class="stack-segment" style="width: 45%; background: var(--success);" title="2024">4.0</div>
+                            <div class="stack-segment" style="width: 40%; background: var(--warning);" title="2025">3.7</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-row">
+                    <div class="industry-icon" style="background: var(--warning-light);">🌿</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <strong>Landscaping (Novacapes)</strong>
+                            <span style="font-weight: 600; color: var(--warning);">3.6/5</span>
+                        </div>
+                        <div class="stacked-bar">
+                            <div class="stack-segment" style="width: 18%; background: var(--danger);" title="2023">3.2</div>
+                            <div class="stack-segment" style="width: 44%; background: var(--success);" title="2024">3.9</div>
+                            <div class="stack-segment" style="width: 38%; background: var(--warning);" title="2025">3.8</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-row">
+                    <div class="industry-icon" style="background: var(--warning-light);">💄</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <strong>Beauty (Mani Salon + Green Trends)</strong>
+                            <span style="font-weight: 600; color: var(--warning);">3.3/5</span>
+                        </div>
+                        <div class="stacked-bar">
+                            <div class="stack-segment" style="width: 20%; background: var(--danger);" title="2023">2.9</div>
+                            <div class="stack-segment" style="width: 42%; background: var(--success);" title="2024">3.7</div>
+                            <div class="stack-segment" style="width: 38%; background: var(--warning);" title="2025">3.3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-row">
+                    <div class="industry-icon" style="background: var(--warning-light);">📸</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <strong>Photography (Shiva Photoshop)</strong>
+                            <span style="font-weight: 600; color: var(--warning);">3.0/5</span>
+                        </div>
+                        <div class="stacked-bar">
+                            <div class="stack-segment" style="width: 22%; background: var(--danger);" title="2023">2.6</div>
+                            <div class="stack-segment" style="width: 38%; background: var(--warning);" title="2024">3.2</div>
+                            <div class="stack-segment" style="width: 40%; background: var(--warning);" title="2025">3.2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-row">
+                    <div class="industry-icon" style="background: var(--danger-light);">💎</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <strong>E-commerce/Jewelry (Anika Jewellers)</strong>
+                            <span style="font-weight: 600; color: var(--danger);">2.8/5</span>
+                        </div>
+                        <div class="stacked-bar">
+                            <div class="stack-segment" style="width: 25%; background: var(--danger);" title="2023">2.2</div>
+                            <div class="stack-segment" style="width: 35%; background: var(--warning);" title="2024">3.0</div>
+                            <div class="stack-segment" style="width: 40%; background: var(--warning);" title="2025">3.1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Volume -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📈 Service Volume Distribution (3 Years)</h3>
+            </div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <span class="bar-label">Web Dev</span>
+                        <div class="bar-container">
+                            <div class="bar primary" style="width: 100%;">310 projects</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Hosting</span>
+                        <div class="bar-container">
+                            <div class="bar info" style="width: 100%;">310 projects</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">SEO</span>
+                        <div class="bar-container">
+                            <div class="bar success" style="width: 100%;">310 projects</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Digital Marketing</span>
+                        <div class="bar-container">
+                            <div class="bar warning" style="width: 58%;">180 projects</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Content</span>
+                        <div class="bar-container">
+                            <div class="bar warning" style="width: 42%;">130 projects</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Email Marketing</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 30%; background: var(--text-muted);">92 projects</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Trend Lines -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📈 Service Quality Trends (2023-2025)</h3>
+            </div>
+            <div class="card-body">
+                <div style="padding: 2rem;">
+                    <svg viewBox="0 0 500 300" style="width: 100%; height: 300px;">
+                        <!-- Grid -->
+                        <line x1="60" y1="30" x2="460" y2="30" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="80" x2="460" y2="80" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="130" x2="460" y2="130" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="180" x2="460" y2="180" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="230" x2="460" y2="230" stroke="var(--border)"/>
+                        
+                        <!-- Y Labels -->
+                        <text x="50" y="35" fill="var(--text-muted)" font-size="10" text-anchor="end">5.0</text>
+                        <text x="50" y="85" fill="var(--text-muted)" font-size="10" text-anchor="end">4.0</text>
+                        <text x="50" y="135" fill="var(--text-muted)" font-size="10" text-anchor="end">3.0</text>
+                        <text x="50" y="185" fill="var(--text-muted)" font-size="10" text-anchor="end">2.0</text>
+                        <text x="50" y="235" fill="var(--text-muted)" font-size="10" text-anchor="end">1.0</text>
+                        
+                        <!-- Hosting Line (2.2 → 4.1 → 4.6) - Biggest improvement -->
+                        <path d="M 120 190 L 260 70 L 400 45" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="120" cy="190" r="5" fill="#10b981"/>
+                        <circle cx="260" cy="70" r="5" fill="#10b981"/>
+                        <circle cx="400" cy="45" r="5" fill="#10b981"/>
+                        
+                        <!-- UI/UX Line (2.4 → 3.5 → 4.2) -->
+                        <path d="M 120 180 L 260 115 L 400 60" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="120" cy="180" r="5" fill="#3b82f6"/>
+                        <circle cx="260" cy="115" r="5" fill="#3b82f6"/>
+                        <circle cx="400" cy="60" r="5" fill="#3b82f6"/>
+                        
+                        <!-- SEO Line (2.8 → 3.2 → 3.4) -->
+                        <path d="M 120 155 L 260 135 L 400 120" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="120" cy="155" r="5" fill="#f59e0b"/>
+                        <circle cx="260" cy="135" r="5" fill="#f59e0b"/>
+                        <circle cx="400" cy="120" r="5" fill="#f59e0b"/>
+                        
+                        <!-- Operations Line (3.0 → 3.2 → 2.5) - Only declining -->
+                        <path d="M 120 130 L 260 120 L 400 170" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="120" cy="130" r="5" fill="#ef4444"/>
+                        <circle cx="260" cy="120" r="5" fill="#ef4444"/>
+                        <circle cx="400" cy="170" r="5" fill="#ef4444"/>
+                        
+                        <!-- X Labels -->
+                        <text x="120" y="255" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2023</text>
+                        <text x="260" y="255" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2024</text>
+                        <text x="400" y="255" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2025</text>
+                        
+                        <!-- Legend -->
+                        <rect x="80" y="275" width="10" height="10" fill="#10b981"/>
+                        <text x="95" y="284" fill="var(--text-secondary)" font-size="10">Hosting</text>
+                        <rect x="160" y="275" width="10" height="10" fill="#3b82f6"/>
+                        <text x="175" y="284" fill="var(--text-secondary)" font-size="10">UI/UX</text>
+                        <rect x="230" y="275" width="10" height="10" fill="#f59e0b"/>
+                        <text x="245" y="284" fill="var(--text-secondary)" font-size="10">SEO</text>
+                        <rect x="290" y="275" width="10" height="10" fill="#ef4444"/>
+                        <text x="305" y="284" fill="var(--text-secondary)" font-size="10">Operations</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Distribution Pie -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🥧 Service Mix Distribution</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-2">
+                    <div style="display: flex; justify-content: center; padding: 2rem;">
+                        <svg viewBox="0 0 200 200" style="width: 200px; height: 200px;">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--chart-1)" stroke-width="40" stroke-dasharray="125 503" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--chart-2)" stroke-width="40" stroke-dasharray="100 503" stroke-dashoffset="-125" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--chart-3)" stroke-width="40" stroke-dasharray="90 503" stroke-dashoffset="-225" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--chart-4)" stroke-width="40" stroke-dasharray="75 503" stroke-dashoffset="-315" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--chart-5)" stroke-width="40" stroke-dasharray="113 503" stroke-dashoffset="-390" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="45" fill="var(--bg-secondary)"/>
+                            <text x="100" y="95" fill="var(--text-primary)" font-size="18" font-weight="bold" text-anchor="middle">943</text>
+                            <text x="100" y="110" fill="var(--text-muted)" font-size="9" text-anchor="middle">Deliveries</text>
+                        </svg>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <div style="width: 14px; height: 14px; background: var(--chart-1); border-radius: 3px;"></div>
+                            <span>Web Development (33%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <div style="width: 14px; height: 14px; background: var(--chart-2); border-radius: 3px;"></div>
+                            <span>Hosting & Maintenance (20%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <div style="width: 14px; height: 14px; background: var(--chart-3); border-radius: 3px;"></div>
+                            <span>SEO Services (18%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <div style="width: 14px; height: 14px; background: var(--chart-4); border-radius: 3px;"></div>
+                            <span>Digital Marketing (15%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <div style="width: 14px; height: 14px; background: var(--chart-5); border-radius: 3px;"></div>
+                            <span>Content & Others (14%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <p>Wafeka Digital Agency | Service Performance Analysis</p>
+            <p>14 Services | 943 Total Service Deliveries</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factor Analysis - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .factor-card {
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .factor-header {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .factor-header.f1 { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+        .factor-header.f2 { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .factor-header.f3 { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .factor-number {
+            font-size: 3rem;
+            font-weight: 800;
+            opacity: 0.3;
+        }
+        .factor-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: -1rem;
+        }
+        .factor-variance {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        .loading-bar {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .loading-bar:last-child { border-bottom: none; }
+        .loading-name { flex: 1; font-size: 0.875rem; }
+        .loading-value {
+            width: 120px;
+            height: 20px;
+            background: var(--bg-card);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-left: 1rem;
+        }
+        .loading-fill {
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+        }
+        .scree-plot {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+        }
+        .scree-bar {
+            width: 60px;
+            border-radius: 4px 4px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+        .factor-score-chart {
+            display: flex;
+            gap: 2rem;
+            padding: 1rem;
+            justify-content: center;
+        }
+        .score-year {
+            text-align: center;
+        }
+        .score-bars {
+            display: flex;
+            gap: 4px;
+            height: 150px;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .score-bar {
+            width: 30px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        .score-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);">
+            <h1>🔬 Factor Analysis</h1>
+            <p>Grouping service attributes into major factors affecting satisfaction</p>
+            <span class="badge">Principal Component Analysis (PCA) | Varimax Rotation</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="8_Executive_Dashboard.html">📊 Dashboard</a>
+            <a href="1_Correlation_Analysis.html">Correlation</a>
+            <a href="2_Regression_Analysis.html">Regression</a>
+            <a href="3_Factor_Analysis.html" class="active">Factor Analysis</a>
+            <a href="4_Trend_Analysis.html">Trends</a>
+            <a href="5_Service_Performance.html">Services</a>
+            <a href="6_Customer_Sentiment.html">Sentiment</a>
+            <a href="7_Revenue_Impact.html">Revenue</a>
+        </nav>
+
+        <!-- Overview KPIs -->
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="kpi-card info">
+                <div class="kpi-label">Total Variables</div>
+                <div class="kpi-value">14</div>
+                <div class="kpi-change">Service attributes analyzed</div>
+            </div>
+            <div class="kpi-card success">
+                <div class="kpi-label">Factors Extracted</div>
+                <div class="kpi-value">3</div>
+                <div class="kpi-change positive">Eigenvalue > 1</div>
+            </div>
+            <div class="kpi-card info">
+                <div class="kpi-label">Variance Explained</div>
+                <div class="kpi-value">74.6%</div>
+                <div class="kpi-change positive">Cumulative</div>
+            </div>
+            <div class="kpi-card success">
+                <div class="kpi-label">KMO Measure</div>
+                <div class="kpi-value">0.82</div>
+                <div class="kpi-change positive">Excellent sampling</div>
+            </div>
+        </div>
+
+        <!-- Scree Plot -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Scree Plot - Eigenvalue Analysis</h2>
+                <p class="section-subtitle">Determining number of factors to retain (Eigenvalue > 1 criterion)</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="scree-plot">
+                    <div class="scree-bar" style="height: 85%; background: var(--chart-1);">
+                        <span>4.85</span>
+                        <span style="margin-top: auto; padding-bottom: 0.5rem; font-size: 0.65rem;">F1</span>
+                    </div>
+                    <div class="scree-bar" style="height: 60%; background: var(--chart-2);">
+                        <span>3.42</span>
+                        <span style="margin-top: auto; padding-bottom: 0.5rem; font-size: 0.65rem;">F2</span>
+                    </div>
+                    <div class="scree-bar" style="height: 38%; background: var(--chart-3);">
+                        <span>2.18</span>
+                        <span style="margin-top: auto; padding-bottom: 0.5rem; font-size: 0.65rem;">F3</span>
+                    </div>
+                    <div class="scree-bar" style="height: 15%; background: var(--text-muted);">
+                        <span>0.85</span>
+                        <span style="margin-top: auto; padding-bottom: 0.5rem; font-size: 0.65rem;">F4</span>
+                    </div>
+                    <div class="scree-bar" style="height: 12%; background: var(--text-muted);">
+                        <span>0.72</span>
+                        <span style="margin-top: auto; padding-bottom: 0.5rem; font-size: 0.65rem;">F5</span>
+                    </div>
+                    <div class="scree-bar" style="height: 10%; background: var(--text-muted);">
+                        <span>0.58</span>
+                        <span style="margin-top: auto; padding-bottom: 0.5rem; font-size: 0.65rem;">F6</span>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 1rem; color: var(--text-muted);">
+                    <p>← Retained (Eigenvalue > 1) | Discarded →</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Three Factors -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🎯 Extracted Factors</h2>
+                <p class="section-subtitle">Three major factors explaining customer satisfaction</p>
+            </div>
+        </div>
+
+        <div class="grid grid-3 stagger" style="margin-bottom: 2rem;">
+            <!-- Factor 1: Technical Quality -->
+            <div class="factor-card">
+                <div class="factor-header f1">
+                    <div class="factor-number">F1</div>
+                    <div class="factor-title">Technical Quality</div>
+                    <div class="factor-variance">Eigenvalue: 4.85 | Variance: 34.6%</div>
+                </div>
+                <div style="padding: 1rem;">
+                    <div class="loading-bar">
+                        <span class="loading-name">UI/UX Design</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 89%; background: var(--chart-1);">0.89</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Web Development</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 85%; background: var(--chart-1);">0.85</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Hosting Reliability</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 82%; background: var(--chart-1);">0.82</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Mobile Responsive</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 78%; background: var(--chart-1);">0.78</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">E-commerce</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 72%; background: var(--chart-1);">0.72</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Factor 2: Operational Efficiency -->
+            <div class="factor-card">
+                <div class="factor-header f2">
+                    <div class="factor-number">F2</div>
+                    <div class="factor-title">Operational Efficiency</div>
+                    <div class="factor-variance">Eigenvalue: 3.42 | Variance: 24.4%</div>
+                </div>
+                <div style="padding: 1rem;">
+                    <div class="loading-bar">
+                        <span class="loading-name">On-Time Delivery</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 88%; background: var(--chart-2);">0.88</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Project Management</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 85%; background: var(--chart-2);">0.85</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Resource Allocation</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 82%; background: var(--chart-2);">0.82</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Meeting Coordination</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 78%; background: var(--chart-2);">0.78</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">WBS/Planning</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 75%; background: var(--chart-2);">0.75</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Factor 3: Communication -->
+            <div class="factor-card">
+                <div class="factor-header f3">
+                    <div class="factor-number">F3</div>
+                    <div class="factor-title">Communication</div>
+                    <div class="factor-variance">Eigenvalue: 2.18 | Variance: 15.6%</div>
+                </div>
+                <div style="padding: 1rem;">
+                    <div class="loading-bar">
+                        <span class="loading-name">Client Updates</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 85%; background: var(--chart-3);">0.85</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Requirement Clarity</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 82%; background: var(--chart-3);">0.82</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Single Point Contact</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 78%; background: var(--chart-3);">0.78</div>
+                        </div>
+                    </div>
+                    <div class="loading-bar">
+                        <span class="loading-name">Knowledge Transfer</span>
+                        <div class="loading-value">
+                            <div class="loading-fill" style="width: 72%; background: var(--chart-3);">0.72</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Factor Loading Matrix -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📋 Rotated Factor Loading Matrix (Varimax)</h3>
+                <span class="badge info">Loadings > 0.5 highlighted</span>
+            </div>
+            <div class="card-body">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service Attribute</th>
+                                <th style="background: var(--chart-1); color: white;">Factor 1<br>Technical</th>
+                                <th style="background: var(--chart-2); color: white;">Factor 2<br>Operations</th>
+                                <th style="background: var(--chart-3); color: white;">Factor 3<br>Communication</th>
+                                <th>Communality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>UI/UX Design</td>
+                                <td class="cell-highlight">0.89</td>
+                                <td>0.12</td>
+                                <td>0.18</td>
+                                <td>0.84</td>
+                            </tr>
+                            <tr>
+                                <td>Website Development</td>
+                                <td class="cell-highlight">0.85</td>
+                                <td>0.22</td>
+                                <td>0.15</td>
+                                <td>0.80</td>
+                            </tr>
+                            <tr>
+                                <td>Hosting Reliability</td>
+                                <td class="cell-highlight">0.82</td>
+                                <td>0.28</td>
+                                <td>0.08</td>
+                                <td>0.76</td>
+                            </tr>
+                            <tr>
+                                <td>Mobile Responsiveness</td>
+                                <td class="cell-highlight">0.78</td>
+                                <td>0.15</td>
+                                <td>0.12</td>
+                                <td>0.65</td>
+                            </tr>
+                            <tr>
+                                <td>E-commerce Functionality</td>
+                                <td class="cell-highlight">0.72</td>
+                                <td>0.35</td>
+                                <td>0.21</td>
+                                <td>0.68</td>
+                            </tr>
+                            <tr>
+                                <td>On-Time Delivery</td>
+                                <td>0.25</td>
+                                <td class="cell-highlight">0.88</td>
+                                <td>0.15</td>
+                                <td>0.86</td>
+                            </tr>
+                            <tr>
+                                <td>Project Management</td>
+                                <td>0.18</td>
+                                <td class="cell-highlight">0.85</td>
+                                <td>0.32</td>
+                                <td>0.85</td>
+                            </tr>
+                            <tr>
+                                <td>Resource Allocation</td>
+                                <td>0.22</td>
+                                <td class="cell-highlight">0.82</td>
+                                <td>0.28</td>
+                                <td>0.79</td>
+                            </tr>
+                            <tr>
+                                <td>Meeting Coordination</td>
+                                <td>0.15</td>
+                                <td class="cell-highlight">0.78</td>
+                                <td>0.35</td>
+                                <td>0.76</td>
+                            </tr>
+                            <tr>
+                                <td>WBS/Planning</td>
+                                <td>0.20</td>
+                                <td class="cell-highlight">0.75</td>
+                                <td>0.30</td>
+                                <td>0.70</td>
+                            </tr>
+                            <tr>
+                                <td>Client Updates</td>
+                                <td>0.12</td>
+                                <td>0.28</td>
+                                <td class="cell-highlight">0.85</td>
+                                <td>0.82</td>
+                            </tr>
+                            <tr>
+                                <td>Requirement Clarity</td>
+                                <td>0.18</td>
+                                <td>0.32</td>
+                                <td class="cell-highlight">0.82</td>
+                                <td>0.80</td>
+                            </tr>
+                            <tr>
+                                <td>Single Point of Contact</td>
+                                <td>0.08</td>
+                                <td>0.25</td>
+                                <td class="cell-highlight">0.78</td>
+                                <td>0.68</td>
+                            </tr>
+                            <tr>
+                                <td>Knowledge Transfer</td>
+                                <td>0.22</td>
+                                <td>0.35</td>
+                                <td class="cell-highlight">0.72</td>
+                                <td>0.68</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Factor Scores by Year -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📈 Factor Scores by Year</h2>
+                <p class="section-subtitle">How each factor performed across 2023-2025</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="factor-score-chart">
+                    <!-- 2023 -->
+                    <div class="score-year">
+                        <div class="score-bars">
+                            <div class="score-bar" style="height: 20px; background: var(--chart-1);" data-value="-1.45"></div>
+                            <div class="score-bar" style="height: 45px; background: var(--chart-2);" data-value="-0.85"></div>
+                            <div class="score-bar" style="height: 55px; background: var(--chart-3);" data-value="-0.62"></div>
+                        </div>
+                        <div style="margin-top: 1rem; font-weight: 600;">2023</div>
+                        <div style="font-size: 0.75rem; color: var(--danger);">Crisis Year</div>
+                    </div>
+                    
+                    <!-- 2024 -->
+                    <div class="score-year">
+                        <div class="score-bars">
+                            <div class="score-bar" style="height: 115px; background: var(--chart-1);" data-value="+0.72"></div>
+                            <div class="score-bar" style="height: 105px; background: var(--chart-2);" data-value="+0.58"></div>
+                            <div class="score-bar" style="height: 95px; background: var(--chart-3);" data-value="+0.45"></div>
+                        </div>
+                        <div style="margin-top: 1rem; font-weight: 600;">2024</div>
+                        <div style="font-size: 0.75rem; color: var(--success);">Recovery Year</div>
+                    </div>
+                    
+                    <!-- 2025 -->
+                    <div class="score-year">
+                        <div class="score-bars">
+                            <div class="score-bar" style="height: 145px; background: var(--chart-1);" data-value="+1.15"></div>
+                            <div class="score-bar" style="height: 55px; background: var(--chart-2);" data-value="-0.32"></div>
+                            <div class="score-bar" style="height: 60px; background: var(--chart-3);" data-value="-0.28"></div>
+                        </div>
+                        <div style="margin-top: 1rem; font-weight: 600;">2025</div>
+                        <div style="font-size: 0.75rem; color: var(--warning);">Mixed Results</div>
+                    </div>
+                </div>
+                
+                <div class="legend" style="margin-top: 2rem;">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--chart-1);"></div>
+                        <span>Factor 1: Technical Quality</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--chart-2);"></div>
+                        <span>Factor 2: Operational Efficiency</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--chart-3);"></div>
+                        <span>Factor 3: Communication</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Factor-CSAT Correlation -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🎯 Factor Correlation with Customer Satisfaction</h3>
+            </div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <span class="bar-label">F2: Operations</span>
+                        <div class="bar-container">
+                            <div class="bar success" style="width: 85%;">r = +0.85 (HIGHEST)</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">F1: Technical</span>
+                        <div class="bar-container">
+                            <div class="bar primary" style="width: 78%;">r = +0.78</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">F3: Comm</span>
+                        <div class="bar-container">
+                            <div class="bar warning" style="width: 68%;">r = +0.68</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="insight" style="margin-top: 1.5rem;">
+                    <div class="insight-title">💡 Key Insight</div>
+                    <div class="insight-text">Factor 2 (Operational Efficiency) has the highest correlation with CSAT (r = +0.85), yet 2025 shows declining performance in this factor. This explains why CSAT dropped from 3.6 to 3.4 despite excellent Technical Quality improvements.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year Analysis -->
+        <div class="grid grid-3" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-header" style="background: var(--danger);">
+                    <h3 style="color: white;">2023 Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><td>F1 Technical</td><td class="cell-negative">-1.45</td></tr>
+                            <tr><td>F2 Operations</td><td class="cell-negative">-0.85</td></tr>
+                            <tr><td>F3 Communication</td><td class="cell-warning">-0.62</td></tr>
+                        </table>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.875rem;">
+                        <strong>Primary Issue:</strong> Technical Quality Crisis - UI/UX and Hosting failures dominated customer complaints.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="background: var(--success);">
+                    <h3 style="color: white;">2024 Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><td>F1 Technical</td><td class="cell-positive">+0.72</td></tr>
+                            <tr><td>F2 Operations</td><td class="cell-positive">+0.58</td></tr>
+                            <tr><td>F3 Communication</td><td class="cell-positive">+0.45</td></tr>
+                        </table>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.875rem;">
+                        <strong>Recovery:</strong> All three factors improved. Design system and hosting upgrades drove recovery.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="background: var(--warning);">
+                    <h3 style="color: white;">2025 Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><td>F1 Technical</td><td class="cell-positive">+1.15 ✅</td></tr>
+                            <tr><td>F2 Operations</td><td class="cell-negative">-0.32 ⚠️</td></tr>
+                            <tr><td>F3 Communication</td><td class="cell-warning">-0.28 ⚠️</td></tr>
+                        </table>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.875rem;">
+                        <strong>Mixed:</strong> Technical excellence achieved but Operational factor declining due to PMS/CRM gap.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variance Explained Pie -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🥧 Variance Explained by Factor</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-2">
+                    <div style="display: flex; justify-content: center; padding: 2rem;">
+                        <svg viewBox="0 0 200 200" style="width: 200px; height: 200px;">
+                            <!-- Pie segments -->
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--chart-1)" stroke-width="35" stroke-dasharray="155 440" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--chart-2)" stroke-width="35" stroke-dasharray="107 440" stroke-dashoffset="-155" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--chart-3)" stroke-width="35" stroke-dasharray="69 440" stroke-dashoffset="-262" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--text-muted)" stroke-width="35" stroke-dasharray="109 440" stroke-dashoffset="-331" transform="rotate(-90 100 100)"/>
+                            
+                            <circle cx="100" cy="100" r="40" fill="var(--bg-secondary)"/>
+                            <text x="100" y="95" fill="var(--text-primary)" font-size="16" font-weight="bold" text-anchor="middle">74.6%</text>
+                            <text x="100" y="112" fill="var(--text-muted)" font-size="9" text-anchor="middle">Explained</text>
+                        </svg>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                <span style="width: 14px; height: 14px; background: var(--chart-1); border-radius: 3px;"></span>
+                                <strong>Factor 1: Technical</strong>
+                            </div>
+                            <div class="progress" style="height: 10px;"><div class="progress-bar primary" style="width: 34.6%;"></div></div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">34.6% variance</span>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                <span style="width: 14px; height: 14px; background: var(--chart-2); border-radius: 3px;"></span>
+                                <strong>Factor 2: Operations</strong>
+                            </div>
+                            <div class="progress" style="height: 10px;"><div class="progress-bar success" style="width: 24.4%;"></div></div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">24.4% variance</span>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                <span style="width: 14px; height: 14px; background: var(--chart-3); border-radius: 3px;"></span>
+                                <strong>Factor 3: Communication</strong>
+                            </div>
+                            <div class="progress" style="height: 10px;"><div class="progress-bar warning" style="width: 15.6%;"></div></div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">15.6% variance</span>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                <span style="width: 14px; height: 14px; background: var(--text-muted); border-radius: 3px;"></span>
+                                <strong>Unexplained</strong>
+                            </div>
+                            <div class="progress" style="height: 10px;"><div class="progress-bar" style="width: 25.4%; background: var(--text-muted);"></div></div>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">25.4% residual</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Factor Performance Radar -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🎯 Factor Performance by Year</h3>
+            </div>
+            <div class="card-body">
+                <div style="display: flex; justify-content: center; padding: 2rem;">
+                    <svg viewBox="0 0 400 300" style="width: 400px; height: 300px;">
+                        <!-- Triangle Grid -->
+                        <polygon points="200,30 350,250 50,250" fill="none" stroke="var(--border)" stroke-width="1"/>
+                        <polygon points="200,90 305,220 95,220" fill="none" stroke="var(--border)" stroke-width="1"/>
+                        <polygon points="200,150 260,190 140,190" fill="none" stroke="var(--border)" stroke-width="1"/>
+                        
+                        <!-- Axis lines -->
+                        <line x1="200" y1="30" x2="200" y2="175" stroke="var(--border)" stroke-width="1"/>
+                        <line x1="50" y1="250" x2="200" y2="175" stroke="var(--border)" stroke-width="1"/>
+                        <line x1="350" y1="250" x2="200" y2="175" stroke="var(--border)" stroke-width="1"/>
+                        
+                        <!-- Labels -->
+                        <text x="200" y="20" fill="var(--text-secondary)" font-size="11" text-anchor="middle">Technical</text>
+                        <text x="35" y="260" fill="var(--text-secondary)" font-size="11" text-anchor="middle">Comms</text>
+                        <text x="365" y="260" fill="var(--text-secondary)" font-size="11" text-anchor="middle">Operations</text>
+                        
+                        <!-- 2023 (poor all around) -->
+                        <polygon points="200,140 100,230 300,230" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="2"/>
+                        
+                        <!-- 2024 (good) -->
+                        <polygon points="200,70 80,240 320,240" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="2"/>
+                        
+                        <!-- 2025 (technical good, ops poor) -->
+                        <polygon points="200,45 115,235 270,235" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="2"/>
+                        
+                        <!-- Legend -->
+                        <rect x="120" y="275" width="12" height="12" fill="rgba(239,68,68,0.5)" stroke="#ef4444"/>
+                        <text x="137" y="285" fill="var(--text-secondary)" font-size="10">2023</text>
+                        <rect x="180" y="275" width="12" height="12" fill="rgba(16,185,129,0.5)" stroke="#10b981"/>
+                        <text x="197" y="285" fill="var(--text-secondary)" font-size="10">2024</text>
+                        <rect x="240" y="275" width="12" height="12" fill="rgba(245,158,11,0.5)" stroke="#f59e0b"/>
+                        <text x="257" y="285" fill="var(--text-secondary)" font-size="10">2025</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <p>Wafeka Digital Agency | Factor Analysis (PCA)</p>
+            <p>Method: Principal Component Analysis with Varimax Rotation</p>
+        </footer>
+    </div>
+</body>
+</html>

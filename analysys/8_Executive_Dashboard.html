@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Dashboard - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .quick-stat {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        .quick-stat-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+        }
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+        }
+        .status-indicator.critical { background: var(--danger); color: white; }
+        .status-indicator.warning { background: var(--warning); color: black; }
+        .status-indicator.good { background: var(--success); color: white; }
+        .recommendation-card {
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 2px solid;
+            transition: var(--transition);
+        }
+        .recommendation-card:hover { transform: translateY(-4px); }
+        .recommendation-card.critical { border-color: var(--danger); }
+        .recommendation-card.high { border-color: var(--warning); }
+        .recommendation-card.medium { border-color: var(--info); }
+        .priority-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .priority-badge.critical { background: var(--danger); color: white; }
+        .priority-badge.high { background: var(--warning); color: black; }
+        .priority-badge.medium { background: var(--info); color: white; }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 1200px) {
+            .summary-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .timeline-step {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .timeline-connector {
+            width: 2px;
+            background: var(--border);
+            margin: 0 19px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
+            <h1>🎯 Executive Dashboard</h1>
+            <p>Customer Satisfaction Study - Complete Analysis Summary</p>
+            <span class="badge">MBA Project | Wafeka Digital Agency | 2023-2025</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="8_Executive_Dashboard.html" class="active">📊 Dashboard</a>
+            <a href="1_Correlation_Analysis.html">Correlation</a>
+            <a href="2_Regression_Analysis.html">Regression</a>
+            <a href="3_Factor_Analysis.html">Factor Analysis</a>
+            <a href="4_Trend_Analysis.html">Trends</a>
+            <a href="5_Service_Performance.html">Services</a>
+            <a href="6_Customer_Sentiment.html">Sentiment</a>
+            <a href="7_Revenue_Impact.html">Revenue</a>
+        </nav>
+
+        <!-- Executive Summary Cards -->
+        <div class="summary-grid stagger" style="margin-bottom: 2rem;">
+            <div class="quick-stat">
+                <div class="quick-stat-value" style="color: var(--primary);">310</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Total Projects</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" style="color: var(--success);">₹1.58Cr</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">3-Year Revenue</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" style="color: var(--warning);">3.27</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Avg CSAT (1-5)</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" style="color: var(--info);">10</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Active Clients</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" style="color: var(--success);">52-58</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Team Size</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" style="color: var(--danger);">₹21L</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">COPQ (3 Years)</div>
+            </div>
+        </div>
+
+        <!-- Current Status -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Current Status Overview</h2>
+            </div>
+        </div>
+
+        <div class="grid grid-3 stagger" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Technical Quality</h3>
+                    <span class="status-indicator good">✅ RESOLVED</span>
+                </div>
+                <div class="card-body">
+                    <div class="bar-chart">
+                        <div class="bar-row">
+                            <span class="bar-label">UI/UX</span>
+                            <div class="bar-container">
+                                <div class="bar success" style="width: 84%;">4.2/5</div>
+                            </div>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">Hosting</span>
+                            <div class="bar-container">
+                                <div class="bar success" style="width: 92%;">4.6/5</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color: var(--success); font-size: 0.875rem; margin-top: 1rem;">
+                        ✓ Design system mature<br>
+                        ✓ VPS + CDN stable<br>
+                        ✓ 3 incidents (down from 23)
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Operational Efficiency</h3>
+                    <span class="status-indicator critical">🔴 CRISIS</span>
+                </div>
+                <div class="card-body">
+                    <div class="bar-chart">
+                        <div class="bar-row">
+                            <span class="bar-label">On-Time</span>
+                            <div class="bar-container">
+                                <div class="bar warning" style="width: 54%;">54%</div>
+                            </div>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">Operations</span>
+                            <div class="bar-container">
+                                <div class="bar danger" style="width: 50%;">2.5/5</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color: var(--danger); font-size: 0.875rem; margin-top: 1rem;">
+                        ✗ No PMS/CRM system<br>
+                        ✗ 83 operational issues<br>
+                        ✗ 672 days lost to handoffs
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Customer Satisfaction</h3>
+                    <span class="status-indicator warning">⚠️ DECLINING</span>
+                </div>
+                <div class="card-body">
+                    <div class="bar-chart">
+                        <div class="bar-row">
+                            <span class="bar-label">CSAT</span>
+                            <div class="bar-container">
+                                <div class="bar warning" style="width: 68%;">3.4/5</div>
+                            </div>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">NPS</span>
+                            <div class="bar-container">
+                                <div class="bar warning" style="width: 50%;">-2</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color: var(--warning); font-size: 0.875rem; margin-top: 1rem;">
+                        ↓ CSAT dropped from 3.6 to 3.4<br>
+                        ↓ NPS dropped from +10 to -2<br>
+                        ↑ Escalations up 62%
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Findings -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🔍 Key Research Findings</h2>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-header">
+                    <h3>📈 Correlation Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <tr>
+                                <td>On-Time Delivery ↔ CSAT</td>
+                                <td class="cell-positive"><strong>r = +0.92</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Average Lag ↔ CSAT</td>
+                                <td class="cell-negative">r = -0.89</td>
+                            </tr>
+                            <tr>
+                                <td>UI/UX Revisions ↔ CSAT</td>
+                                <td class="cell-negative">r = -0.87</td>
+                            </tr>
+                            <tr>
+                                <td>PMS Issues ↔ CSAT</td>
+                                <td class="cell-warning">r = -0.42</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 1rem;">
+                        <strong>Insight:</strong> On-Time Delivery is the strongest predictor of customer satisfaction.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>📊 Regression Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="formula" style="text-align: center;">
+                        <div class="formula-title">Predictive Model (R² = 0.89)</div>
+                        <div class="formula-content">CSAT = 3.12 + 0.015(OnTime) - 0.18(UI/UX) - 0.004(PMS)</div>
+                    </div>
+                    <div class="grid grid-2" style="margin-top: 1rem;">
+                        <div class="stat-item">
+                            <div class="stat-value" style="color: var(--success);">+0.42</div>
+                            <div class="stat-label">On-Time β</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" style="color: var(--danger);">-0.38</div>
+                            <div class="stat-label">UI/UX β</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>🔬 Factor Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="bar-chart">
+                        <div class="bar-row">
+                            <span class="bar-label">F1: Technical</span>
+                            <div class="bar-container">
+                                <div class="bar primary" style="width: 35%;">34.6% variance</div>
+                            </div>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">F2: Operations</span>
+                            <div class="bar-container">
+                                <div class="bar success" style="width: 24%;">24.4% variance</div>
+                            </div>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-label">F3: Comms</span>
+                            <div class="bar-container">
+                                <div class="bar warning" style="width: 16%;">15.6% variance</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 1rem;">
+                        <strong>Insight:</strong> Factor 2 (Operations) has highest CSAT correlation but lowest current score.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>📈 Trend Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <tr>
+                                <td>Revenue CAGR</td>
+                                <td class="cell-positive">+11.5%</td>
+                            </tr>
+                            <tr>
+                                <td>Project Growth</td>
+                                <td class="cell-positive">+7.6%</td>
+                            </tr>
+                            <tr>
+                                <td>UI/UX Improvement</td>
+                                <td class="cell-positive">+75%</td>
+                            </tr>
+                            <tr>
+                                <td>PMS Issues Growth</td>
+                                <td class="cell-negative">+592%</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategic Recommendations -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">🎯 Strategic Recommendations</h2>
+            </div>
+        </div>
+
+        <div class="grid grid-3 stagger" style="margin-bottom: 2rem;">
+            <div class="recommendation-card critical">
+                <span class="priority-badge critical">CRITICAL</span>
+                <h4 style="margin: 1rem 0 0.5rem;">Implement PMS/CRM System</h4>
+                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
+                    Address root cause of 55% of all 2025 delays. Centralize project tracking, meeting notes, and handoffs.
+                </p>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span>Investment: <strong>₹3L</strong></span>
+                    <span style="color: var(--success);">ROI: <strong>167%</strong></span>
+                </div>
+            </div>
+
+            <div class="recommendation-card high">
+                <span class="priority-badge high">HIGH</span>
+                <h4 style="margin: 1rem 0 0.5rem;">Improve On-Time to 70%</h4>
+                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
+                    Primary driver of CSAT (β = +0.42). Focus on realistic scheduling and buffer times.
+                </p>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span>Investment: <strong>₹1L</strong></span>
+                    <span style="color: var(--success);">CSAT Impact: <strong>+0.24</strong></span>
+                </div>
+            </div>
+
+            <div class="recommendation-card medium">
+                <span class="priority-badge medium">MEDIUM</span>
+                <h4 style="margin: 1rem 0 0.5rem;">Maintain Technical Excellence</h4>
+                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">
+                    Sustain design system and hosting improvements. These are now competitive advantages.
+                </p>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span>Investment: <strong>₹1.5L/yr</strong></span>
+                    <span style="color: var(--success);">Status: <strong>Maintain</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Roadmap -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🗺️ Implementation Roadmap</h3>
+            </div>
+            <div class="card-body">
+                <div class="timeline-step">
+                    <div class="timeline-marker" style="background: var(--danger); color: white;">Q1</div>
+                    <div>
+                        <strong>2026 Q1: PMS/CRM Selection & Implementation</strong>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">Evaluate tools (Jira, Monday, ClickUp), implement chosen solution, train team</p>
+                    </div>
+                </div>
+                <div class="timeline-connector" style="height: 30px;"></div>
+                <div class="timeline-step">
+                    <div class="timeline-marker" style="background: var(--warning); color: black;">Q2</div>
+                    <div>
+                        <strong>2026 Q2: Process Optimization</strong>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">Standardize handoffs, implement meeting note templates, establish approval tracking</p>
+                    </div>
+                </div>
+                <div class="timeline-connector" style="height: 30px;"></div>
+                <div class="timeline-step">
+                    <div class="timeline-marker" style="background: var(--info); color: white;">Q3</div>
+                    <div>
+                        <strong>2026 Q3: Client Portal Launch</strong>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">Self-service tracking for clients, automated status updates, approval workflows</p>
+                    </div>
+                </div>
+                <div class="timeline-connector" style="height: 30px;"></div>
+                <div class="timeline-step">
+                    <div class="timeline-marker" style="background: var(--success); color: white;">Q4</div>
+                    <div>
+                        <strong>2026 Q4: Target Achievement</strong>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem;">CSAT ≥ 4.0, On-Time ≥ 70%, NPS ≥ +20</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Radar Chart -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🎯 Performance Radar - Year Comparison</h3>
+            </div>
+            <div class="card-body">
+                <div style="display: flex; justify-content: center; padding: 2rem;">
+                    <svg viewBox="0 0 400 350" style="width: 400px; height: 350px;">
+                        <!-- Pentagon Grid -->
+                        <polygon points="200,30 350,120 300,280 100,280 50,120" fill="none" stroke="var(--border)" stroke-width="1"/>
+                        <polygon points="200,70 310,140 270,255 130,255 90,140" fill="none" stroke="var(--border)" stroke-width="1"/>
+                        <polygon points="200,110 270,160 240,230 160,230 130,160" fill="none" stroke="var(--border)" stroke-width="1"/>
+                        <polygon points="200,150 230,180 210,205 190,205 170,180" fill="none" stroke="var(--border)" stroke-width="1"/>
+                        
+                        <!-- Axis Lines -->
+                        <line x1="200" y1="30" x2="200" y2="170" stroke="var(--border)" stroke-width="1"/>
+                        <line x1="350" y1="120" x2="200" y2="170" stroke="var(--border)" stroke-width="1"/>
+                        <line x1="300" y1="280" x2="200" y2="170" stroke="var(--border)" stroke-width="1"/>
+                        <line x1="100" y1="280" x2="200" y2="170" stroke="var(--border)" stroke-width="1"/>
+                        <line x1="50" y1="120" x2="200" y2="170" stroke="var(--border)" stroke-width="1"/>
+                        
+                        <!-- Labels -->
+                        <text x="200" y="15" fill="var(--text-secondary)" font-size="11" text-anchor="middle">CSAT Score</text>
+                        <text x="370" y="120" fill="var(--text-secondary)" font-size="11" text-anchor="start">On-Time %</text>
+                        <text x="315" y="300" fill="var(--text-secondary)" font-size="11" text-anchor="middle">Revenue</text>
+                        <text x="85" y="300" fill="var(--text-secondary)" font-size="11" text-anchor="middle">UI/UX Quality</text>
+                        <text x="30" y="120" fill="var(--text-secondary)" font-size="11" text-anchor="end">Hosting</text>
+                        
+                        <!-- 2023 Data (poor) -->
+                        <polygon points="200,120 130,145 140,235 260,235 270,145" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="2"/>
+                        
+                        <!-- 2024 Data (good) -->
+                        <polygon points="200,50 310,130 280,265 120,265 90,130" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="2"/>
+                        
+                        <!-- 2025 Data (mixed) -->
+                        <polygon points="200,60 270,155 255,260 145,260 130,155" fill="rgba(245,158,11,0.2)" stroke="#f59e0b" stroke-width="2"/>
+                        
+                        <!-- Legend -->
+                        <rect x="120" y="320" width="12" height="12" fill="#ef4444"/>
+                        <text x="137" y="330" fill="var(--text-secondary)" font-size="11">2023</text>
+                        <rect x="180" y="320" width="12" height="12" fill="#10b981"/>
+                        <text x="197" y="330" fill="var(--text-secondary)" font-size="11">2024</text>
+                        <rect x="240" y="320" width="12" height="12" fill="#f59e0b"/>
+                        <text x="257" y="330" fill="var(--text-secondary)" font-size="11">2025</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Gauges -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Key Performance Gauges</h2>
+            </div>
+        </div>
+
+        <div class="grid grid-4 stagger" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-body" style="text-align: center; padding: 2rem;">
+                    <svg viewBox="0 0 120 80" style="width: 120px; height: 80px;">
+                        <path d="M 10 70 A 50 50 0 0 1 110 70" fill="none" stroke="var(--bg-card)" stroke-width="12" stroke-linecap="round"/>
+                        <path d="M 10 70 A 50 50 0 0 1 87 28" fill="none" stroke="var(--warning)" stroke-width="12" stroke-linecap="round"/>
+                        <text x="60" y="65" fill="var(--text-primary)" font-size="18" font-weight="bold" text-anchor="middle">3.4</text>
+                    </svg>
+                    <div style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">Current CSAT</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body" style="text-align: center; padding: 2rem;">
+                    <svg viewBox="0 0 120 80" style="width: 120px; height: 80px;">
+                        <path d="M 10 70 A 50 50 0 0 1 110 70" fill="none" stroke="var(--bg-card)" stroke-width="12" stroke-linecap="round"/>
+                        <path d="M 10 70 A 50 50 0 0 1 66 21" fill="none" stroke="var(--warning)" stroke-width="12" stroke-linecap="round"/>
+                        <text x="60" y="65" fill="var(--text-primary)" font-size="18" font-weight="bold" text-anchor="middle">54%</text>
+                    </svg>
+                    <div style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">On-Time Rate</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body" style="text-align: center; padding: 2rem;">
+                    <svg viewBox="0 0 120 80" style="width: 120px; height: 80px;">
+                        <path d="M 10 70 A 50 50 0 0 1 110 70" fill="none" stroke="var(--bg-card)" stroke-width="12" stroke-linecap="round"/>
+                        <path d="M 10 70 A 50 50 0 0 1 100 40" fill="none" stroke="var(--success)" stroke-width="12" stroke-linecap="round"/>
+                        <text x="60" y="65" fill="var(--text-primary)" font-size="14" font-weight="bold" text-anchor="middle">₹59L</text>
+                    </svg>
+                    <div style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">2025 Revenue</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body" style="text-align: center; padding: 2rem;">
+                    <svg viewBox="0 0 120 80" style="width: 120px; height: 80px;">
+                        <path d="M 10 70 A 50 50 0 0 1 110 70" fill="none" stroke="var(--bg-card)" stroke-width="12" stroke-linecap="round"/>
+                        <path d="M 10 70 A 50 50 0 0 1 25 35" fill="none" stroke="var(--danger)" stroke-width="12" stroke-linecap="round"/>
+                        <text x="60" y="65" fill="var(--text-primary)" font-size="18" font-weight="bold" text-anchor="middle">-2</text>
+                    </svg>
+                    <div style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">NPS Score</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projected Outcomes -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📈 Projected 2026 Outcomes</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-4">
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">4.0+</div>
+                        <div class="stat-label">Target CSAT</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">70%+</div>
+                        <div class="stat-label">On-Time Target</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">+20</div>
+                        <div class="stat-label">NPS Target</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: var(--success);">₹77L</div>
+                        <div class="stat-label">Revenue Target</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="insight" style="margin-bottom: 2rem; background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
+            <div class="insight-title" style="font-size: 1.25rem;">📋 Executive Summary</div>
+            <div class="insight-text" style="font-size: 1rem;">
+                Wafeka Digital Agency has successfully resolved technical issues (UI/UX revisions down 55%, hosting incidents down 87%) but faces a new operational crisis due to the absence of a PMS/CRM system. The regression model shows On-Time Delivery (β = +0.42) as the strongest predictor of customer satisfaction. With an investment of ₹3L in project management tools, the company can recover the ₹6.25L lost annually to operational inefficiencies and achieve a projected ROI of 167%. Immediate action is recommended to prevent further CSAT decline and potential client churn of 15-20%.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <p><strong>Customer Satisfaction Analysis - MBA Research Project</strong></p>
+            <p>Wafeka Digital Agency | 2023-2025 | 310 Projects | 10 Companies</p>
+            <p style="margin-top: 1rem;">
+                <a href="1_Correlation_Analysis.html" style="color: var(--primary);">Correlation</a> |
+                <a href="2_Regression_Analysis.html" style="color: var(--primary);">Regression</a> |
+                <a href="3_Factor_Analysis.html" style="color: var(--primary);">Factor</a> |
+                <a href="4_Trend_Analysis.html" style="color: var(--primary);">Trends</a> |
+                <a href="5_Service_Performance.html" style="color: var(--primary);">Services</a> |
+                <a href="6_Customer_Sentiment.html" style="color: var(--primary);">Sentiment</a> |
+                <a href="7_Revenue_Impact.html" style="color: var(--primary);">Revenue</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

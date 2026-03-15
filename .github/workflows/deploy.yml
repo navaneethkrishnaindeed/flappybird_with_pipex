@@ -36,35 +36,120 @@ jobs:
       - name: Build web
         run: flutter build web --release --base-href "/projects/flappy/"
 
-      - name: Create projects/flappy directory structure
+      - name: Create site structure
         run: |
+          # Create directories
           mkdir -p _site/projects/flappy
+          mkdir -p _site/wafeka
+          
+          # Copy Flappy Bird game
           cp -r build/web/* _site/projects/flappy/
           
-          # Create a root index that redirects to /projects/flappy
+          # Copy Wafeka Analysis Dashboard
+          cp -r analysys/* _site/wafeka/
+          
+          # Create root landing page
           cat > _site/index.html << 'EOF'
           <!DOCTYPE html>
           <html>
           <head>
             <meta charset="UTF-8">
-            <meta http-equiv="refresh" content="0; url=/projects/flappy/">
-            <title>PipeX Projects</title>
+            <title>PipeX Hub - Navaneeth K</title>
             <style>
+              * { box-sizing: border-box; margin: 0; padding: 0; }
               body {
-                font-family: system-ui, -apple-system, sans-serif;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                font-family: 'SF Pro Display', -apple-system, system-ui, sans-serif;
+                min-height: 100vh;
+                background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
                 color: #fff;
+                padding: 3rem 2rem;
               }
-              a { color: #4fc3f7; }
+              .container { max-width: 900px; margin: 0 auto; }
+              h1 {
+                font-size: 3rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+              }
+              .subtitle { color: #888; margin-bottom: 3rem; font-size: 1.1rem; }
+              .projects { display: grid; gap: 1.5rem; }
+              .card {
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 20px;
+                padding: 2rem;
+                text-decoration: none;
+                color: inherit;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+              }
+              .card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0;
+                height: 3px;
+                background: linear-gradient(90deg, var(--accent), var(--accent2));
+                opacity: 0;
+                transition: opacity 0.3s;
+              }
+              .card:hover::before { opacity: 1; }
+              .card:hover {
+                background: rgba(255,255,255,0.06);
+                transform: translateY(-6px);
+                box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+              }
+              .card-game { --accent: #4fc3f7; --accent2: #00e676; }
+              .card-data { --accent: #f093fb; --accent2: #f5576c; }
+              .card h2 { font-size: 1.5rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+              .card p { color: #aaa; line-height: 1.6; }
+              .tags { margin-top: 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+              .tag {
+                background: rgba(255,255,255,0.08);
+                padding: 0.35rem 0.85rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                color: #ccc;
+              }
+              .footer { margin-top: 4rem; text-align: center; color: #555; font-size: 0.9rem; }
+              .footer a { color: #667eea; text-decoration: none; }
+              .footer a:hover { text-decoration: underline; }
             </style>
           </head>
           <body>
-            <p>Redirecting to <a href="/projects/flappy/">Flappy Bird</a>...</p>
+            <div class="container">
+              <h1>🚀 PipeX Hub</h1>
+              <p class="subtitle">Projects & experiments by Navaneeth K</p>
+              
+              <div class="projects">
+                <a href="/projects/flappy/" class="card card-game">
+                  <h2>🐦 Flappy Bird</h2>
+                  <p>Classic Flappy Bird clone showcasing PipeX state management for smooth 60fps gameplay in Flutter.</p>
+                  <div class="tags">
+                    <span class="tag">Flutter</span>
+                    <span class="tag">PipeX</span>
+                    <span class="tag">Game</span>
+                    <span class="tag">Web</span>
+                  </div>
+                </a>
+                
+                <a href="/wafeka/" class="card card-data">
+                  <h2>📊 Wafeka Analytics</h2>
+                  <p>Comprehensive data analysis dashboard with correlation, regression, factor analysis, and executive insights.</p>
+                  <div class="tags">
+                    <span class="tag">Analytics</span>
+                    <span class="tag">Dashboard</span>
+                    <span class="tag">Data Science</span>
+                  </div>
+                </a>
+              </div>
+              
+              <div class="footer">
+                <p>Built by <a href="https://navaneethk.dev">Navaneeth K</a> · <a href="https://github.com/navaneethkrishnaindeed">GitHub</a> · <a href="https://resume.navaneethk.dev">Resume</a></p>
+              </div>
+            </div>
           </body>
           </html>
           EOF
@@ -75,85 +160,11 @@ jobs:
           <html>
           <head>
             <meta charset="UTF-8">
-            <title>PipeX Projects</title>
-            <style>
-              * { box-sizing: border-box; }
-              body {
-                font-family: 'Segoe UI', system-ui, sans-serif;
-                margin: 0;
-                min-height: 100vh;
-                background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-                color: #fff;
-                padding: 2rem;
-              }
-              .container {
-                max-width: 800px;
-                margin: 0 auto;
-              }
-              h1 {
-                font-size: 2.5rem;
-                margin-bottom: 0.5rem;
-                background: linear-gradient(90deg, #f093fb, #f5576c);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-              }
-              .subtitle {
-                color: #aaa;
-                margin-bottom: 3rem;
-              }
-              .projects {
-                display: grid;
-                gap: 1.5rem;
-              }
-              .project-card {
-                background: rgba(255,255,255,0.05);
-                border: 1px solid rgba(255,255,255,0.1);
-                border-radius: 16px;
-                padding: 1.5rem;
-                text-decoration: none;
-                color: inherit;
-                transition: all 0.3s ease;
-              }
-              .project-card:hover {
-                background: rgba(255,255,255,0.1);
-                transform: translateY(-4px);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-              }
-              .project-card h2 {
-                margin: 0 0 0.5rem 0;
-                color: #4fc3f7;
-              }
-              .project-card p {
-                margin: 0;
-                color: #ccc;
-              }
-              .tag {
-                display: inline-block;
-                background: rgba(79, 195, 247, 0.2);
-                color: #4fc3f7;
-                padding: 0.25rem 0.75rem;
-                border-radius: 20px;
-                font-size: 0.8rem;
-                margin-top: 1rem;
-              }
-            </style>
+            <meta http-equiv="refresh" content="0; url=/projects/flappy/">
+            <title>Projects</title>
           </head>
           <body>
-            <div class="container">
-              <h1>🎮 PipeX Projects</h1>
-              <p class="subtitle">Games & experiments built with Flutter + PipeX</p>
-              
-              <div class="projects">
-                <a href="/projects/flappy/" class="project-card">
-                  <h2>🐦 Flappy Bird</h2>
-                  <p>Classic Flappy Bird clone built with Flutter and PipeX state management using MVC architecture.</p>
-                  <span class="tag">Flutter</span>
-                  <span class="tag">PipeX</span>
-                  <span class="tag">Game</span>
-                </a>
-                <!-- Add more projects here -->
-              </div>
-            </div>
+            <p>Redirecting to <a href="/projects/flappy/">Flappy Bird</a>...</p>
           </body>
           </html>
           EOF

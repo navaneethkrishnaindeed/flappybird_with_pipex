@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Impact - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .revenue-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        .revenue-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .revenue-bar {
+            display: flex;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .revenue-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 0.875rem;
+        }
+        .waterfall-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .waterfall-label { flex: 1; }
+        .waterfall-bar {
+            width: 200px;
+            display: flex;
+            align-items: center;
+        }
+        .waterfall-fill {
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+        .roi-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 8px solid;
+        }
+        .roi-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        .roi-label {
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%);">
+            <h1>💰 Revenue Impact Analysis</h1>
+            <p>Financial performance and the cost of quality issues</p>
+            <span class="badge">₹1.58 Crores Total Revenue | 3 Years</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="8_Executive_Dashboard.html">📊 Dashboard</a>
+            <a href="1_Correlation_Analysis.html">Correlation</a>
+            <a href="2_Regression_Analysis.html">Regression</a>
+            <a href="3_Factor_Analysis.html">Factor Analysis</a>
+            <a href="4_Trend_Analysis.html">Trends</a>
+            <a href="5_Service_Performance.html">Services</a>
+            <a href="6_Customer_Sentiment.html">Sentiment</a>
+            <a href="7_Revenue_Impact.html" class="active">Revenue</a>
+        </nav>
+
+        <!-- Revenue Overview -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📈 Revenue Performance</h2>
+                <p class="section-subtitle">Year-over-Year revenue growth and composition</p>
+            </div>
+        </div>
+
+        <div class="grid grid-3 stagger" style="margin-bottom: 2rem;">
+            <div class="kpi-card info revenue-card">
+                <div class="kpi-label">2023 Revenue</div>
+                <div class="revenue-amount">₹47.15L</div>
+                <div class="kpi-change">95 Projects</div>
+                <div style="margin-top: 1rem;">
+                    <div style="font-size: 0.875rem; color: var(--text-secondary);">Revenue Lost to Delays</div>
+                    <div style="font-size: 1.25rem; font-weight: 700; color: var(--danger);">-₹11.75L (-25%)</div>
+                </div>
+            </div>
+
+            <div class="kpi-card success revenue-card">
+                <div class="kpi-label">2024 Revenue</div>
+                <div class="revenue-amount" style="background: var(--gradient-success); -webkit-background-clip: text;">₹52.38L</div>
+                <div class="kpi-change positive">↑ +11.1% YoY</div>
+                <div style="margin-top: 1rem;">
+                    <div style="font-size: 0.875rem; color: var(--text-secondary);">Revenue Lost to Delays</div>
+                    <div style="font-size: 1.25rem; font-weight: 700; color: var(--warning);">-₹2.85L (-5%)</div>
+                </div>
+            </div>
+
+            <div class="kpi-card warning revenue-card">
+                <div class="kpi-label">2025 Revenue</div>
+                <div class="revenue-amount" style="background: var(--gradient-info); -webkit-background-clip: text;">₹58.72L</div>
+                <div class="kpi-change positive">↑ +12.1% YoY</div>
+                <div style="margin-top: 1rem;">
+                    <div style="font-size: 0.875rem; color: var(--text-secondary);">Revenue Lost to Delays</div>
+                    <div style="font-size: 1.25rem; font-weight: 700; color: var(--danger);">-₹6.25L (-11%)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Waterfall -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📊 Revenue Waterfall - 3 Year Analysis</h3>
+            </div>
+            <div class="card-body">
+                <div class="waterfall-item">
+                    <span class="waterfall-label"><strong>2023 Base Revenue</strong></span>
+                    <div class="waterfall-bar">
+                        <div class="waterfall-fill" style="width: 100%; background: var(--primary);">₹47.15L</div>
+                    </div>
+                </div>
+                <div class="waterfall-item">
+                    <span class="waterfall-label" style="color: var(--danger);">(-) 2023 Delay Losses</span>
+                    <div class="waterfall-bar" style="justify-content: flex-end;">
+                        <div class="waterfall-fill" style="width: 50%; background: var(--danger);">-₹11.75L</div>
+                    </div>
+                </div>
+                <div class="waterfall-item">
+                    <span class="waterfall-label" style="color: var(--success);">(+) 2024 Growth</span>
+                    <div class="waterfall-bar">
+                        <div class="waterfall-fill" style="width: 22%; background: var(--success);">+₹5.23L</div>
+                    </div>
+                </div>
+                <div class="waterfall-item">
+                    <span class="waterfall-label" style="color: var(--danger);">(-) 2024 Delay Losses</span>
+                    <div class="waterfall-bar" style="justify-content: flex-end;">
+                        <div class="waterfall-fill" style="width: 12%; background: var(--danger);">-₹2.85L</div>
+                    </div>
+                </div>
+                <div class="waterfall-item">
+                    <span class="waterfall-label" style="color: var(--success);">(+) 2025 Growth</span>
+                    <div class="waterfall-bar">
+                        <div class="waterfall-fill" style="width: 27%; background: var(--success);">+₹6.34L</div>
+                    </div>
+                </div>
+                <div class="waterfall-item">
+                    <span class="waterfall-label" style="color: var(--danger);">(-) 2025 Delay Losses</span>
+                    <div class="waterfall-bar" style="justify-content: flex-end;">
+                        <div class="waterfall-fill" style="width: 26%; background: var(--danger);">-₹6.25L</div>
+                    </div>
+                </div>
+                <div class="waterfall-item" style="background: var(--bg-card);">
+                    <span class="waterfall-label"><strong>Total 3-Year Revenue</strong></span>
+                    <div class="waterfall-bar">
+                        <div class="waterfall-fill" style="width: 100%; background: var(--gradient-primary);">₹1.58 Cr</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cost of Poor Quality -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">💸 Cost of Poor Quality (COPQ)</h2>
+                <p class="section-subtitle">Financial impact of delays and issues</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cost Category</th>
+                                <th>2023</th>
+                                <th>2024</th>
+                                <th>2025</th>
+                                <th>3-Year Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>UI/UX Revision Costs</strong></td>
+                                <td class="cell-negative">₹5.20L</td>
+                                <td class="cell-warning">₹1.80L</td>
+                                <td class="cell-positive">₹0.85L</td>
+                                <td><strong>₹7.85L</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hosting Downtime Costs</strong></td>
+                                <td class="cell-negative">₹3.45L</td>
+                                <td class="cell-warning">₹0.65L</td>
+                                <td class="cell-positive">₹0.15L</td>
+                                <td><strong>₹4.25L</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Project Delay Penalties</strong></td>
+                                <td class="cell-negative">₹2.10L</td>
+                                <td class="cell-warning">₹0.40L</td>
+                                <td class="cell-warning">₹0.55L</td>
+                                <td><strong>₹3.05L</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resource Conflict Overtime</strong></td>
+                                <td class="cell-negative">₹1.00L</td>
+                                <td class="cell-positive">₹0L</td>
+                                <td class="cell-positive">₹0L</td>
+                                <td><strong>₹1.00L</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>PMS/CRM Gap Costs</strong></td>
+                                <td>₹0</td>
+                                <td class="cell-warning">₹0.48L</td>
+                                <td class="cell-negative">₹4.70L</td>
+                                <td><strong>₹5.18L</strong></td>
+                            </tr>
+                            <tr style="background: var(--bg-card);">
+                                <td><strong>TOTAL COPQ</strong></td>
+                                <td class="cell-negative"><strong>₹11.75L</strong></td>
+                                <td><strong>₹3.33L</strong></td>
+                                <td class="cell-negative"><strong>₹6.25L</strong></td>
+                                <td style="font-size: 1.25rem; color: var(--danger);"><strong>₹21.33L</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>COPQ as % of Revenue</strong></td>
+                                <td class="cell-negative">25%</td>
+                                <td class="cell-positive">6%</td>
+                                <td class="cell-warning">11%</td>
+                                <td><strong>13.5%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROI of Improvements -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📈 ROI of Quality Improvements</h2>
+                <p class="section-subtitle">Return on investment for implemented solutions</p>
+            </div>
+        </div>
+
+        <div class="grid grid-3 stagger" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Design System (2024)</h3>
+                </div>
+                <div class="card-body" style="text-align: center;">
+                    <div class="roi-circle" style="border-color: var(--success);">
+                        <div class="roi-value" style="color: var(--success);">680%</div>
+                        <div class="roi-label">ROI</div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div style="color: var(--text-secondary);">Investment: ₹50K</div>
+                        <div style="color: var(--success); font-weight: 600;">Savings: ₹3.90L/year</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>VPS + CDN Upgrade (2024)</h3>
+                </div>
+                <div class="card-body" style="text-align: center;">
+                    <div class="roi-circle" style="border-color: var(--success);">
+                        <div class="roi-value" style="color: var(--success);">275%</div>
+                        <div class="roi-label">ROI</div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div style="color: var(--text-secondary);">Investment: ₹1.2L/year</div>
+                        <div style="color: var(--success); font-weight: 600;">Savings: ₹3.30L/year</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>PMS/CRM (Proposed 2026)</h3>
+                </div>
+                <div class="card-body" style="text-align: center;">
+                    <div class="roi-circle" style="border-color: var(--info);">
+                        <div class="roi-value" style="color: var(--info);">167%</div>
+                        <div class="roi-label">Est. ROI</div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div style="color: var(--text-secondary);">Investment: ₹3L (one-time)</div>
+                        <div style="color: var(--success); font-weight: 600;">Est. Savings: ₹8L/year</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue by Client -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🏢 Revenue by Client (3-Year Total)</h3>
+            </div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <span class="bar-label">Anika Jewellers</span>
+                        <div class="bar-container">
+                            <div class="bar primary" style="width: 100%;">₹21.8L (13.8%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Green Trends</span>
+                        <div class="bar-container">
+                            <div class="bar success" style="width: 92%;">₹20.1L (12.7%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">KL House Clinic</span>
+                        <div class="bar-container">
+                            <div class="bar info" style="width: 88%;">₹19.2L (12.2%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Ram Properties</span>
+                        <div class="bar-container">
+                            <div class="bar warning" style="width: 82%;">₹17.9L (11.3%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Mani Salon</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 78%; background: var(--chart-5);">₹17.0L (10.8%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Others (5 clients)</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 100%; background: var(--text-muted);">₹62.2L (39.2%)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Forecast -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🔮 2026 Financial Forecast</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-2">
+                    <div style="background: var(--danger-light); padding: 1.5rem; border-radius: 0.75rem;">
+                        <h4 style="color: #991b1b; margin-bottom: 1rem;">Scenario A: No PMS/CRM</h4>
+                        <table style="width: 100%;">
+                            <tr><td>Projected Revenue</td><td style="text-align: right;">₹65L</td></tr>
+                            <tr><td>Expected Losses</td><td style="text-align: right; color: #991b1b;">-₹10L</td></tr>
+                            <tr><td>Client Churn Risk</td><td style="text-align: right; color: #991b1b;">15-20%</td></tr>
+                            <tr><td><strong>Net Revenue</strong></td><td style="text-align: right;"><strong>₹55L</strong></td></tr>
+                        </table>
+                    </div>
+                    <div style="background: var(--success-light); padding: 1.5rem; border-radius: 0.75rem;">
+                        <h4 style="color: #065f46; margin-bottom: 1rem;">Scenario B: With PMS/CRM</h4>
+                        <table style="width: 100%;">
+                            <tr><td>Projected Revenue</td><td style="text-align: right;">₹72L</td></tr>
+                            <tr><td>System Investment</td><td style="text-align: right; color: #065f46;">-₹3L</td></tr>
+                            <tr><td>Delay Reduction</td><td style="text-align: right; color: #065f46;">+₹8L saved</td></tr>
+                            <tr><td><strong>Net Revenue</strong></td><td style="text-align: right;"><strong>₹77L</strong></td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 1.5rem; padding: 1rem; background: var(--bg-card); border-radius: 0.75rem;">
+                    <strong style="font-size: 1.25rem;">Opportunity Cost of Inaction: </strong>
+                    <span style="font-size: 1.5rem; font-weight: 800; color: var(--danger);">₹22L/year</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue vs COPQ Comparison -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📊 Revenue vs Cost of Poor Quality</h3>
+            </div>
+            <div class="card-body">
+                <div style="padding: 2rem;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 320px;">
+                        <!-- Y Axis -->
+                        <text x="40" y="40" fill="var(--text-muted)" font-size="10" text-anchor="end">₹60L</text>
+                        <text x="40" y="90" fill="var(--text-muted)" font-size="10" text-anchor="end">₹45L</text>
+                        <text x="40" y="140" fill="var(--text-muted)" font-size="10" text-anchor="end">₹30L</text>
+                        <text x="40" y="190" fill="var(--text-muted)" font-size="10" text-anchor="end">₹15L</text>
+                        <text x="40" y="240" fill="var(--text-muted)" font-size="10" text-anchor="end">₹0</text>
+                        
+                        <!-- Grid -->
+                        <line x1="50" y1="35" x2="460" y2="35" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="50" y1="85" x2="460" y2="85" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="50" y1="135" x2="460" y2="135" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="50" y1="185" x2="460" y2="185" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="50" y1="235" x2="460" y2="235" stroke="var(--border)"/>
+                        
+                        <!-- 2023 Bars -->
+                        <rect x="80" y="75" width="50" height="160" fill="var(--chart-1)" rx="4"/>
+                        <rect x="135" y="195" width="30" height="40" fill="var(--danger)" rx="4"/>
+                        <text x="117" y="260" fill="var(--text-secondary)" font-size="11" text-anchor="middle">2023</text>
+                        <text x="105" y="65" fill="var(--chart-1)" font-size="10" font-weight="bold">₹47L</text>
+                        <text x="150" y="190" fill="var(--danger)" font-size="9" font-weight="bold">₹12L</text>
+                        
+                        <!-- 2024 Bars -->
+                        <rect x="210" y="60" width="50" height="175" fill="var(--chart-2)" rx="4"/>
+                        <rect x="265" y="225" width="30" height="10" fill="var(--warning)" rx="4"/>
+                        <text x="247" y="260" fill="var(--text-secondary)" font-size="11" text-anchor="middle">2024</text>
+                        <text x="235" y="50" fill="var(--chart-2)" font-size="10" font-weight="bold">₹52L</text>
+                        <text x="280" y="220" fill="var(--warning)" font-size="9" font-weight="bold">₹3L</text>
+                        
+                        <!-- 2025 Bars -->
+                        <rect x="340" y="38" width="50" height="197" fill="var(--chart-2)" rx="4"/>
+                        <rect x="395" y="213" width="30" height="22" fill="var(--danger)" rx="4"/>
+                        <text x="377" y="260" fill="var(--text-secondary)" font-size="11" text-anchor="middle">2025</text>
+                        <text x="365" y="28" fill="var(--chart-2)" font-size="10" font-weight="bold">₹59L</text>
+                        <text x="410" y="208" fill="var(--danger)" font-size="9" font-weight="bold">₹6L</text>
+                        
+                        <!-- Legend -->
+                        <rect x="150" y="290" width="14" height="14" fill="var(--chart-1)" rx="2"/>
+                        <text x="170" y="302" fill="var(--text-secondary)" font-size="11">Revenue</text>
+                        <rect x="260" y="290" width="14" height="14" fill="var(--danger)" rx="2"/>
+                        <text x="280" y="302" fill="var(--text-secondary)" font-size="11">COPQ (Lost)</text>
+                    </svg>
+                </div>
+                <div class="insight">
+                    <div class="insight-title">💡 Key Insight</div>
+                    <div class="insight-text">COPQ dropped from 25% (2023) to 6% (2024) through technical fixes, but rose to 11% (2025) due to PMS issues. Total opportunity cost: ₹21.33L over 3 years.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Growth Donut -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>💰 3-Year Revenue Composition</h3>
+            </div>
+            <div class="card-body">
+                <div class="grid grid-2">
+                    <div style="display: flex; justify-content: center; align-items: center; padding: 2rem;">
+                        <svg viewBox="0 0 200 200" style="width: 200px; height: 200px;">
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--chart-1)" stroke-width="35" stroke-dasharray="132 440" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--chart-2)" stroke-width="35" stroke-dasharray="146 440" stroke-dashoffset="-132" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="var(--chart-3)" stroke-width="35" stroke-dasharray="162 440" stroke-dashoffset="-278" transform="rotate(-90 100 100)"/>
+                            <circle cx="100" cy="100" r="40" fill="var(--bg-secondary)"/>
+                            <text x="100" y="95" fill="var(--text-primary)" font-size="14" font-weight="bold" text-anchor="middle">₹1.58</text>
+                            <text x="100" y="112" fill="var(--text-primary)" font-size="12" font-weight="bold" text-anchor="middle">Crores</text>
+                        </svg>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="width: 12px; height: 12px; background: var(--chart-1); border-radius: 2px;"></span>
+                                    2023
+                                </span>
+                                <strong>₹47.15L (30%)</strong>
+                            </div>
+                            <div class="progress"><div class="progress-bar primary" style="width: 30%;"></div></div>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="width: 12px; height: 12px; background: var(--chart-2); border-radius: 2px;"></span>
+                                    2024
+                                </span>
+                                <strong>₹52.38L (33%)</strong>
+                            </div>
+                            <div class="progress"><div class="progress-bar success" style="width: 33%;"></div></div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="width: 12px; height: 12px; background: var(--chart-3); border-radius: 2px;"></span>
+                                    2025
+                                </span>
+                                <strong>₹58.72L (37%)</strong>
+                            </div>
+                            <div class="progress"><div class="progress-bar warning" style="width: 37%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <p>Wafeka Digital Agency | Revenue Impact Analysis</p>
+            <p>3-Year Financial Performance | ₹1.58 Crores Total Revenue</p>
+        </footer>
+    </div>
+</body>
+</html>

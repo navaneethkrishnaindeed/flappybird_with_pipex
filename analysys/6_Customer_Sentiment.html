@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Sentiment - Wafeka Digital Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .nps-gauge {
+            position: relative;
+            width: 280px;
+            height: 160px;
+            margin: 0 auto;
+        }
+        .nps-arc {
+            width: 280px;
+            height: 140px;
+            border-radius: 140px 140px 0 0;
+            background: conic-gradient(
+                from 180deg,
+                #ef4444 0deg,
+                #ef4444 60deg,
+                #f59e0b 60deg,
+                #f59e0b 120deg,
+                #10b981 120deg,
+                #10b981 180deg
+            );
+            position: relative;
+        }
+        .nps-arc::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 220px;
+            height: 110px;
+            border-radius: 110px 110px 0 0;
+            background: var(--bg-secondary);
+        }
+        .nps-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            height: 100px;
+            background: white;
+            transform-origin: bottom center;
+            border-radius: 2px;
+            transition: transform 1s ease-out;
+        }
+        .nps-value {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .nps-score {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        .sentiment-bar {
+            display: flex;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .sentiment-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 0.875rem;
+        }
+        .quote-card {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid;
+            position: relative;
+        }
+        .quote-card::before {
+            content: '"';
+            position: absolute;
+            top: 0.5rem;
+            left: 1rem;
+            font-size: 3rem;
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        .quote-card.positive { border-color: var(--success); }
+        .quote-card.negative { border-color: var(--danger); }
+        .quote-card.mixed { border-color: var(--warning); }
+        .quote-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+        }
+        .quote-author {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .emotion-bubble {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            margin: 0.25rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);">
+            <h1>💬 Customer Sentiment Analysis</h1>
+            <p>Deep dive into customer feedback, emotions, and satisfaction drivers</p>
+            <span class="badge">310 Projects | 850+ Reviews Analyzed</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="8_Executive_Dashboard.html">📊 Dashboard</a>
+            <a href="1_Correlation_Analysis.html">Correlation</a>
+            <a href="2_Regression_Analysis.html">Regression</a>
+            <a href="3_Factor_Analysis.html">Factor Analysis</a>
+            <a href="4_Trend_Analysis.html">Trends</a>
+            <a href="5_Service_Performance.html">Services</a>
+            <a href="6_Customer_Sentiment.html" class="active">Sentiment</a>
+            <a href="7_Revenue_Impact.html">Revenue</a>
+        </nav>
+
+        <!-- NPS Section -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">📊 Net Promoter Score (NPS) Analysis</h2>
+                <p class="section-subtitle">Would customers recommend Wafeka to others?</p>
+            </div>
+        </div>
+
+        <div class="grid grid-3 stagger" style="margin-bottom: 2rem;">
+            <!-- 2023 NPS -->
+            <div class="card">
+                <div class="card-header" style="background: var(--danger);">
+                    <h3 style="color: white;">2023 NPS</h3>
+                </div>
+                <div class="card-body">
+                    <div class="nps-gauge">
+                        <div class="nps-arc"></div>
+                        <div class="nps-needle" style="transform: rotate(-75deg);"></div>
+                        <div class="nps-value">
+                            <div class="nps-score" style="color: var(--danger);">-52</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Detractor Zone</div>
+                        </div>
+                    </div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-segment" style="width: 60%; background: var(--danger);">Detractors 60%</div>
+                        <div class="sentiment-segment" style="width: 32%; background: var(--warning);">32%</div>
+                        <div class="sentiment-segment" style="width: 8%; background: var(--success);">8%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 NPS -->
+            <div class="card">
+                <div class="card-header" style="background: var(--success);">
+                    <h3 style="color: white;">2024 NPS</h3>
+                </div>
+                <div class="card-body">
+                    <div class="nps-gauge">
+                        <div class="nps-arc"></div>
+                        <div class="nps-needle" style="transform: rotate(10deg);"></div>
+                        <div class="nps-value">
+                            <div class="nps-score" style="color: var(--success);">+10</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Passive Zone</div>
+                        </div>
+                    </div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-segment" style="width: 20%; background: var(--danger);">20%</div>
+                        <div class="sentiment-segment" style="width: 50%; background: var(--warning);">Passives 50%</div>
+                        <div class="sentiment-segment" style="width: 30%; background: var(--success);">30%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2025 NPS -->
+            <div class="card">
+                <div class="card-header" style="background: var(--warning);">
+                    <h3 style="color: white;">2025 NPS</h3>
+                </div>
+                <div class="card-body">
+                    <div class="nps-gauge">
+                        <div class="nps-arc"></div>
+                        <div class="nps-needle" style="transform: rotate(-5deg);"></div>
+                        <div class="nps-value">
+                            <div class="nps-score" style="color: var(--warning);">-2</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Borderline</div>
+                        </div>
+                    </div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-segment" style="width: 25%; background: var(--danger);">25%</div>
+                        <div class="sentiment-segment" style="width: 52%; background: var(--warning);">Passives 52%</div>
+                        <div class="sentiment-segment" style="width: 23%; background: var(--success);">23%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rating Distribution -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">⭐ Rating Distribution</h2>
+                <p class="section-subtitle">Star ratings across all projects</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>2023</th>
+                                <th>2024</th>
+                                <th>2025</th>
+                                <th>Total</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>⭐⭐⭐⭐⭐ (5/5)</td>
+                                <td>5 (5%)</td>
+                                <td class="cell-positive">18 (17%)</td>
+                                <td>15 (14%)</td>
+                                <td><strong>38</strong></td>
+                                <td><span class="badge success">↑ +180%</span></td>
+                            </tr>
+                            <tr>
+                                <td>⭐⭐⭐⭐ (4/5)</td>
+                                <td>17 (18%)</td>
+                                <td class="cell-positive">38 (36%)</td>
+                                <td>35 (32%)</td>
+                                <td><strong>90</strong></td>
+                                <td><span class="badge success">↑ +106%</span></td>
+                            </tr>
+                            <tr>
+                                <td>⭐⭐⭐ (3/5)</td>
+                                <td>40 (42%)</td>
+                                <td>35 (33%)</td>
+                                <td>42 (38%)</td>
+                                <td><strong>117</strong></td>
+                                <td><span class="badge warning">+5%</span></td>
+                            </tr>
+                            <tr>
+                                <td>⭐⭐ (2/5)</td>
+                                <td class="cell-negative">27 (28%)</td>
+                                <td>12 (11%)</td>
+                                <td>15 (14%)</td>
+                                <td><strong>54</strong></td>
+                                <td><span class="badge success">↓ -44%</span></td>
+                            </tr>
+                            <tr>
+                                <td>⭐ (1/5)</td>
+                                <td class="cell-negative">6 (6%)</td>
+                                <td>2 (2%)</td>
+                                <td>3 (3%)</td>
+                                <td><strong>11</strong></td>
+                                <td><span class="badge success">↓ -50%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emotion Analysis -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">😊 Emotion Analysis</h2>
+                <p class="section-subtitle">Key emotions expressed in customer feedback</p>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom: 2rem;">
+            <div class="card">
+                <div class="card-header" style="background: var(--success);">
+                    <h3 style="color: white;">✅ Positive Emotions</h3>
+                </div>
+                <div class="card-body">
+                    <div style="text-align: center;">
+                        <span class="emotion-bubble" style="background: var(--success-light); color: #065f46;">😊 Satisfied (142)</span>
+                        <span class="emotion-bubble" style="background: var(--success-light); color: #065f46;">🎉 Impressed (68)</span>
+                        <span class="emotion-bubble" style="background: var(--success-light); color: #065f46;">👍 Relieved (52)</span>
+                        <span class="emotion-bubble" style="background: var(--success-light); color: #065f46;">🤝 Trusting (45)</span>
+                        <span class="emotion-bubble" style="background: var(--success-light); color: #065f46;">⭐ Delighted (38)</span>
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center; color: var(--text-secondary);">
+                        <strong style="font-size: 1.5rem; color: var(--success);">345</strong> positive mentions
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" style="background: var(--danger);">
+                    <h3 style="color: white;">❌ Negative Emotions</h3>
+                </div>
+                <div class="card-body">
+                    <div style="text-align: center;">
+                        <span class="emotion-bubble" style="background: var(--danger-light); color: #991b1b;">😤 Frustrated (128)</span>
+                        <span class="emotion-bubble" style="background: var(--danger-light); color: #991b1b;">😞 Disappointed (85)</span>
+                        <span class="emotion-bubble" style="background: var(--danger-light); color: #991b1b;">😠 Angry (42)</span>
+                        <span class="emotion-bubble" style="background: var(--danger-light); color: #991b1b;">🤦 Confused (65)</span>
+                        <span class="emotion-bubble" style="background: var(--danger-light); color: #991b1b;">😰 Anxious (38)</span>
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center; color: var(--text-secondary);">
+                        <strong style="font-size: 1.5rem; color: var(--danger);">358</strong> negative mentions
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Quotes -->
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">💬 Voice of the Customer</h2>
+                <p class="section-subtitle">Representative quotes from customer feedback</p>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-bottom: 2rem;">
+            <div>
+                <h4 style="color: var(--success); margin-bottom: 1rem;">Positive Feedback</h4>
+                
+                <div class="quote-card positive">
+                    <div class="quote-text">"Design system works perfectly. First drafts now match our vision."</div>
+                    <div class="quote-author">— Green Trends, 2025</div>
+                </div>
+                
+                <div class="quote-card positive">
+                    <div class="quote-text">"Site is faster. No more crashes. VPS upgrade working well."</div>
+                    <div class="quote-author">— Good Luck Operations, 2024</div>
+                </div>
+                
+                <div class="quote-card positive">
+                    <div class="quote-text">"Same designer from 2023 - she now understands our industry."</div>
+                    <div class="quote-author">— Mani Salon Owner, 2024</div>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color: var(--danger); margin-bottom: 1rem;">Critical Feedback</h4>
+                
+                <div class="quote-card negative">
+                    <div class="quote-text">"I had to explain requirements THREE TIMES. Meeting notes apparently lost."</div>
+                    <div class="quote-author">— Good Luck Management, 2025</div>
+                </div>
+                
+                <div class="quote-card negative">
+                    <div class="quote-text">"PM LEFT AND NO ONE KNEW ANYTHING! Had to explain everything again."</div>
+                    <div class="quote-author">— Mani Salon Director, 2025</div>
+                </div>
+                
+                <div class="quote-card mixed">
+                    <div class="quote-text">"The product is great but the process is terrible. You need a proper PMS!"</div>
+                    <div class="quote-author">— KL House Clinic, 2025</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complaint Categories -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📉 Top Complaint Categories (3-Year Analysis)</h3>
+            </div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <span class="bar-label">PMS/CRM Absence</span>
+                        <div class="bar-container">
+                            <div class="bar danger" style="width: 47%;">47% (2025) ↑</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Meeting Notes Lost</span>
+                        <div class="bar-container">
+                            <div class="bar danger" style="width: 41%;">41% (2025) ↑</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Context Dropped</span>
+                        <div class="bar-container">
+                            <div class="bar warning" style="width: 38%;">38% (2025) ↑</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Handoff Failures</span>
+                        <div class="bar-container">
+                            <div class="bar warning" style="width: 35%;">35% (2025) ↑</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">SEO Results Slow</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 28%; background: var(--text-muted);">28% (stable)</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">UI/UX Revisions</span>
+                        <div class="bar-container">
+                            <div class="bar success" style="width: 8%;">8% (2025) ↓</div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Hosting Issues</span>
+                        <div class="bar-container">
+                            <div class="bar success" style="width: 3%;">3% (2025) ↓</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Escalation Analysis -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>⚠️ Escalation Trend</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Escalation Level</th>
+                                <th>2023</th>
+                                <th>2024</th>
+                                <th>2025</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Project Manager</td>
+                                <td class="cell-negative">85</td>
+                                <td class="cell-positive">32</td>
+                                <td class="cell-warning">45</td>
+                                <td><span class="badge warning">↑ +41%</span></td>
+                            </tr>
+                            <tr>
+                                <td>Department Head</td>
+                                <td class="cell-negative">38</td>
+                                <td class="cell-positive">12</td>
+                                <td class="cell-warning">22</td>
+                                <td><span class="badge warning">↑ +83%</span></td>
+                            </tr>
+                            <tr>
+                                <td>CXO Level</td>
+                                <td>12</td>
+                                <td class="cell-positive">3</td>
+                                <td>8</td>
+                                <td><span class="badge danger">↑ +167%</span></td>
+                            </tr>
+                            <tr>
+                                <td>Legal Threats</td>
+                                <td class="cell-negative">3</td>
+                                <td class="cell-positive">0</td>
+                                <td>1</td>
+                                <td><span class="badge warning">New in 2025</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="insight" style="background: var(--gradient-danger); margin-top: 1rem;">
+                    <div class="insight-title">⚠️ Warning: Escalations Rising Again</div>
+                    <div class="insight-text">After dropping 66% in 2024, escalations increased 62% in 2025 - driven entirely by PMS/CRM operational issues, not technical problems.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sentiment Trend -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>📈 Sentiment Score Trend</h3>
+            </div>
+            <div class="card-body">
+                <div style="padding: 2rem;">
+                    <svg viewBox="0 0 500 250" style="width: 100%; height: 250px;">
+                        <!-- Background gradient areas -->
+                        <defs>
+                            <linearGradient id="sentimentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Zones -->
+                        <rect x="60" y="30" width="400" height="40" fill="rgba(16,185,129,0.1)"/>
+                        <text x="470" y="55" fill="#10b981" font-size="9">Promoter Zone</text>
+                        <rect x="60" y="70" width="400" height="60" fill="rgba(245,158,11,0.1)"/>
+                        <text x="470" y="105" fill="#f59e0b" font-size="9">Passive Zone</text>
+                        <rect x="60" y="130" width="400" height="70" fill="rgba(239,68,68,0.1)"/>
+                        <text x="470" y="170" fill="#ef4444" font-size="9">Detractor Zone</text>
+                        
+                        <!-- Grid -->
+                        <line x1="60" y1="30" x2="460" y2="30" stroke="var(--border)" stroke-dasharray="4"/>
+                        <line x1="60" y1="100" x2="460" y2="100" stroke="var(--border)"/>
+                        <line x1="60" y1="200" x2="460" y2="200" stroke="var(--border)"/>
+                        
+                        <!-- Y Labels -->
+                        <text x="50" y="35" fill="var(--text-muted)" font-size="10" text-anchor="end">+50</text>
+                        <text x="50" y="105" fill="var(--text-muted)" font-size="10" text-anchor="end">0</text>
+                        <text x="50" y="205" fill="var(--text-muted)" font-size="10" text-anchor="end">-50</text>
+                        
+                        <!-- NPS Line -->
+                        <path d="M 120 185 L 260 90 L 400 105" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Data Points with values -->
+                        <circle cx="120" cy="185" r="10" fill="#ef4444" stroke="white" stroke-width="3"/>
+                        <text x="120" y="215" fill="var(--text-secondary)" font-size="10" text-anchor="middle">-52</text>
+                        
+                        <circle cx="260" cy="90" r="10" fill="#10b981" stroke="white" stroke-width="3"/>
+                        <text x="260" y="75" fill="var(--text-secondary)" font-size="10" text-anchor="middle">+10</text>
+                        
+                        <circle cx="400" cy="105" r="10" fill="#f59e0b" stroke="white" stroke-width="3"/>
+                        <text x="400" y="130" fill="var(--text-secondary)" font-size="10" text-anchor="middle">-2</text>
+                        
+                        <!-- X Labels -->
+                        <text x="120" y="235" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2023</text>
+                        <text x="260" y="235" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2024</text>
+                        <text x="400" y="235" fill="var(--text-secondary)" font-size="12" text-anchor="middle">2025</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Word Cloud Style Tags -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>💬 Common Feedback Keywords</h3>
+            </div>
+            <div class="card-body" style="text-align: center; padding: 2rem;">
+                <span style="font-size: 2rem; color: var(--danger); margin: 0.5rem;">delayed</span>
+                <span style="font-size: 1.5rem; color: var(--success); margin: 0.5rem;">improved</span>
+                <span style="font-size: 1.8rem; color: var(--danger); margin: 0.5rem;">frustrated</span>
+                <span style="font-size: 1.2rem; color: var(--success); margin: 0.5rem;">professional</span>
+                <span style="font-size: 2.2rem; color: var(--danger); margin: 0.5rem;">PMS</span>
+                <span style="font-size: 1.4rem; color: var(--warning); margin: 0.5rem;">communication</span>
+                <span style="font-size: 1.6rem; color: var(--success); margin: 0.5rem;">design</span>
+                <span style="font-size: 1.3rem; color: var(--danger); margin: 0.5rem;">handoff</span>
+                <span style="font-size: 1.7rem; color: var(--success); margin: 0.5rem;">hosting</span>
+                <span style="font-size: 1.9rem; color: var(--danger); margin: 0.5rem;">lost notes</span>
+                <span style="font-size: 1.1rem; color: var(--info); margin: 0.5rem;">responsive</span>
+                <span style="font-size: 1.5rem; color: var(--warning); margin: 0.5rem;">waiting</span>
+                <span style="font-size: 1.8rem; color: var(--success); margin: 0.5rem;">quality</span>
+                <span style="font-size: 1.3rem; color: var(--danger); margin: 0.5rem;">context lost</span>
+            </div>
+        </div>
+
+        <!-- Client Retention Funnel -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3>🔄 Client Retention Funnel</h3>
+            </div>
+            <div class="card-body">
+                <div style="display: flex; justify-content: center; padding: 2rem;">
+                    <svg viewBox="0 0 400 250" style="width: 400px; height: 250px;">
+                        <!-- Funnel Stages -->
+                        <polygon points="50,20 350,20 320,70 80,70" fill="var(--chart-1)"/>
+                        <text x="200" y="50" fill="white" font-size="12" font-weight="bold" text-anchor="middle">All Clients: 10</text>
+                        
+                        <polygon points="80,75 320,75 290,125 110,125" fill="var(--chart-2)"/>
+                        <text x="200" y="105" fill="white" font-size="12" font-weight="bold" text-anchor="middle">Repeat Clients: 9 (90%)</text>
+                        
+                        <polygon points="110,130 290,130 260,180 140,180" fill="var(--chart-3)"/>
+                        <text x="200" y="160" fill="white" font-size="12" font-weight="bold" text-anchor="middle">Satisfied (3+): 7 (70%)</text>
+                        
+                        <polygon points="140,185 260,185 230,235 170,235" fill="var(--success)"/>
+                        <text x="200" y="215" fill="white" font-size="12" font-weight="bold" text-anchor="middle">Promoters: 3 (30%)</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <p>Wafeka Digital Agency | Customer Sentiment Analysis</p>
+            <p>850+ Reviews Analyzed | Sentiment Mining Applied</p>
+        </footer>
+    </div>
+</body>
+</html>
