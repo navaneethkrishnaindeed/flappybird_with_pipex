@@ -212,6 +212,22 @@
         @media print {
             .print-btn { display: none; }
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            
+            /* Remove browser default headers and footers */
+            @page {
+                size: A4;
+                margin: 18mm 15mm;
+            }
+            
+            @page :first {
+                margin-top: 0;
+            }
+        }
+        
+        /* Hide URL/date in print - Chrome/Edge specific */
+        @page {
+            margin-top: 0;
+            margin-bottom: 0;
         }
         
         /* List styles */
@@ -233,7 +249,34 @@
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">📄 Print / Save as PDF</button>
+<button class="print-btn" onclick="showPrintInstructions()">📄 Print / Save as PDF</button>
+
+<div id="print-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:9999; padding:40px;">
+    <div style="background:white; max-width:500px; margin:0 auto; padding:30px; border-radius:10px; color:#000;">
+        <h2 style="margin:0 0 20px 0; border:none;">📄 Print Instructions</h2>
+        <p style="margin-bottom:15px;"><strong>To remove URL/headers from PDF:</strong></p>
+        <ol style="margin-left:20px; line-height:1.8;">
+            <li>Click "Print" below</li>
+            <li>In print dialog, click <strong>"More settings"</strong></li>
+            <li>Uncheck <strong>"Headers and footers"</strong></li>
+            <li>Set Destination to <strong>"Save as PDF"</strong></li>
+            <li>Click Save</li>
+        </ol>
+        <div style="margin-top:25px; display:flex; gap:10px;">
+            <button onclick="window.print(); closePrintModal();" style="flex:1; padding:12px; background:#4472C4; color:white; border:none; border-radius:5px; cursor:pointer; font-size:14px;">✓ Print Now</button>
+            <button onclick="closePrintModal();" style="flex:1; padding:12px; background:#ddd; color:#333; border:none; border-radius:5px; cursor:pointer; font-size:14px;">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function showPrintInstructions() {
+    document.getElementById('print-modal').style.display = 'block';
+}
+function closePrintModal() {
+    document.getElementById('print-modal').style.display = 'none';
+}
+</script>
 
 <!-- COVER PAGE -->
 <div class="cover-page">
