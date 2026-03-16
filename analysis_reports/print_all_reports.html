@@ -8,7 +8,7 @@
         /* A4 Print Styles */
         @page {
             size: A4;
-            margin: 20mm 15mm;
+            margin: 18mm 15mm;
         }
         
         * {
@@ -19,8 +19,8 @@
         
         body {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 11pt;
-            line-height: 1.4;
+            font-size: 10pt;
+            line-height: 1.35;
             color: #000;
             background: #fff;
         }
@@ -36,57 +36,57 @@
         
         /* Headers */
         h1 {
-            font-size: 16pt;
+            font-size: 14pt;
             font-weight: bold;
             text-align: center;
             border-bottom: 2px solid #000;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
         }
         
         h2 {
-            font-size: 13pt;
+            font-size: 11pt;
             font-weight: bold;
-            margin: 20px 0 10px 0;
+            margin: 14px 0 8px 0;
             border-bottom: 1px solid #666;
-            padding-bottom: 4px;
+            padding-bottom: 3px;
         }
         
         h3 {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
-            margin: 15px 0 8px 0;
+            margin: 10px 0 6px 0;
         }
         
         /* Report header */
         .report-header {
             text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 1px solid #ccc;
         }
         
         .report-header p {
-            font-size: 10pt;
-            margin-top: 10px;
+            font-size: 9pt;
+            margin-top: 8px;
         }
         
         /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 10px 0 15px 0;
-            font-size: 10pt;
+            margin: 8px 0 12px 0;
+            font-size: 9pt;
         }
         
         th, td {
             border: 1px solid #000;
-            padding: 5px 8px;
+            padding: 4px 6px;
             text-align: left;
         }
         
         th {
-            background: #e0e0e0;
+            background: #d9d9d9;
             font-weight: bold;
         }
         
@@ -99,60 +99,67 @@
             font-family: 'Courier New', monospace;
         }
         
-        .positive { color: #008000; }
-        .negative { color: #C00000; }
-        .warning { color: #D4A017; }
+        .positive { color: #006400; }
+        .negative { color: #8B0000; }
+        .warning { color: #B8860B; }
         
         /* Notes */
         .notes {
-            font-size: 9pt;
-            color: #666;
-            margin: 8px 0;
-            padding-left: 10px;
-            border-left: 2px solid #ccc;
+            font-size: 8pt;
+            color: #444;
+            margin: 6px 0;
+            padding-left: 8px;
+            border-left: 2px solid #999;
         }
         
         /* Equation box */
         .equation-box {
             background: #f0f0f0;
             border: 1px solid #666;
-            padding: 10px 15px;
-            margin: 15px 0;
+            padding: 8px 12px;
+            margin: 10px 0;
             text-align: center;
             font-family: 'Times New Roman', serif;
-            font-size: 11pt;
+            font-size: 10pt;
         }
         
         /* Summary box */
         .summary-box {
             border: 2px solid #000;
-            padding: 12px;
-            margin: 15px 0;
+            padding: 10px;
+            margin: 12px 0;
             background: #fafafa;
         }
         
         .summary-box h3 {
             margin-top: 0;
             border-bottom: 1px solid #000;
-            padding-bottom: 5px;
+            padding-bottom: 4px;
         }
         
-        /* Two column layout */
-        .two-col {
-            display: flex;
-            gap: 20px;
+        /* Chart container */
+        .chart-container {
+            margin: 12px 0;
+            text-align: center;
         }
         
-        .two-col > div {
-            flex: 1;
+        .chart-title {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 8px;
+        }
+        
+        .chart-container svg {
+            max-width: 100%;
+            height: auto;
         }
         
         /* Footer */
         .report-footer {
-            margin-top: 30px;
-            padding-top: 10px;
+            margin-top: 20px;
+            padding-top: 8px;
             border-top: 1px solid #666;
-            font-size: 9pt;
+            font-size: 8pt;
             text-align: center;
             color: #666;
         }
@@ -168,31 +175,31 @@
         }
         
         .cover-page h1 {
-            font-size: 24pt;
+            font-size: 22pt;
             border: none;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .cover-page .subtitle {
-            font-size: 14pt;
-            margin-bottom: 40px;
+            font-size: 13pt;
+            margin-bottom: 30px;
         }
         
         .cover-page .meta {
-            font-size: 11pt;
-            line-height: 2;
+            font-size: 10pt;
+            line-height: 1.8;
         }
         
         /* Print button - hide when printing */
         .print-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: #4472C4;
             color: white;
             border: none;
-            padding: 12px 24px;
-            font-size: 14px;
+            padding: 10px 20px;
+            font-size: 13px;
             cursor: pointer;
             border-radius: 5px;
             z-index: 1000;
@@ -209,12 +216,19 @@
         
         /* List styles */
         ol, ul {
-            margin: 10px 0 10px 25px;
+            margin: 8px 0 8px 20px;
         }
         
         li {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
+
+        /* Correlation colors */
+        .corr-strong-pos { background: #4472C4; color: white; }
+        .corr-mod-pos { background: #8FAADC; }
+        .corr-weak { background: #F2F2F2; }
+        .corr-mod-neg { background: #F4B183; }
+        .corr-strong-neg { background: #C00000; color: white; }
     </style>
 </head>
 <body>
@@ -238,15 +252,15 @@
 <div class="page-break">
     <h1>TABLE OF CONTENTS</h1>
     <table>
-        <tr><th>#</th><th>Report</th><th>Description</th></tr>
-        <tr><td>1</td><td>Executive Summary</td><td>Key findings and recommendations</td></tr>
-        <tr><td>2</td><td>Correlation Analysis</td><td>Pearson correlation matrix</td></tr>
-        <tr><td>3</td><td>Regression Analysis</td><td>Multiple linear regression model</td></tr>
-        <tr><td>4</td><td>Factor Analysis</td><td>Principal Component Analysis</td></tr>
-        <tr><td>5</td><td>Trend Analysis</td><td>Year-over-Year comparison</td></tr>
-        <tr><td>6</td><td>Service Performance</td><td>Service quality ratings</td></tr>
-        <tr><td>7</td><td>Customer Sentiment</td><td>NPS and sentiment analysis</td></tr>
-        <tr><td>8</td><td>Revenue Impact</td><td>Financial analysis and COPQ</td></tr>
+        <tr><th>#</th><th>Report</th><th>Description</th><th>Charts</th></tr>
+        <tr><td>1</td><td>Executive Summary</td><td>Key findings and recommendations</td><td>—</td></tr>
+        <tr><td>2</td><td>Correlation Analysis</td><td>Pearson correlation matrix</td><td>Bar Chart</td></tr>
+        <tr><td>3</td><td>Regression Analysis</td><td>Multiple linear regression model</td><td>Beta Chart, Scatter Plot</td></tr>
+        <tr><td>4</td><td>Factor Analysis</td><td>Principal Component Analysis</td><td>Scree Plot</td></tr>
+        <tr><td>5</td><td>Trend Analysis</td><td>Year-over-Year comparison</td><td>CSAT Chart, Revenue Chart</td></tr>
+        <tr><td>6</td><td>Service Performance</td><td>Service quality ratings</td><td>Line Chart</td></tr>
+        <tr><td>7</td><td>Customer Sentiment</td><td>NPS and sentiment analysis</td><td>NPS Chart</td></tr>
+        <tr><td>8</td><td>Revenue Impact</td><td>Financial analysis and COPQ</td><td>Revenue vs COPQ</td></tr>
     </table>
 </div>
 
@@ -306,61 +320,99 @@
         </tr>
         <tr>
             <td><strong>CSAT</strong></td>
-            <td class="number">1.000</td>
-            <td class="number negative">-.584**</td>
-            <td class="number negative">-.412**</td>
-            <td class="number positive">.721**</td>
-            <td class="number negative">-.389**</td>
-            <td class="number negative">-.523**</td>
+            <td class="number corr-strong-pos">1.000</td>
+            <td class="number corr-mod-neg">-.584**</td>
+            <td class="number corr-mod-neg">-.412**</td>
+            <td class="number corr-strong-pos">.721**</td>
+            <td class="number corr-mod-neg">-.389**</td>
+            <td class="number corr-mod-neg">-.523**</td>
         </tr>
         <tr>
             <td><strong>UI/UX Revisions</strong></td>
-            <td class="number negative">-.584**</td>
-            <td class="number">1.000</td>
-            <td class="number">.186*</td>
-            <td class="number negative">-.412**</td>
-            <td class="number">.234*</td>
-            <td class="number">.367**</td>
+            <td class="number corr-mod-neg">-.584**</td>
+            <td class="number corr-strong-pos">1.000</td>
+            <td class="number corr-weak">.186*</td>
+            <td class="number corr-mod-neg">-.412**</td>
+            <td class="number corr-weak">.234*</td>
+            <td class="number corr-mod-pos">.367**</td>
         </tr>
         <tr>
             <td><strong>Hosting Incidents</strong></td>
-            <td class="number negative">-.412**</td>
-            <td class="number">.186*</td>
-            <td class="number">1.000</td>
-            <td class="number">-.156</td>
-            <td class="number">.089</td>
-            <td class="number">.201*</td>
+            <td class="number corr-mod-neg">-.412**</td>
+            <td class="number corr-weak">.186*</td>
+            <td class="number corr-strong-pos">1.000</td>
+            <td class="number corr-weak">-.156</td>
+            <td class="number corr-weak">.089</td>
+            <td class="number corr-weak">.201*</td>
         </tr>
         <tr>
             <td><strong>On-Time %</strong></td>
-            <td class="number positive">.721**</td>
-            <td class="number negative">-.412**</td>
-            <td class="number">-.156</td>
-            <td class="number">1.000</td>
-            <td class="number negative">-.298**</td>
-            <td class="number negative">-.445**</td>
+            <td class="number corr-strong-pos">.721**</td>
+            <td class="number corr-mod-neg">-.412**</td>
+            <td class="number corr-weak">-.156</td>
+            <td class="number corr-strong-pos">1.000</td>
+            <td class="number corr-mod-neg">-.298**</td>
+            <td class="number corr-mod-neg">-.445**</td>
         </tr>
         <tr>
             <td><strong>PMS Issues</strong></td>
-            <td class="number negative">-.389**</td>
-            <td class="number">.234*</td>
-            <td class="number">.089</td>
-            <td class="number negative">-.298**</td>
-            <td class="number">1.000</td>
-            <td class="number">.512**</td>
+            <td class="number corr-mod-neg">-.389**</td>
+            <td class="number corr-weak">.234*</td>
+            <td class="number corr-weak">.089</td>
+            <td class="number corr-mod-neg">-.298**</td>
+            <td class="number corr-strong-pos">1.000</td>
+            <td class="number corr-mod-pos">.512**</td>
         </tr>
         <tr>
             <td><strong>Lag %</strong></td>
-            <td class="number negative">-.523**</td>
-            <td class="number">.367**</td>
-            <td class="number">.201*</td>
-            <td class="number negative">-.445**</td>
-            <td class="number">.512**</td>
-            <td class="number">1.000</td>
+            <td class="number corr-mod-neg">-.523**</td>
+            <td class="number corr-mod-pos">.367**</td>
+            <td class="number corr-weak">.201*</td>
+            <td class="number corr-mod-neg">-.445**</td>
+            <td class="number corr-mod-pos">.512**</td>
+            <td class="number corr-strong-pos">1.000</td>
         </tr>
     </table>
     <p class="notes">** p &lt; .01 (2-tailed) | * p &lt; .05 (2-tailed)</p>
-    
+
+    <h2>Figure 1: Correlation Coefficients with CSAT</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 400 200" style="width: 100%; max-width: 450px;">
+            <!-- Axes -->
+            <line x1="150" y1="20" x2="150" y2="180" stroke="#000" stroke-width="1"/>
+            <line x1="50" y1="180" x2="380" y2="180" stroke="#000" stroke-width="1"/>
+            
+            <!-- Zero line -->
+            <line x1="200" y1="20" x2="200" y2="180" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+            
+            <!-- Labels and bars -->
+            <text x="145" y="38" font-size="9" text-anchor="end">On-Time Delivery</text>
+            <rect x="200" y="28" width="108" height="16" fill="#4472C4"/>
+            <text x="315" y="40" font-size="8" fill="#000">+0.721</text>
+            
+            <text x="145" y="63" font-size="9" text-anchor="end">UI/UX Revisions</text>
+            <rect x="112" y="53" width="88" height="16" fill="#C00000"/>
+            <text x="105" y="65" font-size="8" fill="#000">-0.584</text>
+            
+            <text x="145" y="88" font-size="9" text-anchor="end">Average Lag %</text>
+            <rect x="121" y="78" width="79" height="16" fill="#C00000"/>
+            <text x="115" y="90" font-size="8" fill="#000">-0.523</text>
+            
+            <text x="145" y="113" font-size="9" text-anchor="end">Hosting Incidents</text>
+            <rect x="138" y="103" width="62" height="16" fill="#C00000"/>
+            <text x="132" y="115" font-size="8" fill="#000">-0.412</text>
+            
+            <text x="145" y="138" font-size="9" text-anchor="end">PMS Issues</text>
+            <rect x="142" y="128" width="58" height="16" fill="#C00000"/>
+            <text x="136" y="140" font-size="8" fill="#000">-0.389</text>
+            
+            <!-- Scale -->
+            <text x="100" y="195" font-size="8" text-anchor="middle">-1.0</text>
+            <text x="200" y="195" font-size="8" text-anchor="middle">0</text>
+            <text x="300" y="195" font-size="8" text-anchor="middle">+1.0</text>
+        </svg>
+    </div>
+
     <h2>Key Correlations with CSAT</h2>
     <table class="no-break">
         <tr><th>Variable</th><th>r</th><th>Strength</th><th>Interpretation</th></tr>
@@ -407,14 +459,105 @@
     <div class="equation-box">
         <strong>CSAT = 3.12 − 0.18(UI/UX) − 0.02(Hosting) + 0.015(OnTime%) − 0.004(PMS) − 0.02(Lag%)</strong>
     </div>
-    
-    <h2>Interpretation</h2>
-    <table class="no-break">
-        <tr><th>Variable</th><th>Effect</th><th>Practical Interpretation</th></tr>
-        <tr><td>On-Time Delivery (β = .42)</td><td class="positive">Positive</td><td>Each 10% increase → +0.15 CSAT points</td></tr>
-        <tr><td>UI/UX Revisions (β = -.38)</td><td class="negative">Negative</td><td>Each additional revision → -0.18 CSAT points</td></tr>
-        <tr><td>Average Lag % (β = -.32)</td><td class="negative">Negative</td><td>Each 1% lag increase → -0.02 CSAT points</td></tr>
-    </table>
+
+    <h2>Figure 2: Standardized Beta Coefficients</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 400 180" style="width: 100%; max-width: 450px;">
+            <!-- Axes -->
+            <line x1="150" y1="15" x2="150" y2="150" stroke="#000" stroke-width="1"/>
+            <line x1="50" y1="150" x2="380" y2="150" stroke="#000" stroke-width="1"/>
+            
+            <!-- Zero line -->
+            <line x1="200" y1="15" x2="200" y2="150" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+            
+            <!-- Labels and bars -->
+            <text x="145" y="33" font-size="9" text-anchor="end">On-Time Delivery</text>
+            <rect x="200" y="23" width="84" height="14" fill="#4472C4"/>
+            <text x="290" y="34" font-size="8" fill="#000">β = +0.42</text>
+            
+            <text x="145" y="55" font-size="9" text-anchor="end">UI/UX Revisions</text>
+            <rect x="124" y="45" width="76" height="14" fill="#C00000"/>
+            <text x="118" y="56" font-size="8" fill="#000">β = -0.38</text>
+            
+            <text x="145" y="77" font-size="9" text-anchor="end">Average Lag %</text>
+            <rect x="136" y="67" width="64" height="14" fill="#C00000"/>
+            <text x="130" y="78" font-size="8" fill="#000">β = -0.32</text>
+            
+            <text x="145" y="99" font-size="9" text-anchor="end">Hosting Incidents</text>
+            <rect x="156" y="89" width="44" height="14" fill="#C00000"/>
+            <text x="150" y="100" font-size="8" fill="#000">β = -0.22</text>
+            
+            <text x="145" y="121" font-size="9" text-anchor="end">PMS Issues</text>
+            <rect x="170" y="111" width="30" height="14" fill="#C00000"/>
+            <text x="164" y="122" font-size="8" fill="#000">β = -0.15</text>
+            
+            <!-- Scale -->
+            <text x="100" y="165" font-size="8" text-anchor="middle">-0.5</text>
+            <text x="200" y="165" font-size="8" text-anchor="middle">0</text>
+            <text x="300" y="165" font-size="8" text-anchor="middle">+0.5</text>
+        </svg>
+    </div>
+
+    <h2>Figure 3: Actual vs Predicted CSAT</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 350 280" style="width: 100%; max-width: 400px;">
+            <!-- Axes -->
+            <line x1="50" y1="230" x2="320" y2="230" stroke="#000" stroke-width="1"/>
+            <line x1="50" y1="230" x2="50" y2="40" stroke="#000" stroke-width="1"/>
+            
+            <!-- Grid lines -->
+            <line x1="50" y1="180" x2="320" y2="180" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="50" y1="130" x2="320" y2="130" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="50" y1="80" x2="320" y2="80" stroke="#ccc" stroke-width="0.5"/>
+            
+            <line x1="120" y1="230" x2="120" y2="40" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="185" y1="230" x2="185" y2="40" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="250" y1="230" x2="250" y2="40" stroke="#ccc" stroke-width="0.5"/>
+            
+            <!-- Y-axis labels -->
+            <text x="42" y="235" fill="#000" font-size="9" text-anchor="end">2.5</text>
+            <text x="42" y="185" fill="#000" font-size="9" text-anchor="end">3.0</text>
+            <text x="42" y="135" fill="#000" font-size="9" text-anchor="end">3.5</text>
+            <text x="42" y="85" fill="#000" font-size="9" text-anchor="end">4.0</text>
+            
+            <!-- X-axis labels -->
+            <text x="50" y="248" fill="#000" font-size="9" text-anchor="middle">2.5</text>
+            <text x="120" y="248" fill="#000" font-size="9" text-anchor="middle">3.0</text>
+            <text x="185" y="248" fill="#000" font-size="9" text-anchor="middle">3.5</text>
+            <text x="250" y="248" fill="#000" font-size="9" text-anchor="middle">4.0</text>
+            
+            <!-- Axis titles -->
+            <text x="185" y="268" fill="#000" font-size="9" text-anchor="middle">Predicted CSAT</text>
+            <text x="15" y="135" fill="#000" font-size="9" text-anchor="middle" transform="rotate(-90 15 135)">Actual CSAT</text>
+            
+            <!-- Perfect fit line -->
+            <line x1="50" y1="230" x2="320" y2="40" stroke="#000" stroke-width="1" stroke-dasharray="5,5"/>
+            
+            <!-- Data points - 2023 (lower left) -->
+            <circle cx="85" cy="195" r="4" fill="#C00000"/>
+            <circle cx="95" cy="185" r="4" fill="#C00000"/>
+            <circle cx="80" cy="205" r="4" fill="#C00000"/>
+            <circle cx="100" cy="190" r="4" fill="#C00000"/>
+            
+            <!-- 2024 data (upper right) -->
+            <circle cx="235" cy="70" r="4" fill="#4472C4"/>
+            <circle cx="225" cy="80" r="4" fill="#4472C4"/>
+            <circle cx="250" cy="65" r="4" fill="#4472C4"/>
+            <circle cx="240" cy="75" r="4" fill="#4472C4"/>
+            
+            <!-- 2025 data (middle) -->
+            <circle cx="175" cy="115" r="4" fill="#D4A017"/>
+            <circle cx="185" cy="110" r="4" fill="#D4A017"/>
+            <circle cx="170" cy="125" r="4" fill="#D4A017"/>
+            <circle cx="190" cy="120" r="4" fill="#D4A017"/>
+            
+            <!-- Legend -->
+            <circle cx="70" y="28" r="4" fill="#C00000"/><text x="80" y="32" font-size="8">2023</text>
+            <circle cx="120" cy="28" r="4" fill="#D4A017"/><text x="130" y="32" font-size="8">2025</text>
+            <circle cx="170" cy="28" r="4" fill="#4472C4"/><text x="180" y="32" font-size="8">2024</text>
+        </svg>
+        <p class="notes" style="text-align: center;">Dashed line = perfect prediction (y = x)</p>
+    </div>
 </div>
 
 <!-- 4. FACTOR ANALYSIS -->
@@ -435,22 +578,75 @@
         <tr><td>1 - Technical Quality</td><td class="number">4.85</td><td class="number">34.6%</td><td class="number">34.6%</td></tr>
         <tr><td>2 - Operational Efficiency</td><td class="number">3.42</td><td class="number">24.4%</td><td class="number">59.0%</td></tr>
         <tr><td>3 - Communication</td><td class="number">2.18</td><td class="number">15.6%</td><td class="number"><strong>74.6%</strong></td></tr>
+        <tr style="color:#999;"><td>4</td><td class="number">0.85</td><td class="number">6.1%</td><td class="number">80.7%</td></tr>
+        <tr style="color:#999;"><td>5</td><td class="number">0.72</td><td class="number">5.1%</td><td class="number">85.8%</td></tr>
     </table>
     <p class="notes">Components with Eigenvalue &gt; 1.0 retained (Kaiser criterion)</p>
+
+    <h2>Figure 4: Scree Plot</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 400 220" style="width: 100%; max-width: 450px;">
+            <!-- Axes -->
+            <line x1="50" y1="180" x2="370" y2="180" stroke="#000" stroke-width="1"/>
+            <line x1="50" y1="180" x2="50" y2="30" stroke="#000" stroke-width="1"/>
+            
+            <!-- Grid lines -->
+            <line x1="50" y1="140" x2="370" y2="140" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="50" y1="100" x2="370" y2="100" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="50" y1="60" x2="370" y2="60" stroke="#ccc" stroke-width="0.5"/>
+            
+            <!-- Eigenvalue = 1 reference line -->
+            <line x1="50" y1="155" x2="370" y2="155" stroke="#C00000" stroke-width="1" stroke-dasharray="4,4"/>
+            <text x="375" y="159" fill="#C00000" font-size="8">Eigen = 1</text>
+            
+            <!-- Y-axis labels -->
+            <text x="42" y="185" fill="#000" font-size="9" text-anchor="end">0</text>
+            <text x="42" y="145" fill="#000" font-size="9" text-anchor="end">2</text>
+            <text x="42" y="105" fill="#000" font-size="9" text-anchor="end">4</text>
+            <text x="42" y="65" fill="#000" font-size="9" text-anchor="end">6</text>
+            
+            <!-- X-axis labels -->
+            <text x="90" y="198" fill="#000" font-size="9" text-anchor="middle">1</text>
+            <text x="145" y="198" fill="#000" font-size="9" text-anchor="middle">2</text>
+            <text x="200" y="198" fill="#000" font-size="9" text-anchor="middle">3</text>
+            <text x="255" y="198" fill="#000" font-size="9" text-anchor="middle">4</text>
+            <text x="310" y="198" fill="#000" font-size="9" text-anchor="middle">5</text>
+            
+            <!-- Axis titles -->
+            <text x="200" y="215" fill="#000" font-size="9" text-anchor="middle">Component Number</text>
+            <text x="18" y="105" fill="#000" font-size="9" text-anchor="middle" transform="rotate(-90 18 105)">Eigenvalue</text>
+            
+            <!-- Line connecting points -->
+            <polyline points="90,59 145,95 200,127 255,159 310,163" fill="none" stroke="#4472C4" stroke-width="2"/>
+            
+            <!-- Data points -->
+            <circle cx="90" cy="59" r="5" fill="#4472C4"/>
+            <circle cx="145" cy="95" r="5" fill="#4472C4"/>
+            <circle cx="200" cy="127" r="5" fill="#4472C4"/>
+            <circle cx="255" cy="159" r="5" fill="#999"/>
+            <circle cx="310" cy="163" r="5" fill="#999"/>
+            
+            <!-- Point labels -->
+            <text x="90" y="50" fill="#4472C4" font-size="8" text-anchor="middle">4.85</text>
+            <text x="145" y="86" fill="#4472C4" font-size="8" text-anchor="middle">3.42</text>
+            <text x="200" y="118" fill="#4472C4" font-size="8" text-anchor="middle">2.18</text>
+        </svg>
+        <p class="notes" style="text-align: center;">Three components retained based on Kaiser criterion (Eigenvalue &gt; 1)</p>
+    </div>
     
     <h2>Factor Loadings (Rotated)</h2>
     <table class="no-break">
         <tr><th>Variable</th><th>F1: Technical</th><th>F2: Operations</th><th>F3: Comms</th></tr>
-        <tr><td>UI/UX Design</td><td class="number"><strong>.89</strong></td><td class="number">.12</td><td class="number">.18</td></tr>
-        <tr><td>Website Development</td><td class="number"><strong>.85</strong></td><td class="number">.22</td><td class="number">.15</td></tr>
-        <tr><td>Hosting Reliability</td><td class="number"><strong>.82</strong></td><td class="number">.28</td><td class="number">.08</td></tr>
-        <tr><td>On-Time Delivery</td><td class="number">.25</td><td class="number"><strong>.88</strong></td><td class="number">.15</td></tr>
-        <tr><td>Project Management</td><td class="number">.18</td><td class="number"><strong>.85</strong></td><td class="number">.32</td></tr>
-        <tr><td>Resource Allocation</td><td class="number">.22</td><td class="number"><strong>.82</strong></td><td class="number">.28</td></tr>
-        <tr><td>Client Updates</td><td class="number">.12</td><td class="number">.28</td><td class="number"><strong>.85</strong></td></tr>
-        <tr><td>Requirement Clarity</td><td class="number">.18</td><td class="number">.32</td><td class="number"><strong>.82</strong></td></tr>
+        <tr><td>UI/UX Design</td><td class="number" style="background:#c6efce;"><strong>.89</strong></td><td class="number">.12</td><td class="number">.18</td></tr>
+        <tr><td>Website Development</td><td class="number" style="background:#c6efce;"><strong>.85</strong></td><td class="number">.22</td><td class="number">.15</td></tr>
+        <tr><td>Hosting Reliability</td><td class="number" style="background:#c6efce;"><strong>.82</strong></td><td class="number">.28</td><td class="number">.08</td></tr>
+        <tr><td>On-Time Delivery</td><td class="number">.25</td><td class="number" style="background:#c6efce;"><strong>.88</strong></td><td class="number">.15</td></tr>
+        <tr><td>Project Management</td><td class="number">.18</td><td class="number" style="background:#c6efce;"><strong>.85</strong></td><td class="number">.32</td></tr>
+        <tr><td>Resource Allocation</td><td class="number">.22</td><td class="number" style="background:#c6efce;"><strong>.82</strong></td><td class="number">.28</td></tr>
+        <tr><td>Client Updates</td><td class="number">.12</td><td class="number">.28</td><td class="number" style="background:#c6efce;"><strong>.85</strong></td></tr>
+        <tr><td>Requirement Clarity</td><td class="number">.18</td><td class="number">.32</td><td class="number" style="background:#c6efce;"><strong>.82</strong></td></tr>
     </table>
-    <p class="notes">Loadings &gt; .50 shown in bold</p>
+    <p class="notes">Loadings &gt; .50 shown in bold with highlight</p>
     
     <h2>Factor-CSAT Correlation</h2>
     <table class="no-break">
@@ -474,18 +670,78 @@
         <tr><td>CSAT Score</td><td class="number negative">2.8</td><td class="number positive">3.6</td><td class="number warning">3.4</td><td class="number">+10.3%</td></tr>
         <tr><td>On-Time %</td><td class="number negative">24%</td><td class="number positive">58%</td><td class="number warning">54%</td><td class="number">+50.0%</td></tr>
     </table>
+
+    <h2>Figure 5: CSAT Score Trend (2023-2025)</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 350 200" style="width: 100%; max-width: 400px;">
+            <!-- Axes -->
+            <line x1="50" y1="160" x2="310" y2="160" stroke="#000" stroke-width="1"/>
+            <line x1="50" y1="160" x2="50" y2="30" stroke="#000" stroke-width="1"/>
+            
+            <!-- Grid lines -->
+            <line x1="50" y1="125" x2="310" y2="125" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="50" y1="90" x2="310" y2="90" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="50" y1="55" x2="310" y2="55" stroke="#ccc" stroke-width="0.5"/>
+            
+            <!-- Y-axis labels -->
+            <text x="42" y="165" fill="#000" font-size="9" text-anchor="end">2.0</text>
+            <text x="42" y="130" fill="#000" font-size="9" text-anchor="end">3.0</text>
+            <text x="42" y="95" fill="#000" font-size="9" text-anchor="end">4.0</text>
+            <text x="42" y="60" fill="#000" font-size="9" text-anchor="end">5.0</text>
+            
+            <!-- X-axis labels -->
+            <text x="100" y="178" fill="#000" font-size="9" text-anchor="middle">2023</text>
+            <text x="180" y="178" fill="#000" font-size="9" text-anchor="middle">2024</text>
+            <text x="260" y="178" fill="#000" font-size="9" text-anchor="middle">2025</text>
+            
+            <!-- Bars -->
+            <rect x="75" y="132" width="50" height="28" fill="#C00000"/>
+            <rect x="155" y="83" width="50" height="77" fill="#4472C4"/>
+            <rect x="235" y="90" width="50" height="70" fill="#D4A017"/>
+            
+            <!-- Values -->
+            <text x="100" y="125" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">2.8</text>
+            <text x="180" y="76" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">3.6</text>
+            <text x="260" y="83" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">3.4</text>
+            
+            <!-- Axis title -->
+            <text x="180" y="195" fill="#000" font-size="9" text-anchor="middle">Year</text>
+        </svg>
+    </div>
     
-    <h2>Year-over-Year Changes</h2>
-    <table class="no-break">
-        <tr><th>Metric</th><th>2023→2024</th><th>2024→2025</th><th>Status</th></tr>
-        <tr><td>Revenue</td><td class="number positive">+11.1%</td><td class="number positive">+12.1%</td><td class="positive">Growing</td></tr>
-        <tr><td>CSAT Score</td><td class="number positive">+28.6%</td><td class="number negative">-5.6%</td><td class="warning">Mixed</td></tr>
-        <tr><td>On-Time %</td><td class="number positive">+141.7%</td><td class="number negative">-6.9%</td><td class="warning">Slipping</td></tr>
-        <tr><td>UI/UX Revisions</td><td class="number positive">-42.9%</td><td class="number positive">-21.4%</td><td class="positive">Resolved</td></tr>
-        <tr><td>Hosting Issues</td><td class="number positive">-65.2%</td><td class="number positive">-62.5%</td><td class="positive">Resolved</td></tr>
-        <tr><td>PMS Issues</td><td class="number">New</td><td class="number negative">+591.7%</td><td class="negative">Crisis</td></tr>
-    </table>
-    
+    <h2>Figure 6: Revenue Growth (₹ Lakhs)</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 350 180" style="width: 100%; max-width: 400px;">
+            <!-- Axes -->
+            <line x1="50" y1="145" x2="310" y2="145" stroke="#000" stroke-width="1"/>
+            <line x1="50" y1="145" x2="50" y2="25" stroke="#000" stroke-width="1"/>
+            
+            <!-- Y-axis labels -->
+            <text x="42" y="148" fill="#000" font-size="9" text-anchor="end">₹40L</text>
+            <text x="42" y="100" fill="#000" font-size="9" text-anchor="end">₹50L</text>
+            <text x="42" y="52" fill="#000" font-size="9" text-anchor="end">₹60L</text>
+            
+            <!-- X-axis labels -->
+            <text x="100" y="162" fill="#000" font-size="9" text-anchor="middle">2023</text>
+            <text x="180" y="162" fill="#000" font-size="9" text-anchor="middle">2024</text>
+            <text x="260" y="162" fill="#000" font-size="9" text-anchor="middle">2025</text>
+            
+            <!-- Bars -->
+            <rect x="75" y="80" width="50" height="65" fill="#4472C4"/>
+            <rect x="155" y="58" width="50" height="87" fill="#4472C4"/>
+            <rect x="235" y="32" width="50" height="113" fill="#4472C4"/>
+            
+            <!-- Values -->
+            <text x="100" y="73" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">₹47L</text>
+            <text x="180" y="51" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">₹52L</text>
+            <text x="260" y="25" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">₹59L</text>
+            
+            <!-- Growth arrows -->
+            <text x="140" y="45" fill="#006400" font-size="8">+11%</text>
+            <text x="220" y="25" fill="#006400" font-size="8">+12%</text>
+        </svg>
+    </div>
+
     <h2>Issue Distribution Trend</h2>
     <table class="no-break">
         <tr><th>Issue Category</th><th>2023</th><th>2024</th><th>2025</th><th>Trend</th></tr>
@@ -515,6 +771,67 @@
         <tr><td>9</td><td>Operations/PM</td><td class="number">3.0</td><td class="number">3.2</td><td class="number negative">2.5</td><td class="number">2.9</td><td class="negative">-17%</td></tr>
     </table>
     <p class="notes">Rating Scale: 1 (Very Poor) to 5 (Excellent) | Operations is the only declining service</p>
+
+    <h2>Figure 7: Service Quality Trends</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 400 220" style="width: 100%; max-width: 450px;">
+            <!-- Axes -->
+            <line x1="60" y1="180" x2="360" y2="180" stroke="#000" stroke-width="1"/>
+            <line x1="60" y1="180" x2="60" y2="30" stroke="#000" stroke-width="1"/>
+            
+            <!-- Y-axis labels -->
+            <text x="52" y="185" fill="#000" font-size="9" text-anchor="end">1.0</text>
+            <text x="52" y="145" fill="#000" font-size="9" text-anchor="end">2.0</text>
+            <text x="52" y="105" fill="#000" font-size="9" text-anchor="end">3.0</text>
+            <text x="52" y="65" fill="#000" font-size="9" text-anchor="end">4.0</text>
+            <text x="52" y="35" fill="#000" font-size="9" text-anchor="end">5.0</text>
+            
+            <!-- X-axis labels -->
+            <text x="120" y="198" fill="#000" font-size="9" text-anchor="middle">2023</text>
+            <text x="210" y="198" fill="#000" font-size="9" text-anchor="middle">2024</text>
+            <text x="300" y="198" fill="#000" font-size="9" text-anchor="middle">2025</text>
+            
+            <!-- Grid lines -->
+            <line x1="60" y1="145" x2="360" y2="145" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3"/>
+            <line x1="60" y1="105" x2="360" y2="105" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3"/>
+            <line x1="60" y1="65" x2="360" y2="65" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3"/>
+            
+            <!-- Hosting Line (2.2 → 4.1 → 4.6) -->
+            <polyline points="120,152 210,57 300,37" fill="none" stroke="#006400" stroke-width="2"/>
+            <circle cx="120" cy="152" r="4" fill="#006400"/>
+            <circle cx="210" cy="57" r="4" fill="#006400"/>
+            <circle cx="300" cy="37" r="4" fill="#006400"/>
+            
+            <!-- UI/UX Line (2.4 → 3.5 → 4.2) -->
+            <polyline points="120,144 210,85 300,53" fill="none" stroke="#4472C4" stroke-width="2"/>
+            <circle cx="120" cy="144" r="4" fill="#4472C4"/>
+            <circle cx="210" cy="85" r="4" fill="#4472C4"/>
+            <circle cx="300" cy="53" r="4" fill="#4472C4"/>
+            
+            <!-- SEO Line (2.8 → 3.2 → 3.4) -->
+            <polyline points="120,128 210,112 300,104" fill="none" stroke="#D4A017" stroke-width="2"/>
+            <circle cx="120" cy="128" r="4" fill="#D4A017"/>
+            <circle cx="210" cy="112" r="4" fill="#D4A017"/>
+            <circle cx="300" cy="104" r="4" fill="#D4A017"/>
+            
+            <!-- Operations Line (3.0 → 3.2 → 2.5) - Declining -->
+            <polyline points="120,120 210,112 300,140" fill="none" stroke="#C00000" stroke-width="2"/>
+            <circle cx="120" cy="120" r="4" fill="#C00000"/>
+            <circle cx="210" cy="112" r="4" fill="#C00000"/>
+            <circle cx="300" cy="140" r="4" fill="#C00000"/>
+            
+            <!-- Legend -->
+            <rect x="80" y="210" width="10" height="3" fill="#006400"/>
+            <text x="95" y="213" fill="#000" font-size="8">Hosting</text>
+            <rect x="140" y="210" width="10" height="3" fill="#4472C4"/>
+            <text x="155" y="213" fill="#000" font-size="8">UI/UX</text>
+            <rect x="195" y="210" width="10" height="3" fill="#D4A017"/>
+            <text x="210" y="213" fill="#000" font-size="8">SEO</text>
+            <rect x="250" y="210" width="10" height="3" fill="#C00000"/>
+            <text x="265" y="213" fill="#000" font-size="8">Operations</text>
+        </svg>
+        <p class="notes" style="text-align: center;">Note: Operations is the only service showing declining trend</p>
+    </div>
     
     <h2>Performance by Industry</h2>
     <table class="no-break">
@@ -541,6 +858,47 @@
         <tr><td>2024</td><td class="number">30%</td><td class="number">50%</td><td class="number">20%</td><td class="number positive">+10</td><td class="positive">Passive</td></tr>
         <tr><td>2025</td><td class="number">23%</td><td class="number">52%</td><td class="number">25%</td><td class="number warning">-2</td><td class="warning">Borderline</td></tr>
     </table>
+
+    <h2>Figure 8: NPS Score Trend</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 350 200" style="width: 100%; max-width: 400px;">
+            <!-- Axes -->
+            <line x1="50" y1="100" x2="310" y2="100" stroke="#000" stroke-width="1"/>
+            <line x1="50" y1="175" x2="50" y2="25" stroke="#000" stroke-width="1"/>
+            
+            <!-- Grid lines -->
+            <line x1="50" y1="50" x2="310" y2="50" stroke="#ccc" stroke-width="0.5"/>
+            <line x1="50" y1="150" x2="310" y2="150" stroke="#ccc" stroke-width="0.5"/>
+            
+            <!-- Y-axis labels -->
+            <text x="42" y="55" fill="#000" font-size="9" text-anchor="end">+50</text>
+            <text x="42" y="105" fill="#000" font-size="9" text-anchor="end">0</text>
+            <text x="42" y="155" fill="#000" font-size="9" text-anchor="end">-50</text>
+            
+            <!-- X-axis labels -->
+            <text x="100" y="190" fill="#000" font-size="9" text-anchor="middle">2023</text>
+            <text x="180" y="190" fill="#000" font-size="9" text-anchor="middle">2024</text>
+            <text x="260" y="190" fill="#000" font-size="9" text-anchor="middle">2025</text>
+            
+            <!-- Line connecting points -->
+            <polyline points="100,152 180,90 260,102" fill="none" stroke="#4472C4" stroke-width="2"/>
+            
+            <!-- Data points -->
+            <circle cx="100" cy="152" r="6" fill="#C00000"/>
+            <circle cx="180" cy="90" r="6" fill="#4472C4"/>
+            <circle cx="260" cy="102" r="6" fill="#D4A017"/>
+            
+            <!-- Values -->
+            <text x="100" y="168" fill="#C00000" font-size="10" font-weight="bold" text-anchor="middle">-52</text>
+            <text x="180" y="78" fill="#4472C4" font-size="10" font-weight="bold" text-anchor="middle">+10</text>
+            <text x="260" y="118" fill="#D4A017" font-size="10" font-weight="bold" text-anchor="middle">-2</text>
+            
+            <!-- Zone labels -->
+            <text x="330" y="55" fill="#006400" font-size="8">Good</text>
+            <text x="330" y="105" fill="#D4A017" font-size="8">Passive</text>
+            <text x="330" y="155" fill="#C00000" font-size="8">Poor</text>
+        </svg>
+    </div>
     
     <h2>Rating Distribution</h2>
     <table class="no-break">
@@ -598,6 +956,49 @@
         <tr><td><strong>TOTAL COPQ</strong></td><td class="number negative"><strong>₹11.75L</strong></td><td class="number"><strong>₹3.33L</strong></td><td class="number negative"><strong>₹6.25L</strong></td><td class="number negative"><strong>₹21.33L</strong></td></tr>
         <tr><td><strong>COPQ % of Revenue</strong></td><td class="number negative"><strong>25%</strong></td><td class="number positive"><strong>6%</strong></td><td class="number warning"><strong>11%</strong></td><td class="number"><strong>13.5%</strong></td></tr>
     </table>
+
+    <h2>Figure 9: Revenue vs COPQ (₹ Lakhs)</h2>
+    <div class="chart-container no-break">
+        <svg viewBox="0 0 400 200" style="width: 100%; max-width: 450px;">
+            <!-- Axes -->
+            <line x1="60" y1="160" x2="360" y2="160" stroke="#000" stroke-width="1"/>
+            <line x1="60" y1="160" x2="60" y2="25" stroke="#000" stroke-width="1"/>
+            
+            <!-- Y-axis labels -->
+            <text x="52" y="165" fill="#000" font-size="9" text-anchor="end">₹0</text>
+            <text x="52" y="115" fill="#000" font-size="9" text-anchor="end">₹30L</text>
+            <text x="52" y="65" fill="#000" font-size="9" text-anchor="end">₹60L</text>
+            
+            <!-- X-axis labels -->
+            <text x="115" y="178" fill="#000" font-size="9" text-anchor="middle">2023</text>
+            <text x="210" y="178" fill="#000" font-size="9" text-anchor="middle">2024</text>
+            <text x="305" y="178" fill="#000" font-size="9" text-anchor="middle">2025</text>
+            
+            <!-- Revenue Bars -->
+            <rect x="90" y="63" width="30" height="97" fill="#4472C4"/>
+            <rect x="185" y="53" width="30" height="107" fill="#4472C4"/>
+            <rect x="280" y="41" width="30" height="119" fill="#4472C4"/>
+            
+            <!-- COPQ Bars -->
+            <rect x="125" y="137" width="20" height="23" fill="#C00000"/>
+            <rect x="220" y="153" width="20" height="7" fill="#D4A017"/>
+            <rect x="315" y="148" width="20" height="12" fill="#C00000"/>
+            
+            <!-- Values -->
+            <text x="105" y="55" fill="#4472C4" font-size="8" text-anchor="middle">₹47L</text>
+            <text x="200" y="45" fill="#4472C4" font-size="8" text-anchor="middle">₹52L</text>
+            <text x="295" y="33" fill="#4472C4" font-size="8" text-anchor="middle">₹59L</text>
+            <text x="135" y="130" fill="#C00000" font-size="7" text-anchor="middle">₹12L</text>
+            <text x="230" y="148" fill="#D4A017" font-size="7" text-anchor="middle">₹3L</text>
+            <text x="325" y="142" fill="#C00000" font-size="7" text-anchor="middle">₹6L</text>
+            
+            <!-- Legend -->
+            <rect x="100" y="190" width="10" height="8" fill="#4472C4"/>
+            <text x="115" y="197" fill="#000" font-size="8">Revenue</text>
+            <rect x="180" y="190" width="10" height="8" fill="#C00000"/>
+            <text x="195" y="197" fill="#000" font-size="8">COPQ (Lost)</text>
+        </svg>
+    </div>
     
     <h2>ROI of Improvements</h2>
     <table class="no-break">
@@ -617,7 +1018,7 @@
     </table>
 </div>
 
-<!-- FINAL PAGE -->
+<!-- APPENDIX -->
 <div class="page-break">
     <h1>APPENDIX: METHODOLOGY</h1>
     
@@ -642,6 +1043,20 @@
         <tr><td>Reviews Analyzed</td><td>850+</td></tr>
         <tr><td>Confidence Level</td><td>α = .05 (95%)</td></tr>
         <tr><td>Missing Data</td><td>Listwise deletion</td></tr>
+    </table>
+    
+    <h2>Charts Index</h2>
+    <table class="no-break">
+        <tr><th>Figure</th><th>Description</th><th>Page</th></tr>
+        <tr><td>Figure 1</td><td>Correlation Coefficients with CSAT (Bar Chart)</td><td>Correlation</td></tr>
+        <tr><td>Figure 2</td><td>Standardized Beta Coefficients (Bar Chart)</td><td>Regression</td></tr>
+        <tr><td>Figure 3</td><td>Actual vs Predicted CSAT (Scatter Plot)</td><td>Regression</td></tr>
+        <tr><td>Figure 4</td><td>Scree Plot - Eigenvalues by Component</td><td>Factor</td></tr>
+        <tr><td>Figure 5</td><td>CSAT Score Trend 2023-2025 (Bar Chart)</td><td>Trend</td></tr>
+        <tr><td>Figure 6</td><td>Revenue Growth (Bar Chart)</td><td>Trend</td></tr>
+        <tr><td>Figure 7</td><td>Service Quality Trends (Line Chart)</td><td>Service</td></tr>
+        <tr><td>Figure 8</td><td>NPS Score Trend (Line Chart)</td><td>Sentiment</td></tr>
+        <tr><td>Figure 9</td><td>Revenue vs COPQ (Grouped Bar Chart)</td><td>Revenue</td></tr>
     </table>
     
     <div class="report-footer">
