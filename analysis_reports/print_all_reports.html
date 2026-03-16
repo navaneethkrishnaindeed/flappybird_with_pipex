@@ -411,39 +411,43 @@ function closePrintModal() {
 
     <h2>Figure 1: Correlation Coefficients with CSAT</h2>
     <div class="chart-container no-break">
-        <svg viewBox="0 0 400 200" style="width: 100%; max-width: 450px;">
-            <!-- Axes -->
-            <line x1="150" y1="20" x2="150" y2="180" stroke="#000" stroke-width="1"/>
-            <line x1="50" y1="180" x2="380" y2="180" stroke="#000" stroke-width="1"/>
+        <svg viewBox="0 0 450 200" style="width: 100%; max-width: 500px;">
+            <!-- Labels on left side -->
+            <text x="95" y="38" font-size="9" text-anchor="end">On-Time Delivery</text>
+            <text x="95" y="63" font-size="9" text-anchor="end">UI/UX Revisions</text>
+            <text x="95" y="88" font-size="9" text-anchor="end">Average Lag %</text>
+            <text x="95" y="113" font-size="9" text-anchor="end">Hosting Incidents</text>
+            <text x="95" y="138" font-size="9" text-anchor="end">PMS Issues</text>
             
-            <!-- Zero line -->
-            <line x1="200" y1="20" x2="200" y2="180" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+            <!-- Axes - Y axis at center (x=250), X axis at bottom -->
+            <line x1="250" y1="20" x2="250" y2="160" stroke="#000" stroke-width="1"/>
+            <line x1="110" y1="160" x2="390" y2="160" stroke="#000" stroke-width="1"/>
             
-            <!-- Labels and bars -->
-            <text x="145" y="38" font-size="9" text-anchor="end">On-Time Delivery</text>
-            <rect x="200" y="28" width="108" height="16" fill="#4472C4"/>
-            <text x="315" y="40" font-size="8" fill="#000">+0.721</text>
+            <!-- Bars -->
+            <!-- On-Time: +0.721 (positive, goes right) -->
+            <rect x="250" y="28" width="101" height="16" fill="#4472C4"/>
+            <text x="358" y="40" font-size="8" fill="#000">+0.721</text>
             
-            <text x="145" y="63" font-size="9" text-anchor="end">UI/UX Revisions</text>
-            <rect x="112" y="53" width="88" height="16" fill="#C00000"/>
-            <text x="105" y="65" font-size="8" fill="#000">-0.584</text>
+            <!-- UI/UX: -0.584 (negative, goes left) -->
+            <rect x="168" y="53" width="82" height="16" fill="#C00000"/>
+            <text x="162" y="65" font-size="8" fill="#000">-0.584</text>
             
-            <text x="145" y="88" font-size="9" text-anchor="end">Average Lag %</text>
-            <rect x="121" y="78" width="79" height="16" fill="#C00000"/>
-            <text x="115" y="90" font-size="8" fill="#000">-0.523</text>
+            <!-- Lag: -0.523 (negative, goes left) -->
+            <rect x="177" y="78" width="73" height="16" fill="#C00000"/>
+            <text x="171" y="90" font-size="8" fill="#000">-0.523</text>
             
-            <text x="145" y="113" font-size="9" text-anchor="end">Hosting Incidents</text>
-            <rect x="138" y="103" width="62" height="16" fill="#C00000"/>
-            <text x="132" y="115" font-size="8" fill="#000">-0.412</text>
+            <!-- Hosting: -0.412 (negative, goes left) -->
+            <rect x="192" y="103" width="58" height="16" fill="#C00000"/>
+            <text x="186" y="115" font-size="8" fill="#000">-0.412</text>
             
-            <text x="145" y="138" font-size="9" text-anchor="end">PMS Issues</text>
-            <rect x="142" y="128" width="58" height="16" fill="#C00000"/>
-            <text x="136" y="140" font-size="8" fill="#000">-0.389</text>
+            <!-- PMS: -0.389 (negative, goes left) -->
+            <rect x="196" y="128" width="54" height="16" fill="#C00000"/>
+            <text x="190" y="140" font-size="8" fill="#000">-0.389</text>
             
             <!-- Scale -->
-            <text x="100" y="195" font-size="8" text-anchor="middle">-1.0</text>
-            <text x="200" y="195" font-size="8" text-anchor="middle">0</text>
-            <text x="300" y="195" font-size="8" text-anchor="middle">+1.0</text>
+            <text x="130" y="178" font-size="8" text-anchor="middle">-1.0</text>
+            <text x="250" y="178" font-size="8" text-anchor="middle">0</text>
+            <text x="370" y="178" font-size="8" text-anchor="middle">+1.0</text>
         </svg>
     </div>
 
@@ -497,39 +501,43 @@ function closePrintModal() {
     <div class="page-break"></div>
     <h2>Figure 2: Standardized Beta Coefficients</h2>
     <div class="chart-container no-break">
-        <svg viewBox="0 0 400 180" style="width: 100%; max-width: 450px;">
-            <!-- Axes -->
-            <line x1="150" y1="15" x2="150" y2="150" stroke="#000" stroke-width="1"/>
-            <line x1="50" y1="150" x2="380" y2="150" stroke="#000" stroke-width="1"/>
+        <svg viewBox="0 0 450 180" style="width: 100%; max-width: 500px;">
+            <!-- Labels on left side -->
+            <text x="95" y="33" font-size="9" text-anchor="end">On-Time Delivery</text>
+            <text x="95" y="55" font-size="9" text-anchor="end">UI/UX Revisions</text>
+            <text x="95" y="77" font-size="9" text-anchor="end">Average Lag %</text>
+            <text x="95" y="99" font-size="9" text-anchor="end">Hosting Incidents</text>
+            <text x="95" y="121" font-size="9" text-anchor="end">PMS Issues</text>
             
-            <!-- Zero line -->
-            <line x1="200" y1="15" x2="200" y2="150" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+            <!-- Axes - Y axis at center (x=250), X axis at bottom -->
+            <line x1="250" y1="15" x2="250" y2="140" stroke="#000" stroke-width="1"/>
+            <line x1="110" y1="140" x2="390" y2="140" stroke="#000" stroke-width="1"/>
             
-            <!-- Labels and bars -->
-            <text x="145" y="33" font-size="9" text-anchor="end">On-Time Delivery</text>
-            <rect x="200" y="23" width="84" height="14" fill="#4472C4"/>
-            <text x="290" y="34" font-size="8" fill="#000">β = +0.42</text>
+            <!-- Bars - positive goes right from 250, negative goes left from 250 -->
+            <!-- On-Time: +0.42 (positive, goes right) -->
+            <rect x="250" y="23" width="84" height="14" fill="#4472C4"/>
+            <text x="340" y="34" font-size="8" fill="#000">+0.42</text>
             
-            <text x="145" y="55" font-size="9" text-anchor="end">UI/UX Revisions</text>
-            <rect x="124" y="45" width="76" height="14" fill="#C00000"/>
-            <text x="118" y="56" font-size="8" fill="#000">β = -0.38</text>
+            <!-- UI/UX: -0.38 (negative, goes left) -->
+            <rect x="174" y="45" width="76" height="14" fill="#C00000"/>
+            <text x="168" y="56" font-size="8" fill="#000">-0.38</text>
             
-            <text x="145" y="77" font-size="9" text-anchor="end">Average Lag %</text>
-            <rect x="136" y="67" width="64" height="14" fill="#C00000"/>
-            <text x="130" y="78" font-size="8" fill="#000">β = -0.32</text>
+            <!-- Lag: -0.32 (negative, goes left) -->
+            <rect x="186" y="67" width="64" height="14" fill="#C00000"/>
+            <text x="180" y="78" font-size="8" fill="#000">-0.32</text>
             
-            <text x="145" y="99" font-size="9" text-anchor="end">Hosting Incidents</text>
-            <rect x="156" y="89" width="44" height="14" fill="#C00000"/>
-            <text x="150" y="100" font-size="8" fill="#000">β = -0.22</text>
+            <!-- Hosting: -0.22 (negative, goes left) -->
+            <rect x="206" y="89" width="44" height="14" fill="#C00000"/>
+            <text x="200" y="100" font-size="8" fill="#000">-0.22</text>
             
-            <text x="145" y="121" font-size="9" text-anchor="end">PMS Issues</text>
-            <rect x="170" y="111" width="30" height="14" fill="#C00000"/>
-            <text x="164" y="122" font-size="8" fill="#000">β = -0.15</text>
+            <!-- PMS: -0.15 (negative, goes left) -->
+            <rect x="220" y="111" width="30" height="14" fill="#C00000"/>
+            <text x="214" y="122" font-size="8" fill="#000">-0.15</text>
             
             <!-- Scale -->
-            <text x="100" y="165" font-size="8" text-anchor="middle">-0.5</text>
-            <text x="200" y="165" font-size="8" text-anchor="middle">0</text>
-            <text x="300" y="165" font-size="8" text-anchor="middle">+0.5</text>
+            <text x="130" y="155" font-size="8" text-anchor="middle">-0.5</text>
+            <text x="250" y="155" font-size="8" text-anchor="middle">0</text>
+            <text x="370" y="155" font-size="8" text-anchor="middle">+0.5</text>
         </svg>
     </div>
 
