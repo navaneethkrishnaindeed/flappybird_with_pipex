@@ -8,7 +8,7 @@
         /* A4 Print Styles */
         @page {
             size: A4;
-            margin: 18mm 15mm;
+            margin: 20mm 15mm 15mm 15mm; /* top right bottom left */
         }
         
         * {
@@ -214,21 +214,11 @@
             #print-modal { display: none !important; }
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             
-            /* Remove browser default headers and footers */
+            /* Page setup for printing */
             @page {
                 size: A4;
-                margin: 18mm 15mm;
+                margin: 20mm 15mm 15mm 15mm;
             }
-            
-            @page :first {
-                margin-top: 0;
-            }
-        }
-        
-        /* Hide URL/date in print - Chrome/Edge specific */
-        @page {
-            margin-top: 0;
-            margin-bottom: 0;
         }
         
         /* List styles */
