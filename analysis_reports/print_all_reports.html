@@ -210,7 +210,8 @@
         }
         
         @media print {
-            .print-btn { display: none; }
+            .print-btn { display: none !important; }
+            #print-modal { display: none !important; }
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             
             /* Remove browser default headers and footers */
