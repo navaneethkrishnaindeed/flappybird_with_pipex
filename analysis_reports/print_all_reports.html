@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistical Analysis Reports - Zoro Technologies (Print Version)</title>
+    <style>
+        /* A4 Print Styles */
+        @page {
+            size: A4;
+            margin: 20mm 15mm;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            line-height: 1.4;
+            color: #000;
+            background: #fff;
+        }
+        
+        /* Page breaks */
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .no-break {
+            page-break-inside: avoid;
+        }
+        
+        /* Headers */
+        h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            border-bottom: 1px solid #666;
+            padding-bottom: 4px;
+        }
+        
+        h3 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin: 15px 0 8px 0;
+        }
+        
+        /* Report header */
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .report-header p {
+            font-size: 10pt;
+            margin-top: 10px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 15px 0;
+            font-size: 10pt;
+        }
+        
+        th, td {
+            border: 1px solid #000;
+            padding: 5px 8px;
+            text-align: left;
+        }
+        
+        th {
+            background: #e0e0e0;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        .number {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .positive { color: #008000; }
+        .negative { color: #C00000; }
+        .warning { color: #D4A017; }
+        
+        /* Notes */
+        .notes {
+            font-size: 9pt;
+            color: #666;
+            margin: 8px 0;
+            padding-left: 10px;
+            border-left: 2px solid #ccc;
+        }
+        
+        /* Equation box */
+        .equation-box {
+            background: #f0f0f0;
+            border: 1px solid #666;
+            padding: 10px 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 11pt;
+        }
+        
+        /* Summary box */
+        .summary-box {
+            border: 2px solid #000;
+            padding: 12px;
+            margin: 15px 0;
+            background: #fafafa;
+        }
+        
+        .summary-box h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+        }
+        
+        /* Two column layout */
+        .two-col {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .two-col > div {
+            flex: 1;
+        }
+        
+        /* Footer */
+        .report-footer {
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px solid #666;
+            font-size: 9pt;
+            text-align: center;
+            color: #666;
+        }
+        
+        /* Cover page */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-page h1 {
+            font-size: 24pt;
+            border: none;
+            margin-bottom: 20px;
+        }
+        
+        .cover-page .subtitle {
+            font-size: 14pt;
+            margin-bottom: 40px;
+        }
+        
+        .cover-page .meta {
+            font-size: 11pt;
+            line-height: 2;
+        }
+        
+        /* Print button - hide when printing */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4472C4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        
+        .print-btn:hover {
+            background: #3461b3;
+        }
+        
+        @media print {
+            .print-btn { display: none; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        
+        /* List styles */
+        ol, ul {
+            margin: 10px 0 10px 25px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">📄 Print / Save as PDF</button>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+    <h1>STATISTICAL ANALYSIS REPORTS</h1>
+    <p class="subtitle">Customer Satisfaction Study</p>
+    <div class="meta">
+        <p><strong>Organization:</strong> Zoro Technologies</p>
+        <p><strong>Analysis Period:</strong> 2023 - 2025</p>
+        <p><strong>Sample Size:</strong> n = 310 Projects</p>
+        <p><strong>Report Format:</strong> SPSS/Excel Professional Style</p>
+        <p><strong>Date:</strong> March 2025</p>
+    </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="page-break">
+    <h1>TABLE OF CONTENTS</h1>
+    <table>
+        <tr><th>#</th><th>Report</th><th>Description</th></tr>
+        <tr><td>1</td><td>Executive Summary</td><td>Key findings and recommendations</td></tr>
+        <tr><td>2</td><td>Correlation Analysis</td><td>Pearson correlation matrix</td></tr>
+        <tr><td>3</td><td>Regression Analysis</td><td>Multiple linear regression model</td></tr>
+        <tr><td>4</td><td>Factor Analysis</td><td>Principal Component Analysis</td></tr>
+        <tr><td>5</td><td>Trend Analysis</td><td>Year-over-Year comparison</td></tr>
+        <tr><td>6</td><td>Service Performance</td><td>Service quality ratings</td></tr>
+        <tr><td>7</td><td>Customer Sentiment</td><td>NPS and sentiment analysis</td></tr>
+        <tr><td>8</td><td>Revenue Impact</td><td>Financial analysis and COPQ</td></tr>
+    </table>
+</div>
+
+<!-- 1. EXECUTIVE SUMMARY -->
+<div class="page-break">
+    <h1>1. EXECUTIVE SUMMARY</h1>
+    
+    <h2>Key Performance Indicators</h2>
+    <table class="no-break">
+        <tr><th>KPI</th><th>Value</th><th>Status</th></tr>
+        <tr><td>Total Projects</td><td class="number">310</td><td>—</td></tr>
+        <tr><td>3-Year Revenue</td><td class="number">₹1.58 Crores</td><td class="positive">+11.5% CAGR</td></tr>
+        <tr><td>Average CSAT Score</td><td class="number">3.27/5</td><td class="warning">Below Target</td></tr>
+        <tr><td>Current CSAT (2025)</td><td class="number">3.4/5</td><td class="warning">Declining</td></tr>
+        <tr><td>On-Time Delivery Rate</td><td class="number">54%</td><td class="warning">Below 70% target</td></tr>
+        <tr><td>NPS Score (2025)</td><td class="number">-2</td><td class="warning">Borderline</td></tr>
+        <tr><td>3-Year COPQ</td><td class="number negative">₹21.33L</td><td class="negative">13.5% of Revenue</td></tr>
+    </table>
+    
+    <h2>Current Status Overview</h2>
+    <table class="no-break">
+        <tr><th>Domain</th><th>Status</th><th>Assessment</th></tr>
+        <tr><td>Technical Quality</td><td class="positive">✓ RESOLVED</td><td>Design system mature, VPS stable</td></tr>
+        <tr><td>Operational Efficiency</td><td class="negative">✗ CRISIS</td><td>No PMS/CRM, 672 days lost</td></tr>
+        <tr><td>Customer Satisfaction</td><td class="warning">⚠ DECLINING</td><td>Escalations up 62%</td></tr>
+    </table>
+    
+    <h2>Predictive Model</h2>
+    <div class="equation-box">
+        <strong>CSAT = 3.12 + 0.015(OnTime%) − 0.18(UI/UX Rev) − 0.004(PMS Issues) − 0.02(Lag%)</strong>
+    </div>
+    <p class="notes">R² = 0.89 | Model explains 89% of variance in customer satisfaction</p>
+    
+    <h2>Strategic Recommendations</h2>
+    <table class="no-break">
+        <tr><th>Priority</th><th>Recommendation</th><th>Investment</th><th>ROI</th></tr>
+        <tr><td class="negative">CRITICAL</td><td>Implement PMS/CRM System</td><td class="number">₹3L</td><td class="number">167%</td></tr>
+        <tr><td class="warning">HIGH</td><td>Improve On-Time to 70%</td><td class="number">₹1L</td><td class="number">450%</td></tr>
+        <tr><td>MEDIUM</td><td>Maintain Technical Excellence</td><td class="number">₹1.5L/yr</td><td>Maintain</td></tr>
+    </table>
+    
+    <div class="summary-box">
+        <h3>Executive Conclusion</h3>
+        <p>Zoro Technologies has successfully resolved technical issues (UI/UX revisions down 55%, hosting incidents down 87%) but faces a new operational crisis due to the absence of a PMS/CRM system. On-Time Delivery (β = +0.42) is the strongest predictor of customer satisfaction. With ₹3L investment in PMS tools, the company can recover ₹6.25L lost annually with 167% ROI.</p>
+    </div>
+</div>
+
+<!-- 2. CORRELATION ANALYSIS -->
+<div class="page-break">
+    <h1>2. CORRELATION ANALYSIS</h1>
+    <p><strong>Method:</strong> Pearson Correlation (2-tailed) | <strong>n =</strong> 310</p>
+    
+    <h2>Correlation Matrix</h2>
+    <table class="no-break">
+        <tr>
+            <th></th><th>CSAT</th><th>UI/UX Rev</th><th>Hosting</th><th>On-Time %</th><th>PMS</th><th>Lag %</th>
+        </tr>
+        <tr>
+            <td><strong>CSAT</strong></td>
+            <td class="number">1.000</td>
+            <td class="number negative">-.584**</td>
+            <td class="number negative">-.412**</td>
+            <td class="number positive">.721**</td>
+            <td class="number negative">-.389**</td>
+            <td class="number negative">-.523**</td>
+        </tr>
+        <tr>
+            <td><strong>UI/UX Revisions</strong></td>
+            <td class="number negative">-.584**</td>
+            <td class="number">1.000</td>
+            <td class="number">.186*</td>
+            <td class="number negative">-.412**</td>
+            <td class="number">.234*</td>
+            <td class="number">.367**</td>
+        </tr>
+        <tr>
+            <td><strong>Hosting Incidents</strong></td>
+            <td class="number negative">-.412**</td>
+            <td class="number">.186*</td>
+            <td class="number">1.000</td>
+            <td class="number">-.156</td>
+            <td class="number">.089</td>
+            <td class="number">.201*</td>
+        </tr>
+        <tr>
+            <td><strong>On-Time %</strong></td>
+            <td class="number positive">.721**</td>
+            <td class="number negative">-.412**</td>
+            <td class="number">-.156</td>
+            <td class="number">1.000</td>
+            <td class="number negative">-.298**</td>
+            <td class="number negative">-.445**</td>
+        </tr>
+        <tr>
+            <td><strong>PMS Issues</strong></td>
+            <td class="number negative">-.389**</td>
+            <td class="number">.234*</td>
+            <td class="number">.089</td>
+            <td class="number negative">-.298**</td>
+            <td class="number">1.000</td>
+            <td class="number">.512**</td>
+        </tr>
+        <tr>
+            <td><strong>Lag %</strong></td>
+            <td class="number negative">-.523**</td>
+            <td class="number">.367**</td>
+            <td class="number">.201*</td>
+            <td class="number negative">-.445**</td>
+            <td class="number">.512**</td>
+            <td class="number">1.000</td>
+        </tr>
+    </table>
+    <p class="notes">** p &lt; .01 (2-tailed) | * p &lt; .05 (2-tailed)</p>
+    
+    <h2>Key Correlations with CSAT</h2>
+    <table class="no-break">
+        <tr><th>Variable</th><th>r</th><th>Strength</th><th>Interpretation</th></tr>
+        <tr><td>On-Time Delivery</td><td class="number positive">+.721</td><td>Strong +</td><td>Better delivery strongly improves satisfaction</td></tr>
+        <tr><td>UI/UX Revisions</td><td class="number negative">-.584</td><td>Moderate -</td><td>More revisions reduce satisfaction</td></tr>
+        <tr><td>Average Lag %</td><td class="number negative">-.523</td><td>Moderate -</td><td>Project delays reduce satisfaction</td></tr>
+        <tr><td>Hosting Incidents</td><td class="number negative">-.412</td><td>Moderate -</td><td>Downtime hurts satisfaction</td></tr>
+        <tr><td>PMS Issues</td><td class="number negative">-.389</td><td>Weak -</td><td>Operational issues affect satisfaction</td></tr>
+    </table>
+</div>
+
+<!-- 3. REGRESSION ANALYSIS -->
+<div class="page-break">
+    <h1>3. REGRESSION ANALYSIS</h1>
+    <p><strong>Method:</strong> Multiple Linear Regression (OLS) | <strong>Dependent Variable:</strong> CSAT</p>
+    
+    <h2>Model Summary</h2>
+    <table class="no-break">
+        <tr><th>Model</th><th>R</th><th>R Square</th><th>Adjusted R Square</th><th>Std. Error</th></tr>
+        <tr><td>1</td><td class="number">.943</td><td class="number">.890</td><td class="number">.850</td><td class="number">.18</td></tr>
+    </table>
+    <p class="notes">Predictors: (Constant), Average Lag %, PMS Issues, On-Time Delivery %, Hosting Incidents, UI/UX Revisions</p>
+    
+    <h2>ANOVA</h2>
+    <table class="no-break">
+        <tr><th>Model</th><th>Sum of Squares</th><th>df</th><th>Mean Square</th><th>F</th><th>Sig.</th></tr>
+        <tr><td>Regression</td><td class="number">4.012</td><td class="number">5</td><td class="number">.802</td><td class="number">24.600</td><td class="number"><strong>&lt;.001</strong></td></tr>
+        <tr><td>Residual</td><td class="number">9.913</td><td class="number">304</td><td class="number">.033</td><td></td><td></td></tr>
+        <tr><td>Total</td><td class="number">13.925</td><td class="number">309</td><td></td><td></td><td></td></tr>
+    </table>
+    
+    <h2>Coefficients</h2>
+    <table class="no-break">
+        <tr><th>Variable</th><th>B</th><th>Std. Error</th><th>Beta</th><th>t</th><th>Sig.</th></tr>
+        <tr><td>(Constant)</td><td class="number">3.120</td><td class="number">.450</td><td></td><td class="number">6.933</td><td class="number">&lt;.001</td></tr>
+        <tr><td>UI/UX Revisions</td><td class="number">-.180</td><td class="number">.050</td><td class="number negative">-.380</td><td class="number">-3.600</td><td class="number">.008</td></tr>
+        <tr><td>Hosting Incidents</td><td class="number">-.020</td><td class="number">.010</td><td class="number">-.220</td><td class="number">-2.000</td><td class="number">.052</td></tr>
+        <tr><td>On-Time Delivery %</td><td class="number">.015</td><td class="number">.003</td><td class="number positive">.420</td><td class="number">5.000</td><td class="number">&lt;.001</td></tr>
+        <tr><td>PMS Issues</td><td class="number">-.004</td><td class="number">.002</td><td class="number">-.150</td><td class="number">-2.000</td><td class="number">.048</td></tr>
+        <tr><td>Average Lag %</td><td class="number">-.020</td><td class="number">.006</td><td class="number negative">-.320</td><td class="number">-3.333</td><td class="number">.012</td></tr>
+    </table>
+    
+    <h2>Regression Equation</h2>
+    <div class="equation-box">
+        <strong>CSAT = 3.12 − 0.18(UI/UX) − 0.02(Hosting) + 0.015(OnTime%) − 0.004(PMS) − 0.02(Lag%)</strong>
+    </div>
+    
+    <h2>Interpretation</h2>
+    <table class="no-break">
+        <tr><th>Variable</th><th>Effect</th><th>Practical Interpretation</th></tr>
+        <tr><td>On-Time Delivery (β = .42)</td><td class="positive">Positive</td><td>Each 10% increase → +0.15 CSAT points</td></tr>
+        <tr><td>UI/UX Revisions (β = -.38)</td><td class="negative">Negative</td><td>Each additional revision → -0.18 CSAT points</td></tr>
+        <tr><td>Average Lag % (β = -.32)</td><td class="negative">Negative</td><td>Each 1% lag increase → -0.02 CSAT points</td></tr>
+    </table>
+</div>
+
+<!-- 4. FACTOR ANALYSIS -->
+<div class="page-break">
+    <h1>4. FACTOR ANALYSIS</h1>
+    <p><strong>Method:</strong> PCA with Varimax Rotation | <strong>Variables:</strong> 14</p>
+    
+    <h2>KMO and Bartlett's Test</h2>
+    <table class="no-break">
+        <tr><td>Kaiser-Meyer-Olkin Measure</td><td class="number"><strong>.82</strong></td></tr>
+        <tr><td>Bartlett's Test - Chi-Square</td><td class="number">1842.56</td></tr>
+        <tr><td>Bartlett's Test - Sig.</td><td class="number">&lt;.001</td></tr>
+    </table>
+    
+    <h2>Total Variance Explained</h2>
+    <table class="no-break">
+        <tr><th>Factor</th><th>Eigenvalue</th><th>% Variance</th><th>Cumulative %</th></tr>
+        <tr><td>1 - Technical Quality</td><td class="number">4.85</td><td class="number">34.6%</td><td class="number">34.6%</td></tr>
+        <tr><td>2 - Operational Efficiency</td><td class="number">3.42</td><td class="number">24.4%</td><td class="number">59.0%</td></tr>
+        <tr><td>3 - Communication</td><td class="number">2.18</td><td class="number">15.6%</td><td class="number"><strong>74.6%</strong></td></tr>
+    </table>
+    <p class="notes">Components with Eigenvalue &gt; 1.0 retained (Kaiser criterion)</p>
+    
+    <h2>Factor Loadings (Rotated)</h2>
+    <table class="no-break">
+        <tr><th>Variable</th><th>F1: Technical</th><th>F2: Operations</th><th>F3: Comms</th></tr>
+        <tr><td>UI/UX Design</td><td class="number"><strong>.89</strong></td><td class="number">.12</td><td class="number">.18</td></tr>
+        <tr><td>Website Development</td><td class="number"><strong>.85</strong></td><td class="number">.22</td><td class="number">.15</td></tr>
+        <tr><td>Hosting Reliability</td><td class="number"><strong>.82</strong></td><td class="number">.28</td><td class="number">.08</td></tr>
+        <tr><td>On-Time Delivery</td><td class="number">.25</td><td class="number"><strong>.88</strong></td><td class="number">.15</td></tr>
+        <tr><td>Project Management</td><td class="number">.18</td><td class="number"><strong>.85</strong></td><td class="number">.32</td></tr>
+        <tr><td>Resource Allocation</td><td class="number">.22</td><td class="number"><strong>.82</strong></td><td class="number">.28</td></tr>
+        <tr><td>Client Updates</td><td class="number">.12</td><td class="number">.28</td><td class="number"><strong>.85</strong></td></tr>
+        <tr><td>Requirement Clarity</td><td class="number">.18</td><td class="number">.32</td><td class="number"><strong>.82</strong></td></tr>
+    </table>
+    <p class="notes">Loadings &gt; .50 shown in bold</p>
+    
+    <h2>Factor-CSAT Correlation</h2>
+    <table class="no-break">
+        <tr><th>Factor</th><th>r with CSAT</th><th>Rank</th></tr>
+        <tr><td>F2: Operational Efficiency</td><td class="number positive"><strong>+.85</strong></td><td>1 (Highest)</td></tr>
+        <tr><td>F1: Technical Quality</td><td class="number positive">+.78</td><td>2</td></tr>
+        <tr><td>F3: Communication</td><td class="number positive">+.68</td><td>3</td></tr>
+    </table>
+</div>
+
+<!-- 5. TREND ANALYSIS -->
+<div class="page-break">
+    <h1>5. TREND ANALYSIS</h1>
+    <p><strong>Period:</strong> 2023-2025 (3 Years) | <strong>Method:</strong> YoY Comparison</p>
+    
+    <h2>Key Metrics by Year</h2>
+    <table class="no-break">
+        <tr><th>Metric</th><th>2023</th><th>2024</th><th>2025</th><th>CAGR</th></tr>
+        <tr><td>Projects</td><td class="number">95</td><td class="number">105</td><td class="number">110</td><td class="number positive">+7.6%</td></tr>
+        <tr><td>Revenue</td><td class="number">₹47.15L</td><td class="number">₹52.38L</td><td class="number">₹58.72L</td><td class="number positive">+11.5%</td></tr>
+        <tr><td>CSAT Score</td><td class="number negative">2.8</td><td class="number positive">3.6</td><td class="number warning">3.4</td><td class="number">+10.3%</td></tr>
+        <tr><td>On-Time %</td><td class="number negative">24%</td><td class="number positive">58%</td><td class="number warning">54%</td><td class="number">+50.0%</td></tr>
+    </table>
+    
+    <h2>Year-over-Year Changes</h2>
+    <table class="no-break">
+        <tr><th>Metric</th><th>2023→2024</th><th>2024→2025</th><th>Status</th></tr>
+        <tr><td>Revenue</td><td class="number positive">+11.1%</td><td class="number positive">+12.1%</td><td class="positive">Growing</td></tr>
+        <tr><td>CSAT Score</td><td class="number positive">+28.6%</td><td class="number negative">-5.6%</td><td class="warning">Mixed</td></tr>
+        <tr><td>On-Time %</td><td class="number positive">+141.7%</td><td class="number negative">-6.9%</td><td class="warning">Slipping</td></tr>
+        <tr><td>UI/UX Revisions</td><td class="number positive">-42.9%</td><td class="number positive">-21.4%</td><td class="positive">Resolved</td></tr>
+        <tr><td>Hosting Issues</td><td class="number positive">-65.2%</td><td class="number positive">-62.5%</td><td class="positive">Resolved</td></tr>
+        <tr><td>PMS Issues</td><td class="number">New</td><td class="number negative">+591.7%</td><td class="negative">Crisis</td></tr>
+    </table>
+    
+    <h2>Issue Distribution Trend</h2>
+    <table class="no-break">
+        <tr><th>Issue Category</th><th>2023</th><th>2024</th><th>2025</th><th>Trend</th></tr>
+        <tr><td>UI/UX Issues</td><td class="number negative">76%</td><td class="number">15%</td><td class="number positive">8%</td><td class="positive">↓ Resolved</td></tr>
+        <tr><td>Hosting Issues</td><td class="number negative">44%</td><td class="number">10%</td><td class="number positive">3%</td><td class="positive">↓ Resolved</td></tr>
+        <tr><td>PMS/CRM Issues</td><td class="number">0%</td><td class="number">18%</td><td class="number negative">47%</td><td class="negative">↑ Crisis</td></tr>
+    </table>
+    <p class="notes">Issue migration observed: Technical issues resolved, operational issues emerged</p>
+</div>
+
+<!-- 6. SERVICE PERFORMANCE -->
+<div class="page-break">
+    <h1>6. SERVICE PERFORMANCE ANALYSIS</h1>
+    <p><strong>Services:</strong> 9 Categories | <strong>Deliveries:</strong> 943 instances</p>
+    
+    <h2>Service Satisfaction Ranking</h2>
+    <table class="no-break">
+        <tr><th>Rank</th><th>Service</th><th>2023</th><th>2024</th><th>2025</th><th>Avg</th><th>Change</th></tr>
+        <tr><td>1</td><td>Hosting</td><td class="number negative">2.2</td><td class="number positive">4.1</td><td class="number positive">4.6</td><td class="number">3.6</td><td class="positive">+109%</td></tr>
+        <tr><td>2</td><td>Maintenance</td><td class="number">2.8</td><td class="number positive">4.5</td><td class="number positive">4.4</td><td class="number">3.9</td><td class="positive">+57%</td></tr>
+        <tr><td>3</td><td>UI/UX Design</td><td class="number negative">2.4</td><td class="number">3.5</td><td class="number positive">4.2</td><td class="number">3.4</td><td class="positive">+75%</td></tr>
+        <tr><td>4</td><td>Web Development</td><td class="number negative">2.5</td><td class="number">3.5</td><td class="number">3.8</td><td class="number">3.3</td><td class="positive">+52%</td></tr>
+        <tr><td>5</td><td>Content Creation</td><td class="number">3.0</td><td class="number">3.7</td><td class="number">3.6</td><td class="number">3.4</td><td class="positive">+20%</td></tr>
+        <tr><td>6</td><td>Digital Marketing</td><td class="number">3.1</td><td class="number">3.8</td><td class="number">3.5</td><td class="number">3.5</td><td class="positive">+13%</td></tr>
+        <tr><td>7</td><td>SEO</td><td class="number">2.8</td><td class="number">3.2</td><td class="number">3.4</td><td class="number">3.1</td><td class="positive">+21%</td></tr>
+        <tr><td>8</td><td>Email Marketing</td><td class="number negative">2.6</td><td class="number">3.4</td><td class="number">3.2</td><td class="number">3.1</td><td class="positive">+23%</td></tr>
+        <tr><td>9</td><td>Operations/PM</td><td class="number">3.0</td><td class="number">3.2</td><td class="number negative">2.5</td><td class="number">2.9</td><td class="negative">-17%</td></tr>
+    </table>
+    <p class="notes">Rating Scale: 1 (Very Poor) to 5 (Excellent) | Operations is the only declining service</p>
+    
+    <h2>Performance by Industry</h2>
+    <table class="no-break">
+        <tr><th>Industry</th><th>Client</th><th>3-Year Avg</th></tr>
+        <tr><td>Healthcare</td><td>KL House Clinic</td><td class="number">3.9</td></tr>
+        <tr><td>Retail</td><td>Good Luck</td><td class="number">3.7</td></tr>
+        <tr><td>Fitness</td><td>Akilan Fitness</td><td class="number">3.7</td></tr>
+        <tr><td>Landscaping</td><td>Novacapes</td><td class="number">3.6</td></tr>
+        <tr><td>Beauty</td><td>Mani Salon + Green Trends</td><td class="number">3.3</td></tr>
+        <tr><td>Photography</td><td>Shiva Photoshop</td><td class="number">3.0</td></tr>
+        <tr><td>E-commerce</td><td>Anika Jewellers</td><td class="number negative">2.8</td></tr>
+    </table>
+</div>
+
+<!-- 7. CUSTOMER SENTIMENT -->
+<div class="page-break">
+    <h1>7. CUSTOMER SENTIMENT ANALYSIS</h1>
+    <p><strong>Reviews Analyzed:</strong> 850+ | <strong>Method:</strong> NPS & Sentiment Classification</p>
+    
+    <h2>Net Promoter Score (NPS)</h2>
+    <table class="no-break">
+        <tr><th>Year</th><th>Promoters</th><th>Passives</th><th>Detractors</th><th>NPS</th><th>Zone</th></tr>
+        <tr><td>2023</td><td class="number">8%</td><td class="number">32%</td><td class="number negative">60%</td><td class="number negative">-52</td><td class="negative">Detractor</td></tr>
+        <tr><td>2024</td><td class="number">30%</td><td class="number">50%</td><td class="number">20%</td><td class="number positive">+10</td><td class="positive">Passive</td></tr>
+        <tr><td>2025</td><td class="number">23%</td><td class="number">52%</td><td class="number">25%</td><td class="number warning">-2</td><td class="warning">Borderline</td></tr>
+    </table>
+    
+    <h2>Rating Distribution</h2>
+    <table class="no-break">
+        <tr><th>Rating</th><th>2023</th><th>2024</th><th>2025</th><th>Total</th></tr>
+        <tr><td>5 Stars</td><td class="number">5 (5%)</td><td class="number positive">18 (17%)</td><td class="number">15 (14%)</td><td class="number">38</td></tr>
+        <tr><td>4 Stars</td><td class="number">17 (18%)</td><td class="number positive">38 (36%)</td><td class="number">35 (32%)</td><td class="number">90</td></tr>
+        <tr><td>3 Stars</td><td class="number">40 (42%)</td><td class="number">35 (33%)</td><td class="number">42 (38%)</td><td class="number">117</td></tr>
+        <tr><td>2 Stars</td><td class="number negative">27 (28%)</td><td class="number">12 (11%)</td><td class="number">15 (14%)</td><td class="number">54</td></tr>
+        <tr><td>1 Star</td><td class="number negative">6 (6%)</td><td class="number">2 (2%)</td><td class="number">3 (3%)</td><td class="number">11</td></tr>
+    </table>
+    
+    <h2>Top Complaint Categories (2025)</h2>
+    <table class="no-break">
+        <tr><th>Rank</th><th>Category</th><th>Frequency</th><th>Trend</th></tr>
+        <tr><td>1</td><td>PMS/CRM Absence</td><td class="number negative">47%</td><td class="negative">NEW</td></tr>
+        <tr><td>2</td><td>Meeting Notes Lost</td><td class="number negative">41%</td><td class="negative">↑ +156%</td></tr>
+        <tr><td>3</td><td>Context Dropped</td><td class="number">38%</td><td class="negative">↑ +89%</td></tr>
+        <tr><td>4</td><td>Handoff Failures</td><td class="number">35%</td><td class="negative">↑ +125%</td></tr>
+        <tr><td>5</td><td>UI/UX Revisions</td><td class="number positive">8%</td><td class="positive">↓ -73%</td></tr>
+        <tr><td>6</td><td>Hosting Issues</td><td class="number positive">3%</td><td class="positive">↓ -87%</td></tr>
+    </table>
+    
+    <h2>Escalation Trends</h2>
+    <table class="no-break">
+        <tr><th>Level</th><th>2023</th><th>2024</th><th>2025</th><th>Change</th></tr>
+        <tr><td>Project Manager</td><td class="number">85</td><td class="number positive">32</td><td class="number">45</td><td class="negative">+41%</td></tr>
+        <tr><td>Department Head</td><td class="number">38</td><td class="number positive">12</td><td class="number">22</td><td class="negative">+83%</td></tr>
+        <tr><td>CXO Level</td><td class="number">12</td><td class="number positive">3</td><td class="number">8</td><td class="negative">+167%</td></tr>
+        <tr><td><strong>Total</strong></td><td class="number">138</td><td class="number positive">47</td><td class="number">76</td><td class="negative"><strong>+62%</strong></td></tr>
+    </table>
+</div>
+
+<!-- 8. REVENUE IMPACT -->
+<div class="page-break">
+    <h1>8. REVENUE IMPACT ANALYSIS</h1>
+    <p><strong>Total Revenue:</strong> ₹1.58 Crores | <strong>Method:</strong> COPQ Analysis</p>
+    
+    <h2>Revenue Summary</h2>
+    <table class="no-break">
+        <tr><th>Metric</th><th>2023</th><th>2024</th><th>2025</th><th>Total</th></tr>
+        <tr><td>Gross Revenue</td><td class="number">₹47.15L</td><td class="number">₹52.38L</td><td class="number">₹58.72L</td><td class="number"><strong>₹158.25L</strong></td></tr>
+        <tr><td>Projects</td><td class="number">95</td><td class="number">105</td><td class="number">110</td><td class="number"><strong>310</strong></td></tr>
+        <tr><td>Revenue/Project</td><td class="number">₹49,632</td><td class="number">₹49,886</td><td class="number">₹53,382</td><td class="number"><strong>₹51,048</strong></td></tr>
+        <tr><td>YoY Growth</td><td class="number">—</td><td class="number positive">+11.1%</td><td class="number positive">+12.1%</td><td class="number positive"><strong>+11.5%</strong></td></tr>
+    </table>
+    
+    <h2>Cost of Poor Quality (COPQ)</h2>
+    <table class="no-break">
+        <tr><th>Category</th><th>2023</th><th>2024</th><th>2025</th><th>Total</th></tr>
+        <tr><td>UI/UX Revision Costs</td><td class="number negative">₹5.20L</td><td class="number">₹1.80L</td><td class="number positive">₹0.85L</td><td class="number">₹7.85L</td></tr>
+        <tr><td>Hosting Downtime</td><td class="number negative">₹3.45L</td><td class="number">₹0.65L</td><td class="number positive">₹0.15L</td><td class="number">₹4.25L</td></tr>
+        <tr><td>Project Delay Penalties</td><td class="number negative">₹2.10L</td><td class="number positive">₹0.40L</td><td class="number">₹0.55L</td><td class="number">₹3.05L</td></tr>
+        <tr><td>Resource Overtime</td><td class="number negative">₹1.00L</td><td class="number positive">₹0.00L</td><td class="number positive">₹0.00L</td><td class="number">₹1.00L</td></tr>
+        <tr><td>PMS/CRM Gap Costs</td><td class="number">₹0.00L</td><td class="number">₹0.48L</td><td class="number negative">₹4.70L</td><td class="number">₹5.18L</td></tr>
+        <tr><td><strong>TOTAL COPQ</strong></td><td class="number negative"><strong>₹11.75L</strong></td><td class="number"><strong>₹3.33L</strong></td><td class="number negative"><strong>₹6.25L</strong></td><td class="number negative"><strong>₹21.33L</strong></td></tr>
+        <tr><td><strong>COPQ % of Revenue</strong></td><td class="number negative"><strong>25%</strong></td><td class="number positive"><strong>6%</strong></td><td class="number warning"><strong>11%</strong></td><td class="number"><strong>13.5%</strong></td></tr>
+    </table>
+    
+    <h2>ROI of Improvements</h2>
+    <table class="no-break">
+        <tr><th>Initiative</th><th>Investment</th><th>Savings/yr</th><th>ROI</th><th>Payback</th></tr>
+        <tr><td>Design System (2024)</td><td class="number">₹50K</td><td class="number positive">₹3.90L</td><td class="number positive">680%</td><td class="number">1.5 mo</td></tr>
+        <tr><td>VPS + CDN (2024)</td><td class="number">₹1.2L/yr</td><td class="number positive">₹3.30L</td><td class="number positive">275%</td><td class="number">4 mo</td></tr>
+        <tr><td>PMS/CRM (Proposed)</td><td class="number">₹3L</td><td class="number positive">₹8L (est.)</td><td class="number positive">167%</td><td class="number">4.5 mo</td></tr>
+    </table>
+    
+    <h2>2026 Forecast</h2>
+    <table class="no-break">
+        <tr><th>Metric</th><th>Without PMS</th><th>With PMS</th><th>Difference</th></tr>
+        <tr><td>Projected Revenue</td><td class="number">₹65L</td><td class="number">₹72L</td><td class="number positive">+₹7L</td></tr>
+        <tr><td>Expected COPQ</td><td class="number negative">-₹10L</td><td class="number positive">-₹2L</td><td class="number positive">+₹8L saved</td></tr>
+        <tr><td>Client Churn Loss</td><td class="number negative">-₹10L to -₹12L</td><td class="number positive">-₹3L to -₹5L</td><td class="number positive">+₹7L saved</td></tr>
+        <tr><td><strong>Net Revenue</strong></td><td class="number"><strong>₹43L - ₹55L</strong></td><td class="number positive"><strong>₹62L - ₹77L</strong></td><td class="number positive"><strong>+₹19L - ₹22L</strong></td></tr>
+    </table>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="page-break">
+    <h1>APPENDIX: METHODOLOGY</h1>
+    
+    <h2>Statistical Methods</h2>
+    <ul>
+        <li>Pearson Product-Moment Correlation (bivariate relationships)</li>
+        <li>Multiple Linear Regression (OLS method, Enter)</li>
+        <li>Principal Component Analysis with Varimax Rotation</li>
+        <li>Shapiro-Wilk Test (normality)</li>
+        <li>Durbin-Watson Test (autocorrelation)</li>
+        <li>Variance Inflation Factor (multicollinearity)</li>
+        <li>Net Promoter Score Analysis</li>
+        <li>Sentiment Classification</li>
+    </ul>
+    
+    <h2>Data Summary</h2>
+    <table class="no-break">
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Sample Size</td><td>n = 310 projects</td></tr>
+        <tr><td>Companies</td><td>10</td></tr>
+        <tr><td>Analysis Period</td><td>2023 - 2025 (3 years)</td></tr>
+        <tr><td>Reviews Analyzed</td><td>850+</td></tr>
+        <tr><td>Confidence Level</td><td>α = .05 (95%)</td></tr>
+        <tr><td>Missing Data</td><td>Listwise deletion</td></tr>
+    </table>
+    
+    <div class="report-footer">
+        <p><strong>Statistical Analysis Reports - Zoro Technologies</strong></p>
+        <p>Customer Satisfaction Study | MBA Research Project</p>
+        <p>310 Projects | 10 Companies | 2023-2025</p>
+        <p>Generated: March 2025</p>
+    </div>
+</div>
+
+</body>
+</html>
